@@ -1,0 +1,14 @@
+Write an PCRaster file: arr.write(PCRfilename)
+Read an IDF: arr=raster2arr(yourIDF)
+raster2arr(yourIDF).write(PCRfilename)
+
+
+
+__________________________________________________________
+
+The 'write' method recognizes the extension of the filename. 
+For PCRaster files the extension should be .map.
+If you want to use another extension instead of .map you should specify this in the write statement:
+
+
+arr.write("test.pcr",raster_format="PCRaster")

@@ -1,0 +1,1617 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Module raster_func &#8212; Lib_WB 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Module gis_func" href="gis_func.html" />
+    <link rel="prev" title="Welcome to Lib_WB’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="index.html"><img src="_static/logo.jpg" width=150 border="0" alt="Deltares python modules"/></a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gis_func.html" title="Module gis_func"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Lib_WB’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Module raster_func</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting started</a></li>
+<li><a class="reference internal" href="#rasterarr-object">rasterArr object</a></li>
+<li><a class="reference internal" href="#geographical-information">Geographical information</a></li>
+<li><a class="reference internal" href="#nodata-and-mask-missing-values">Nodata and mask (missing values)</a></li>
+<li><a class="reference internal" href="#raster-formats">Raster formats</a></li>
+<li><a class="reference internal" href="#non-equidistant-rasters">Non-equidistant rasters</a></li>
+<li><a class="reference internal" href="#rescaling-resampling">Rescaling/resampling</a></li>
+<li><a class="reference internal" href="#projection">Projection</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reading-rasters">Reading rasters</a></li>
+<li><a class="reference internal" href="#writing-rasters">Writing rasters</a></li>
+<li><a class="reference internal" href="#indexing-slicing-and-data-array-setting">Indexing, slicing and data array setting</a></li>
+<li><a class="reference internal" href="#assignment-copy-or-bind-a-rasterarr-object">Assignment: copy or bind a rasterArr object?</a></li>
+<li><a class="reference internal" href="#geographical-information-getting-and-setting">Geographical information: getting and setting</a></li>
+<li><a class="reference internal" href="#nodata-and-mask-getting-setting-and-filling">Nodata and mask: getting, setting and filling</a></li>
+<li><a class="reference internal" href="#id7">Rescaling/resampling</a></li>
+<li><a class="reference internal" href="#reprojecting">Reprojecting</a></li>
+<li><a class="reference internal" href="#mathematical-operations">Mathematical operations</a></li>
+<li><a class="reference internal" href="#comparison-operations">Comparison operations</a></li>
+<li><a class="reference internal" href="#conditionals">Conditionals</a></li>
+<li><a class="reference internal" href="#statistics">Statistics</a></li>
+<li><a class="reference internal" href="#type-conversion">Type conversion</a></li>
+<li><a class="reference internal" href="#window-operations">Window operations</a></li>
+<li><a class="reference internal" href="#direct-reading-and-writing-of-cell-values">Direct reading and writing of cell values</a></li>
+<li><a class="reference internal" href="#other-functions-methods">Other functions/methods</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to Lib_WB’s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gis_func.html"
+                        title="next chapter">Module gis_func</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/raster_func.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-raster-func">
+<span id="raster-func"></span><h1>Module raster_func<a class="headerlink" href="#module-raster-func" title="Permalink to this headline">¶</a></h1>
+<p>This module contains raster functions and methods.</p>
+<p>It comprises (amongst others) reading, writing, rescaling, sampling,
+reprojecting, operators, statistics, conditionals, window operations
+on raster data.</p>
+<p>Raster data is stored in rasterArr objects, basicly a numpy MaskedArray
+and a dict with geographical information.</p>
+<p>All GDAL supported raster formats are handled. Additionally iMOD raster
+files (IDF) are handled.</p>
+<p>Rescaling/resampling is done automatically if needed.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getting-started">
+<h3>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h3>
+<p>Module file: raster_func.py</p>
+<p>Recommended import statement:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">raster_func</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p><strong>Python installation:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="95%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Python</td>
+<td>Developed and tested with Python 2.7</td>
+</tr>
+<tr class="row-even"><td>Numpy</td>
+<td>Developed and tested with numpy 1.8.2</td>
+</tr>
+<tr class="row-odd"><td>GDAL</td>
+<td><p class="first">Developed and tested with osgeo.gdal 1.10.1</p>
+<p>GDAL is used for reading/writing raster formats other than ArcInfo ASCII Grid, PCRaster, iMOD IDF and USGS/FEWS BIL.</p>
+<p>Without GDAL raster_func will only work for these 4 raster formats.</p>
+<p class="last">See also <a class="reference internal" href="#raster-formats"><span class="std std-ref">Raster formats</span></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rasterarr-object">
+<span id="id1"></span><h3>rasterArr object<a class="headerlink" href="#rasterarr-object" title="Permalink to this headline">¶</a></h3>
+<p>The rasterArr object is a container which include:</p>
+<ul class="simple">
+<li>Data array: numpy MaskedArray object including the nodata mask.</li>
+<li>Geographical information: dict with basic metadata of the raster (see also <a class="reference internal" href="#geo-info"><span class="std std-ref">Geographical information</span></a>).</li>
+<li>Nodata value (see also <a class="reference internal" href="#nodata"><span class="std std-ref">Nodata and mask (missing values)</span></a>.</li>
+</ul>
+<p>The data array is 2-D or 3-D (rank 2 or 3). 3-D is also referred to as a map stack.</p>
+<p>The data array could be modified or overwritten directly by the programmer. The geographical information and nodata value are private attributes and could only be changed by methods.</p>
+<p>If the raster_func methods and functions are used correctly, the rasterArr object remains internally consistent.
+This means that the geographical information, the mask and the nodata value remain correct and consistent to each other, also after rescaling/resampling etc.</p>
+<p>A rasterArr object is created by reading an existing raster file (see <a class="reference internal" href="#reading-rasters"><span class="std std-ref">Reading rasters</span></a>) or from scratch using:</p>
+<p><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr" title="raster_func.rasterArr"><code class="xref py py-class docutils literal"><span class="pre">rasterArr(arr,</span> <span class="pre">gi=None,</span> <span class="pre">nodata=None,</span> <span class="pre">**kwargs)</span></code></a></p>
+<p>Some internal methods for consistency are applied upon initialisation.
+This comprises the rank of the object (see below), nodata value and mask, nrow and ncol of <em>arr</em> and <em>gi</em> etc.</p>
+<p>If the rank of the object is lower than 2 the rank is increased to 2 by adding new dimensions.
+If the rank of the object is higher than 3 the rank is decreased to 3 by removing dimensions.</p>
+</div>
+<div class="section" id="geographical-information">
+<span id="geo-info"></span><h3>Geographical information<a class="headerlink" href="#geographical-information" title="Permalink to this headline">¶</a></h3>
+<p>The basic geographical information stored as dict in the rasterArr object comprises:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="61%" />
+<col width="34%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>xll</td>
+<td>X coordinate of lower left corner</td>
+<td>float</td>
+</tr>
+<tr class="row-even"><td>yll</td>
+<td>Y coordinate of lower left corner</td>
+<td>float</td>
+</tr>
+<tr class="row-odd"><td>dx</td>
+<td>Cell size in x direction</td>
+<td>float or numpy array (1-D)</td>
+</tr>
+<tr class="row-even"><td>dy</td>
+<td>Cell size in y direction</td>
+<td>float or numpy array (1-D)</td>
+</tr>
+<tr class="row-odd"><td>nrow</td>
+<td>Number of rows</td>
+<td>int</td>
+</tr>
+<tr class="row-even"><td>ncol</td>
+<td>Number of columns</td>
+<td>int</td>
+</tr>
+<tr class="row-odd"><td>proj</td>
+<td><div class="first last line-block">
+<div class="line">Projection in PCRaster terms</div>
+<div class="line">0 = y coordinates increase from top to bottom</div>
+<div class="line">1 = y coordinates increase from bottom to top</div>
+</div>
+</td>
+<td>int</td>
+</tr>
+<tr class="row-even"><td>ang</td>
+<td>Angle in PCRaster terms</td>
+<td>float</td>
+</tr>
+<tr class="row-odd"><td>crs</td>
+<td>Coordinate reference system</td>
+<td>str</td>
+</tr>
+</tbody>
+</table>
+<p><em>dx</em> and <em>dy</em> are numpy arrays if the raster is non-equidistant.</p>
+<p>Strictly spoken <em>nrow</em> and <em>ncol</em> are not necessary because these are the dimensions of the data array.
+However, because the geographical information is often used as an “stand-alone” dict in rescaling/resampling methods/functions it is needed to have <em>nrow</em> and <em>ncol</em> included in the dict.</p>
+<p><em>ang</em> is not yet used in the raster_func methods/functions. By default it is assumed to be 0, meaning no rotation of the coordinate system.</p>
+<p><em>crs</em> is the coordinate reference system in WKT format. It can also be set as EPSG number or by a recognizable string reference (see <a class="reference internal" href="#projection"><span class="std std-ref">Projection</span></a>).</p>
+<p>Extended geographical information which could be get with methods/functions comprises:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="75%" />
+<col width="18%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>xur</td>
+<td>X coordinate of the upper right corner</td>
+<td>float</td>
+</tr>
+<tr class="row-even"><td>yur</td>
+<td>Y coordinate of the upper right corner</td>
+<td>float</td>
+</tr>
+<tr class="row-odd"><td>Dx</td>
+<td>Total extent/width in x direction</td>
+<td>float</td>
+</tr>
+<tr class="row-even"><td>Dy</td>
+<td>Total extent/heigt in y direction</td>
+<td>float</td>
+</tr>
+<tr class="row-odd"><td>ieq</td>
+<td><div class="first last line-block">
+<div class="line">Equidistant flag in iMOD terms</div>
+<div class="line">0 = equidistant raster</div>
+<div class="line">1 = non-equidistant raster</div>
+</div>
+</td>
+<td>int</td>
+</tr>
+<tr class="row-even"><td>x</td>
+<td>X coordinates of column centers</td>
+<td>array</td>
+</tr>
+<tr class="row-odd"><td>xarr</td>
+<td>X coordinates of cell centers</td>
+<td>rasterArr</td>
+</tr>
+<tr class="row-even"><td>y</td>
+<td>Y coordinates of row centers</td>
+<td>array</td>
+</tr>
+<tr class="row-odd"><td>yarr</td>
+<td>Y coordinates of cell centers</td>
+<td>rasterArr</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="nodata-and-mask-missing-values">
+<span id="nodata"></span><h3>Nodata and mask (missing values)<a class="headerlink" href="#nodata-and-mask-missing-values" title="Permalink to this headline">¶</a></h3>
+<p>Cells with nodata value (missing value) are masked and will not be used in operations. In most cases the nodata value is less important than the mask.
+The mask determines which cells are not active in operations and stored as missing value in output raster files.
+In some output raster files the nodata value will not be stored as ‘NAN’ and in that case the programmer may want to use a specific (recognizable) value as nodata.</p>
+<p>Both the nodata value and the mask could be changed/set by the programmer using methods.
+The nodata value of masked cells which is available in the numpy MaskedArray “under water” could change during operations,
+e.g. if there is a risk that the nodata value falls within the range of valid raster values.</p>
+</div>
+<div class="section" id="raster-formats">
+<span id="id2"></span><h3>Raster formats<a class="headerlink" href="#raster-formats" title="Permalink to this headline">¶</a></h3>
+<p>Below the supported raster formats are shown. Basically all GDAL supported formats could be read. For writing a limited number of formats is supported.</p>
+<p>Reading and writing of AAIGrid, IDF, PCRaster and BIL is done without GDAL. Without a valid installation of GDAL reading and writing will work for these 4 formats.</p>
+<p>See also <a class="reference external" href="http://www.gdal.org/formats_list.html">GDAL Raster Formats</a></p>
+<p><strong>Formats supported for reading:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="9%" />
+<col width="15%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Format</th>
+<th class="head">Number</th>
+<th class="head">Short name</th>
+<th class="head">Default extension</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ArcInfo ASCII Grid</td>
+<td>1</td>
+<td>AAIGrid</td>
+<td>.asc</td>
+</tr>
+<tr class="row-odd"><td>iMOD IDF</td>
+<td>2</td>
+<td>IDF</td>
+<td>.idf</td>
+</tr>
+<tr class="row-even"><td>PCRaster</td>
+<td>3</td>
+<td>PCRaster</td>
+<td>.map</td>
+</tr>
+<tr class="row-odd"><td>ArcInfo Binary Grid (ESRI Grid)</td>
+<td>4</td>
+<td>AIG</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>USGS/FEWS BIL</td>
+<td>5</td>
+<td>BIL</td>
+<td>.bil</td>
+</tr>
+<tr class="row-odd"><td>GeoTIFF</td>
+<td>6</td>
+<td>GTiff</td>
+<td>.tif</td>
+</tr>
+<tr class="row-even"><td>netCDF</td>
+<td>7</td>
+<td>netCDF</td>
+<td>.nc</td>
+</tr>
+<tr class="row-odd"><td>HDF4Image</td>
+<td>8</td>
+<td>HDF4Image</td>
+<td>.hdf</td>
+</tr>
+<tr class="row-even"><td>other GDAL supported formats</td>
+<td>9 &gt;</td>
+<td>see GDAL</td>
+<td>lower-case short name</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Formats supported for writing:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="9%" />
+<col width="15%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Format</th>
+<th class="head">Number</th>
+<th class="head">Short name</th>
+<th class="head">Default extension</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ArcInfo ASCII Grid</td>
+<td>1</td>
+<td>AAIGrid</td>
+<td>.asc</td>
+</tr>
+<tr class="row-odd"><td>iMOD IDF</td>
+<td>2</td>
+<td>IDF</td>
+<td>.idf</td>
+</tr>
+<tr class="row-even"><td>PCRaster</td>
+<td>3</td>
+<td>PCRaster</td>
+<td>.map</td>
+</tr>
+<tr class="row-odd"><td>USGS/FEWS BIL</td>
+<td>5</td>
+<td>BIL</td>
+<td>.bil</td>
+</tr>
+<tr class="row-even"><td>GeoTIFF</td>
+<td>6</td>
+<td>GTiff</td>
+<td>.tif</td>
+</tr>
+<tr class="row-odd"><td>netCDF</td>
+<td>7</td>
+<td>netCDF</td>
+<td>.nc</td>
+</tr>
+<tr class="row-even"><td>HDF4Image</td>
+<td>8</td>
+<td>HDF4Image</td>
+<td>.hdf</td>
+</tr>
+<tr class="row-odd"><td>other GDAL supported formats</td>
+<td>8 &gt;</td>
+<td>see GDAL</td>
+<td>lower-case short name</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="non-equidistant-rasters">
+<h3>Non-equidistant rasters<a class="headerlink" href="#non-equidistant-rasters" title="Permalink to this headline">¶</a></h3>
+<p>Support for non-equidistant rasters is limited. Rescaling/resampling is not working on non-equidistant rasters and therefore all methods/functions using rescaling/resampling
+do not support non-equidistant rasters.
+It is possible to resample a non-equidistant raster to an equidistant raster.</p>
+</div>
+<div class="section" id="rescaling-resampling">
+<span id="id3"></span><h3>Rescaling/resampling<a class="headerlink" href="#rescaling-resampling" title="Permalink to this headline">¶</a></h3>
+<p>Rescaling/resampling could be done with several methods. These are listed below.
+If new cell values are to be calculated from more than one original cell value these original cell values are area-weighted.</p>
+<p>Rescaling/resampling is done if 2 rasterArr objects differ from each other with respect to cell size and/or extent. It is assumed that the coordinate systems are equal.
+A shift in the cell boundaries will also lead to rescaling/resampling if this shift is larger than 1e-7.</p>
+<p>The default method is in most cases ‘sample’.
+A <strong>“global method”</strong> is used in functions/method in which rescaling/resampling may be applied,
+but for which no specific method could be given by the programmer. E.g. mathematical and comparison operations.
+The global method could be set/reset by the programmer and overrules the default method.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>mean</td>
+<td>Arithmetic mean</td>
+</tr>
+<tr class="row-odd"><td>harm</td>
+<td>Harmonic mean</td>
+</tr>
+<tr class="row-even"><td>log</td>
+<td>Geometric mean / Log-average (with base <cite>e</cite>)</td>
+</tr>
+<tr class="row-odd"><td>log10</td>
+<td>Geometric mean / Log-average (with base <cite>10</cite>)</td>
+</tr>
+<tr class="row-even"><td>min</td>
+<td>Minimum</td>
+</tr>
+<tr class="row-odd"><td>max</td>
+<td>Maximum</td>
+</tr>
+<tr class="row-even"><td>sum</td>
+<td>Sum</td>
+</tr>
+<tr class="row-odd"><td>sample</td>
+<td>Sample original raster at cell centres of new raster</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="projection">
+<span id="id4"></span><h3>Projection<a class="headerlink" href="#projection" title="Permalink to this headline">¶</a></h3>
+<p>Projection information (i.e. coordinate reference system) could be stored in the geographical information (see ‘crs’ in <a class="reference internal" href="#geo-info"><span class="std std-ref">Geographical information</span></a>).
+The default format of the crs is WKT (Well Known Text). Additionally, the crs may be specified as EPSG reference number (an integer) and some
+strings are recognized as crs (see table below). These are converted to WKT automatically on initializing a rasterArr object;
+they can also be converted using a function. Further, a PRJ file with crs information can be read.</p>
+<p>If a rasterArr is written to a file and the crs is set then the projection information is either stored in the raster file (if supported by the
+raster format) or in a seperate PRJ file.</p>
+<p>Reprojecting a rasterArr object to another crs is possible. For this OSR and GDAL are used (osgeo). If ‘gdalwarp’ is callable on the system
+this is used to speed up the reprojection process.</p>
+<p>For information about coordinate reference systems, EPSG numbers, WKT formatted strings etc.: see <a class="reference external" href="http://spatialreference.org">Spatial Reference</a>.</p>
+<p><strong>Strings recognized as crs / convertable to crs:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="8%" />
+<col width="10%" />
+<col width="62%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">String</th>
+<th class="head">EPSG</th>
+<th class="head">Unit</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>WGS84</td>
+<td>4326</td>
+<td>Degree</td>
+<td>WGS 1984</td>
+</tr>
+<tr class="row-odd"><td>WGS72</td>
+<td>4322</td>
+<td>Degree</td>
+<td>WGS 1972</td>
+</tr>
+<tr class="row-even"><td>NAD27</td>
+<td>4267</td>
+<td>Degree</td>
+<td>North America Datum 1927</td>
+</tr>
+<tr class="row-odd"><td>NAD83</td>
+<td>4269</td>
+<td>Degree</td>
+<td>North America Datum 1983</td>
+</tr>
+<tr class="row-even"><td>EPSG:i</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>Any EPSG reference number (i)</td>
+</tr>
+<tr class="row-odd"><td>UTMiN</td>
+<td>&#160;</td>
+<td>Meter</td>
+<td>Any UTM zone (i) on Northern hemisphere</td>
+</tr>
+<tr class="row-even"><td>UTMiS</td>
+<td>&#160;</td>
+<td>Meter</td>
+<td>Any UTM zone (i) on Southern hemisphere</td>
+</tr>
+<tr class="row-odd"><td>amersfoort</td>
+<td>28992</td>
+<td>Meter</td>
+<td>Dutch Amersfoort coordinate system (RD)</td>
+</tr>
+<tr class="row-even"><td>rd</td>
+<td>28992</td>
+<td>Meter</td>
+<td>Dutch Amersfoort coordinate system (RD)</td>
+</tr>
+<tr class="row-odd"><td>gda94</td>
+<td>4283</td>
+<td>Degree</td>
+<td>GDA94</td>
+</tr>
+<tr class="row-even"><td>gda94_vicgrid</td>
+<td>3111</td>
+<td>Meter</td>
+<td>GDA94 / Vicgrid94</td>
+</tr>
+</tbody>
+</table>
+<p>See also the ‘SetFromUserInput’ method in the <a class="reference external" href="http://www.gdal.org/classOGRSpatialReference.html">OGRSpatialReference class</a>.</p>
+</div>
+</div>
+<div class="section" id="reading-rasters">
+<span id="id5"></span><h2>Reading rasters<a class="headerlink" href="#reading-rasters" title="Permalink to this headline">¶</a></h2>
+<p>See also <a class="reference internal" href="#raster-formats"><span class="std std-ref">Raster formats</span></a></p>
+<p><strong>Functions:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.raster2arr" title="raster_func.raster2arr"><code class="xref py py-func docutils literal"><span class="pre">raster2arr</span></code></a></td>
+<td>Function to read a raster file and create a rasterArr object.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasters2arr" title="raster_func.rasters2arr"><code class="xref py py-func docutils literal"><span class="pre">rasters2arr</span></code></a></td>
+<td>Function to read a list of raster files and create a rasterArr object (map stack).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.raster2gi" title="raster_func.raster2gi"><code class="xref py py-func docutils literal"><span class="pre">raster2gi</span></code></a></td>
+<td>Function to get the basic geographical information of the raster.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.get_raster_format" title="raster_func.get_raster_format"><code class="xref py py-func docutils literal"><span class="pre">get_raster_format</span></code></a></td>
+<td>Function to get the raster format of a file.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.get_raster_crs" title="raster_func.get_raster_crs"><code class="xref py py-func docutils literal"><span class="pre">get_raster_crs</span></code></a></td>
+<td>Function to get the crs of a file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.get_raster_nodata" title="raster_func.get_raster_nodata"><code class="xref py py-func docutils literal"><span class="pre">get_raster_nodata</span></code></a></td>
+<td>Function to get the nodata value of a raster file.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.get_raster_minmax" title="raster_func.get_raster_minmax"><code class="xref py py-func docutils literal"><span class="pre">get_raster_minmax</span></code></a></td>
+<td>Function to get the minimum and maximum value of a PCRaster or IDF file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.get_raster_pcrMapType" title="raster_func.get_raster_pcrMapType"><code class="xref py py-func docutils literal"><span class="pre">get_raster_pcrMapType</span></code></a></td>
+<td>Function to get the map type (valueScale) of a PCRaster file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="writing-rasters">
+<span id="id6"></span><h2>Writing rasters<a class="headerlink" href="#writing-rasters" title="Permalink to this headline">¶</a></h2>
+<p>See also <a class="reference internal" href="#raster-formats"><span class="std std-ref">Raster formats</span></a></p>
+<p><strong>Main methods on rasterArr objects:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.write" title="raster_func.rasterArr.write"><code class="xref py py-func docutils literal"><span class="pre">write</span></code></a></td>
+<td>Method to write a 2-D or 3-D rasterArr object to raster file(s).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.arr2raster" title="raster_func.rasterArr.arr2raster"><code class="xref py py-func docutils literal"><span class="pre">arr2raster</span></code></a></td>
+<td>Method to write a 2-D or 3-D rasterArr object to raster file(s).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.arr2figure" title="raster_func.rasterArr.arr2figure"><code class="xref py py-func docutils literal"><span class="pre">arr2figure</span></code></a></td>
+<td>Method to plot a 2-D rasterArr object to a map (matplotlib figure object)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="indexing-slicing-and-data-array-setting">
+<span id="indexing-slicing"></span><h2>Indexing, slicing and data array setting<a class="headerlink" href="#indexing-slicing-and-data-array-setting" title="Permalink to this headline">¶</a></h2>
+<p>Indexing and slicing is done similar to a numpy array, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">myRasterArr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">myRasterArr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">myRasterArr</span><span class="p">[:</span><span class="mi">10</span><span class="p">,</span><span class="mi">30</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span>
+<span class="n">myRasterArr</span><span class="p">[:]</span>
+</pre></div>
+</div>
+<p>A single value or slice of the numpy MaskedArray is returned.</p>
+<p>In the same way the single value or slice could be set/changed by another value/array, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">myRasterArr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+<span class="n">myRasterArr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">myRasterArr</span><span class="p">[:</span><span class="mi">10</span><span class="p">,</span><span class="mi">30</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,),</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">myRasterArr</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>It is possible to set/change (a part of) a rasterArr object with another rasterArr object:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.put_rA" title="raster_func.put_rA"><code class="xref py py-func docutils literal"><span class="pre">put_rA</span></code></a></td>
+<td>Function to replace a part of the data of a rasterArr object with another rasterArr object.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.set_arr" title="raster_func.rasterArr.set_arr"><code class="xref py py-func docutils literal"><span class="pre">set_arr</span></code></a></td>
+<td>Method to set the data array (in-place).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions for getting cell values based on a list of x,y coordinates or row,col indices:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.xy_arr2val" title="raster_func.xy_arr2val"><code class="xref py py-func docutils literal"><span class="pre">xy_arr2val</span></code></a></td>
+<td>Function to extract cell values of a rasterArr object using x,y coordinates.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rc_arr2val" title="raster_func.rc_arr2val"><code class="xref py py-func docutils literal"><span class="pre">rc_arr2val</span></code></a></td>
+<td>Function to extract cell values of a rasterArr object using row,col indices.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions for setting cell values based on a list of x,y coordinates or row,col indices:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.xy_val2arr" title="raster_func.xy_val2arr"><code class="xref py py-func docutils literal"><span class="pre">xy_val2arr</span></code></a></td>
+<td>Function to set cell values of a rasterArr object using x,y coordinates.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rc_val2arr" title="raster_func.rc_val2arr"><code class="xref py py-func docutils literal"><span class="pre">rc_val2arr</span></code></a></td>
+<td>Function to set cell values of a rasterArr object using row,col indices.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Methods for slicing/cropping to new rasterArr objects:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.slice" title="raster_func.rasterArr.slice"><code class="xref py py-func docutils literal"><span class="pre">slice</span></code></a></td>
+<td>Method to crop the raster to a given slice.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.crop" title="raster_func.rasterArr.crop"><code class="xref py py-func docutils literal"><span class="pre">crop</span></code></a></td>
+<td>Method to crop the raster to non-nodata values.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="assignment-copy-or-bind-a-rasterarr-object">
+<span id="rasterarr-assignment"></span><h2>Assignment: copy or bind a rasterArr object?<a class="headerlink" href="#assignment-copy-or-bind-a-rasterarr-object" title="Permalink to this headline">¶</a></h2>
+<p>Assignment statements in Python do not copy objects, they create bindings between a target and an object.
+For mutable objects (like rasterArr objects) this could lead to unexpected behaviour.</p>
+<p>Try:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">A</span><span class="o">=</span><span class="n">rasterArr</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">B</span><span class="o">=</span><span class="n">A</span>
+<span class="n">B</span><span class="o">.</span><span class="n">arr</span><span class="o">=</span><span class="p">[[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">]]</span>
+<span class="nb">print</span> <span class="n">A</span>
+</pre></div>
+</div>
+<p>and see that A has been changed! B is not a copy of A but refers to the same object.</p>
+<p>If B was intended to be a copy of A you should use the <a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.copy" title="raster_func.rasterArr.copy"><code class="xref py py-func docutils literal"><span class="pre">copy</span></code></a> method.</p>
+<p>Try:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">A</span><span class="o">=</span><span class="n">rasterArr</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">B</span><span class="o">=</span><span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">B</span><span class="o">.</span><span class="n">arr</span><span class="o">=</span><span class="p">[[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">]]</span>
+<span class="nb">print</span> <span class="n">A</span>
+<span class="nb">print</span> <span class="n">B</span>
+</pre></div>
+</div>
+<p>and see that A is unchanged.</p>
+</div>
+<div class="section" id="geographical-information-getting-and-setting">
+<h2>Geographical information: getting and setting<a class="headerlink" href="#geographical-information-getting-and-setting" title="Permalink to this headline">¶</a></h2>
+<p>See also <a class="reference internal" href="#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+<p><strong>Methods on rasterArr objects to get basic geographical information:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.gi" title="raster_func.rasterArr.gi"><code class="xref py py-func docutils literal"><span class="pre">gi</span></code></a></td>
+<td>Method to get the basic geographical information dict.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.gi_list" title="raster_func.rasterArr.gi_list"><code class="xref py py-func docutils literal"><span class="pre">gi_list</span></code></a></td>
+<td>Method to get the basic geographical information as list.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.xll" title="raster_func.rasterArr.xll"><code class="xref py py-func docutils literal"><span class="pre">xll</span></code></a></td>
+<td>Method to get xll (x coordinate of lower left corner).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.yll" title="raster_func.rasterArr.yll"><code class="xref py py-func docutils literal"><span class="pre">yll</span></code></a></td>
+<td>Method to get yll (y coordinate of lower left corner).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.dx" title="raster_func.rasterArr.dx"><code class="xref py py-func docutils literal"><span class="pre">dx</span></code></a></td>
+<td>Method to get dx (cell size in x direction).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.dy" title="raster_func.rasterArr.dy"><code class="xref py py-func docutils literal"><span class="pre">dy</span></code></a></td>
+<td>Method to get dy (cell size in y direction).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.nrow" title="raster_func.rasterArr.nrow"><code class="xref py py-func docutils literal"><span class="pre">nrow</span></code></a></td>
+<td>Method to get nrow (number of rows).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.ncol" title="raster_func.rasterArr.ncol"><code class="xref py py-func docutils literal"><span class="pre">ncol</span></code></a></td>
+<td>Method to get ncol (number of columns).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.proj" title="raster_func.rasterArr.proj"><code class="xref py py-func docutils literal"><span class="pre">proj</span></code></a></td>
+<td>Method to get proj (projection flag in PCRaster terms).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.ang" title="raster_func.rasterArr.ang"><code class="xref py py-func docutils literal"><span class="pre">ang</span></code></a></td>
+<td>Method to get ang (angle/rotation of coordinate system in PCRaster terms).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.crs" title="raster_func.rasterArr.crs"><code class="xref py py-func docutils literal"><span class="pre">crs</span></code></a></td>
+<td>Method to get crs (coordinate reference system).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Methods on rasterArr objects to get extended geographical information:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.gi_extended" title="raster_func.rasterArr.gi_extended"><code class="xref py py-func docutils literal"><span class="pre">gi_extended</span></code></a></td>
+<td>Method to get the extended geographical information (xur, yur, Dx, Dy).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.xur" title="raster_func.rasterArr.xur"><code class="xref py py-func docutils literal"><span class="pre">xur</span></code></a></td>
+<td>Method to get xur (x coordinate of upper right corner).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.yur" title="raster_func.rasterArr.yur"><code class="xref py py-func docutils literal"><span class="pre">yur</span></code></a></td>
+<td>Method to get yur (y coordinate of upper right corner).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.Dx" title="raster_func.rasterArr.Dx"><code class="xref py py-func docutils literal"><span class="pre">Dx</span></code></a></td>
+<td>Method to get Dx (total extent/width in x direction).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.Dy" title="raster_func.rasterArr.Dy"><code class="xref py py-func docutils literal"><span class="pre">Dy</span></code></a></td>
+<td>Method to get Dy (total extent/height in y direction).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.ieq" title="raster_func.rasterArr.ieq"><code class="xref py py-func docutils literal"><span class="pre">ieq</span></code></a></td>
+<td>Method to get ieq (equidistant flag).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.shape" title="raster_func.rasterArr.shape"><code class="xref py py-func docutils literal"><span class="pre">shape</span></code></a></td>
+<td>Method to get the shape of the data array.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.x" title="raster_func.rasterArr.x"><code class="xref py py-func docutils literal"><span class="pre">x</span></code></a></td>
+<td>Method to get the x coordinates of the column centers.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.y" title="raster_func.rasterArr.y"><code class="xref py py-func docutils literal"><span class="pre">y</span></code></a></td>
+<td>Method to get the y coordinates of the row centers.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.xarr" title="raster_func.rasterArr.xarr"><code class="xref py py-func docutils literal"><span class="pre">xarr</span></code></a></td>
+<td>Method to get a rasterArr object with the x coordinates of the cell centers.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.yarr" title="raster_func.rasterArr.yarr"><code class="xref py py-func docutils literal"><span class="pre">yarr</span></code></a></td>
+<td>Method to get a rasterArr object with the y coordinates of the cell centers.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.dxarr" title="raster_func.rasterArr.dxarr"><code class="xref py py-func docutils literal"><span class="pre">dxarr</span></code></a></td>
+<td>Method to get a rasterArr object with the dx values of the cells.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.dyarr" title="raster_func.rasterArr.dyarr"><code class="xref py py-func docutils literal"><span class="pre">dyarr</span></code></a></td>
+<td>Method to get a rasterArr object with the dy values of the cells.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Methods on rasterArr objects to set/change geographical information:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.set_gi" title="raster_func.rasterArr.set_gi"><code class="xref py py-func docutils literal"><span class="pre">set_gi</span></code></a></td>
+<td>Method to set geographical information using keyword arguments (in-place).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.set_extent" title="raster_func.rasterArr.set_extent"><code class="xref py py-func docutils literal"><span class="pre">set_extent</span></code></a></td>
+<td>Method to create a new rasterArr object with a changed extent.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.set_dxdy" title="raster_func.rasterArr.set_dxdy"><code class="xref py py-func docutils literal"><span class="pre">set_dxdy</span></code></a></td>
+<td>Method to create a new rasterArr object with changed cellsize.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Other methods on rasterArr objects:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.get_gi" title="raster_func.rasterArr.get_gi"><code class="xref py py-func docutils literal"><span class="pre">get_gi</span></code></a></td>
+<td>Method to get a list of specified geographical information elements.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.extent" title="raster_func.rasterArr.extent"><code class="xref py py-func docutils literal"><span class="pre">extent</span></code></a></td>
+<td>Method to get the extent: xll, yll, xur, yur.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions to get basic geographical information:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.raster2gi" title="raster_func.raster2gi"><code class="xref py py-func docutils literal"><span class="pre">raster2gi</span></code></a></td>
+<td>Function to get the basic geographical information of the raster.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.get_raster_crs" title="raster_func.get_raster_crs"><code class="xref py py-func docutils literal"><span class="pre">get_raster_crs</span></code></a></td>
+<td>Function to get the crs of a file.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions to get extended geographical information:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.gi_extended" title="raster_func.gi_extended"><code class="xref py py-func docutils literal"><span class="pre">gi_extended</span></code></a></td>
+<td>Function to get the extended geographical information of a rasterArr object or a basic geographical information dict/list.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.gi_get_xur" title="raster_func.gi_get_xur"><code class="xref py py-func docutils literal"><span class="pre">gi_get_xur</span></code></a></td>
+<td>Function to get xur (x coordinate of upper right corner) from a geographical information dict/list.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.gi_get_yur" title="raster_func.gi_get_yur"><code class="xref py py-func docutils literal"><span class="pre">gi_get_yur</span></code></a></td>
+<td>Function to get yur (y coordinate of upper right corner) from a geographical information dict/list.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.gi_get_Dx" title="raster_func.gi_get_Dx"><code class="xref py py-func docutils literal"><span class="pre">gi_get_Dx</span></code></a></td>
+<td>Function to get Dx (total extent/width in x direction) from a geographical information dict/list.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.gi_get_Dy" title="raster_func.gi_get_Dy"><code class="xref py py-func docutils literal"><span class="pre">gi_get_Dy</span></code></a></td>
+<td>Function to get Dy (total extent/height in y direction) from a geographical information dict/list.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions to set/change geographical information:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.set_gi" title="raster_func.set_gi"><code class="xref py py-func docutils literal"><span class="pre">set_gi</span></code></a></td>
+<td>Function to set geographical information using keyword arguments.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.gi_set_extent" title="raster_func.gi_set_extent"><code class="xref py py-func docutils literal"><span class="pre">gi_set_extent</span></code></a></td>
+<td>Function to set (change) the extent of a geographical information dict/list.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.gi_set_dxdy" title="raster_func.gi_set_dxdy"><code class="xref py py-func docutils literal"><span class="pre">gi_set_dxdy</span></code></a></td>
+<td>Function to set (change) the cell size of a geographical information dict/list.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Other functions:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.get_gi" title="raster_func.get_gi"><code class="xref py py-func docutils literal"><span class="pre">get_gi</span></code></a></td>
+<td>Function to get a list of specified geographical information elements of a rasterArr object or a geographical information dict/list.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.gi2dict" title="raster_func.gi2dict"><code class="xref py py-func docutils literal"><span class="pre">gi2dict</span></code></a></td>
+<td>Function to convert and set geographical information into a dict with at least the basic geographical information.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.gi2list" title="raster_func.gi2list"><code class="xref py py-func docutils literal"><span class="pre">gi2list</span></code></a></td>
+<td>Function to convert and set geographical information into a list with the basic geographical information.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.equal_gi" title="raster_func.equal_gi"><code class="xref py py-func docutils literal"><span class="pre">equal_gi</span></code></a></td>
+<td>Function to check if 2 geographical information dicts/lists are equal.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="nodata-and-mask-getting-setting-and-filling">
+<h2>Nodata and mask: getting, setting and filling<a class="headerlink" href="#nodata-and-mask-getting-setting-and-filling" title="Permalink to this headline">¶</a></h2>
+<p>See also <a class="reference internal" href="#nodata"><span class="std std-ref">Nodata and mask (missing values)</span></a></p>
+<p><strong>Methods on rasterArr objects to get nodata and mask:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="59%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.nodata" title="raster_func.rasterArr.nodata"><code class="xref py py-func docutils literal"><span class="pre">nodata</span></code></a></td>
+<td>Method to get the nodata value.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.mask" title="raster_func.rasterArr.mask"><code class="xref py py-func docutils literal"><span class="pre">mask</span></code></a></td>
+<td>Method to get the mask.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Methods on rasterArr objects to set nodata and mask:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="48%" />
+<col width="52%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.set_nodata" title="raster_func.rasterArr.set_nodata"><code class="xref py py-func docutils literal"><span class="pre">set_nodata</span></code></a></td>
+<td>Method to set the nodata value (in-place).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.set_mask" title="raster_func.rasterArr.set_mask"><code class="xref py py-func docutils literal"><span class="pre">set_mask</span></code></a></td>
+<td>Method to set the mask (in-place).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.set_nodata_mask" title="raster_func.rasterArr.set_nodata_mask"><code class="xref py py-func docutils literal"><span class="pre">set_nodata_mask</span></code></a></td>
+<td>Method to set all cells with nodata value to masked cells (in-place).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.cover" title="raster_func.rasterArr.cover"><code class="xref py py-func docutils literal"><span class="pre">cover</span></code></a></td>
+<td>Method to fill (cover) nodata cells.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Global functions:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.set_nodataIDF" title="raster_func.set_nodataIDF"><code class="xref py py-func docutils literal"><span class="pre">set_nodataIDF</span></code></a></td>
+<td>Function to set the global IDF nodata value.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.get_nodataIDF" title="raster_func.get_nodataIDF"><code class="xref py py-func docutils literal"><span class="pre">get_nodataIDF</span></code></a></td>
+<td>Function to get the global IDF nodata value.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.set_nodataASC" title="raster_func.set_nodataASC"><code class="xref py py-func docutils literal"><span class="pre">set_nodataASC</span></code></a></td>
+<td>Function to set the global ASC nodata value.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.get_nodataASC" title="raster_func.get_nodataASC"><code class="xref py py-func docutils literal"><span class="pre">get_nodataASC</span></code></a></td>
+<td>Function to get the global ASC nodata value.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Other functions:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="48%" />
+<col width="52%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.get_raster_nodata" title="raster_func.get_raster_nodata"><code class="xref py py-func docutils literal"><span class="pre">get_raster_nodata</span></code></a></td>
+<td>Function to get the nodata value of a raster file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id7">
+<h2>Rescaling/resampling<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>See also <a class="reference internal" href="#rescaling-resampling"><span class="std std-ref">Rescaling/resampling</span></a></p>
+<p><strong>Main functions:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rescale_rA" title="raster_func.rescale_rA"><code class="xref py py-func docutils literal"><span class="pre">rescale_rA</span></code></a></td>
+<td>Function to rescale/resample a rasterArr object.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.resample_rA" title="raster_func.resample_rA"><code class="xref py py-func docutils literal"><span class="pre">resample_rA</span></code></a></td>
+<td>Function to resample a rasterArr object using a step size.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rA_nonequi2equi" title="raster_func.rA_nonequi2equi"><code class="xref py py-func docutils literal"><span class="pre">rA_nonequi2equi</span></code></a></td>
+<td>Function to resample a non-equidistant raster to an equidistant raster.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Main methods on rasterArr objects:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.rescale" title="raster_func.rasterArr.rescale"><code class="xref py py-func docutils literal"><span class="pre">rescale</span></code></a></td>
+<td>Method to rescale/resample.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.resample" title="raster_func.rasterArr.resample"><code class="xref py py-func docutils literal"><span class="pre">resample</span></code></a></td>
+<td>Method to resample using a step size.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.nonequi2equi" title="raster_func.rasterArr.nonequi2equi"><code class="xref py py-func docutils literal"><span class="pre">nonequi2equi</span></code></a></td>
+<td>Method to resample a non-equidistant raster to an equidistant raster.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Global functions:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.set_global_method" title="raster_func.set_global_method"><code class="xref py py-func docutils literal"><span class="pre">set_global_method</span></code></a></td>
+<td>Function to set the global method for rescaling/resampling.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.reset_global_method" title="raster_func.reset_global_method"><code class="xref py py-func docutils literal"><span class="pre">reset_global_method</span></code></a></td>
+<td>Function to reset the global method for rescaling/resampling to None.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.get_global_method" title="raster_func.get_global_method"><code class="xref py py-func docutils literal"><span class="pre">get_global_method</span></code></a></td>
+<td>Function to get the global method for rescaling/resampling.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="reprojecting">
+<h2>Reprojecting<a class="headerlink" href="#reprojecting" title="Permalink to this headline">¶</a></h2>
+<p>See also <a class="reference internal" href="#projection"><span class="std std-ref">Projection</span></a></p>
+<p><strong>Functions to reproject rasterArr objects:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="52%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.reproject_rA" title="raster_func.reproject_rA"><code class="xref py py-func docutils literal"><span class="pre">reproject_rA</span></code></a></td>
+<td>Function to reproject a rasterArr object.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.warp_rA" title="raster_func.warp_rA"><code class="xref py py-func docutils literal"><span class="pre">warp_rA</span></code></a></td>
+<td>Function to reproject a rasterArr object by using gdalwarp.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Methods on rasterArr objects:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="52%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.reproject" title="raster_func.rasterArr.reproject"><code class="xref py py-func docutils literal"><span class="pre">reproject</span></code></a></td>
+<td>Method to reproject.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.warp" title="raster_func.rasterArr.warp"><code class="xref py py-func docutils literal"><span class="pre">warp</span></code></a></td>
+<td>Method to reproject by using gdalwarp.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions to convert crs to WKT or EPSG string:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="52%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.prj2crs" title="raster_func.prj2crs"><code class="xref py py-func docutils literal"><span class="pre">prj2crs</span></code></a></td>
+<td>Function to create EPSG or WKT string from prj file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.crs2wkt" title="raster_func.crs2wkt"><code class="xref py py-func docutils literal"><span class="pre">crs2wkt</span></code></a></td>
+<td>Function to create WKT string from a crs reference.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.crs2epsg" title="raster_func.crs2epsg"><code class="xref py py-func docutils literal"><span class="pre">crs2epsg</span></code></a></td>
+<td>Function to create EPSG string from a crs reference.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Other functions:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="52%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.crs2prj" title="raster_func.crs2prj"><code class="xref py py-func docutils literal"><span class="pre">crs2prj</span></code></a></td>
+<td>Function to write crs as WKT to prj file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.same_crs" title="raster_func.same_crs"><code class="xref py py-func docutils literal"><span class="pre">same_crs</span></code></a></td>
+<td>Function to check if two crs references are the same.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.get_raster_crs" title="raster_func.get_raster_crs"><code class="xref py py-func docutils literal"><span class="pre">get_raster_crs</span></code></a></td>
+<td>Function to get the crs of a file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mathematical-operations">
+<h2>Mathematical operations<a class="headerlink" href="#mathematical-operations" title="Permalink to this headline">¶</a></h2>
+<p>Below a list of mathematical operations.</p>
+<p><em>other</em> could be a rasterArr object, numpy array (ndarry or MaskedArray) or single numeric value.
+If <em>other</em> is a rasterArr object it is rescaled/resampled to meet <em>self</em> if needed, using the global method.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="6%" />
+<col width="67%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Addition</td>
+<td>+</td>
+<td><div class="first last line-block">
+<div class="line">result = self + other</div>
+<div class="line">result = other + self</div>
+<div class="line">self += other</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>Subtraction</td>
+<td>-</td>
+<td><div class="first last line-block">
+<div class="line">result = self - other</div>
+<div class="line">result = other - self</div>
+<div class="line">self -= other</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>Negation</td>
+<td>-</td>
+<td>result = -self</td>
+</tr>
+<tr class="row-even"><td>Multiplication</td>
+<td>*</td>
+<td><div class="first last line-block">
+<div class="line">result = self * other</div>
+<div class="line">result = other * self</div>
+<div class="line">self *= other</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>Division</td>
+<td>/</td>
+<td><div class="first last line-block">
+<div class="line">result = self / other</div>
+<div class="line">result = other / self</div>
+<div class="line">self /= other</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>Exponentiation</td>
+<td>**</td>
+<td><div class="first last line-block">
+<div class="line">result = self ** other</div>
+<div class="line">result = other ** self</div>
+<div class="line">self **= other</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>Modulo</td>
+<td>%</td>
+<td><div class="first last line-block">
+<div class="line">result = self % other</div>
+<div class="line">result = other % self</div>
+<div class="line">self %= other</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>Absolute</td>
+<td>abs</td>
+<td><div class="first last line-block">
+<div class="line">result = self.abs()</div>
+<div class="line">See also <a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.abs" title="raster_func.rasterArr.abs"><code class="xref py py-func docutils literal"><span class="pre">abs</span></code></a></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>Logarithm (base <em>e</em>)</td>
+<td>log</td>
+<td><div class="first last line-block">
+<div class="line">result = self.log()</div>
+<div class="line">See also <a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.log" title="raster_func.rasterArr.log"><code class="xref py py-func docutils literal"><span class="pre">log</span></code></a></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>Logarithm (base 10)</td>
+<td>log10</td>
+<td><div class="first last line-block">
+<div class="line">result = self.log10()</div>
+<div class="line">See also <a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.log10" title="raster_func.rasterArr.log10"><code class="xref py py-func docutils literal"><span class="pre">log10</span></code></a></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>Exponential (base <em>e</em>)</td>
+<td>exp</td>
+<td><div class="first last line-block">
+<div class="line">result = self.exp() = <em>e</em> ** self</div>
+<div class="line">See also <a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.exp" title="raster_func.rasterArr.exp"><code class="xref py py-func docutils literal"><span class="pre">exp</span></code></a></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>Exponential (base 10)</td>
+<td>exp10</td>
+<td><div class="first last line-block">
+<div class="line">result = self.exp10() = 10 ** self</div>
+<div class="line">See also <a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.exp10" title="raster_func.rasterArr.exp10"><code class="xref py py-func docutils literal"><span class="pre">exp10</span></code></a></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="comparison-operations">
+<h2>Comparison operations<a class="headerlink" href="#comparison-operations" title="Permalink to this headline">¶</a></h2>
+<p>Below a list of comparison operations.</p>
+<p><em>other</em> could be a rasterArr object, numpy array (ndarry or MaskedArray) or single numeric value.
+If <em>other</em> is a rasterArr object it is rescaled/resampled to meet <em>self</em> if needed, using the global method.</p>
+<p>The return values are of int8 dtype: 1 = True, 0 = False, -1 = masked</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="7%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Equal</td>
+<td>==</td>
+<td>result = self == other</td>
+</tr>
+<tr class="row-even"><td>Not equal</td>
+<td>!=</td>
+<td>result = self != other</td>
+</tr>
+<tr class="row-odd"><td>Less than</td>
+<td>&lt;</td>
+<td>result = self &lt; other</td>
+</tr>
+<tr class="row-even"><td>Less than or equal</td>
+<td>&lt;=</td>
+<td>result = self &lt;= other</td>
+</tr>
+<tr class="row-odd"><td>Greater than</td>
+<td>&gt;</td>
+<td>result = self &gt; other</td>
+</tr>
+<tr class="row-even"><td>Greater than or equal</td>
+<td>&gt;=</td>
+<td>result = self &gt;= other</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="conditionals">
+<span id="id8"></span><h2>Conditionals<a class="headerlink" href="#conditionals" title="Permalink to this headline">¶</a></h2>
+<p><strong>Functions:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.if_then" title="raster_func.if_then"><code class="xref py py-func docutils literal"><span class="pre">if_then</span></code></a></td>
+<td>Function to perform a conditional operation (if-then).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.if_then_else" title="raster_func.if_then_else"><code class="xref py py-func docutils literal"><span class="pre">if_then_else</span></code></a></td>
+<td>Function to perform a conditional operation (if-then-else).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="statistics">
+<span id="id9"></span><h2>Statistics<a class="headerlink" href="#statistics" title="Permalink to this headline">¶</a></h2>
+<p><strong>Methods on rasterArr objects:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.sum" title="raster_func.rasterArr.sum"><code class="xref py py-func docutils literal"><span class="pre">sum</span></code></a></td>
+<td>Method to calculate the sum of the array elements over the given axis.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.count" title="raster_func.rasterArr.count"><code class="xref py py-func docutils literal"><span class="pre">count</span></code></a></td>
+<td>Method to calculate the number of non-nodata elements over the given axis.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.mean" title="raster_func.rasterArr.mean"><code class="xref py py-func docutils literal"><span class="pre">mean</span></code></a></td>
+<td>Method to calculate the mean of the array elements over the given axis.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.std" title="raster_func.rasterArr.std"><code class="xref py py-func docutils literal"><span class="pre">std</span></code></a></td>
+<td>Method to calculate the standard deviation of the array elements over the given axis.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.var" title="raster_func.rasterArr.var"><code class="xref py py-func docutils literal"><span class="pre">var</span></code></a></td>
+<td>Method to calculate the variance of the array elements over the given axis.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.min" title="raster_func.rasterArr.min"><code class="xref py py-func docutils literal"><span class="pre">min</span></code></a></td>
+<td>Method to get the minimum value of the array elements over the given axis.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.max" title="raster_func.rasterArr.max"><code class="xref py py-func docutils literal"><span class="pre">max</span></code></a></td>
+<td>Method to get the maximum value of the array elements over the given axis.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.median" title="raster_func.rasterArr.median"><code class="xref py py-func docutils literal"><span class="pre">median</span></code></a></td>
+<td>Method to calculate the median of the array elements over the given axis.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.percentile" title="raster_func.rasterArr.percentile"><code class="xref py py-func docutils literal"><span class="pre">percentile</span></code></a></td>
+<td>Method to calculate a percentile of the array elements over the given axis.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions on rasterArr objects:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="63%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasters_mean" title="raster_func.rasters_mean"><code class="xref py py-func docutils literal"><span class="pre">rasters_mean</span></code></a></td>
+<td>Function to calculate the mean of two or more rasters (or numpy arrays, floats, ints).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasters_min" title="raster_func.rasters_min"><code class="xref py py-func docutils literal"><span class="pre">rasters_min</span></code></a></td>
+<td>Function to calculate the minimum of two or more rasters (or numpy arrays, floats, ints).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasters_max" title="raster_func.rasters_max"><code class="xref py py-func docutils literal"><span class="pre">rasters_max</span></code></a></td>
+<td>Function to calculate the maximum of two or more rasters (or numpy arrays, floats, ints).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions on raster files:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.idfs2stat" title="raster_func.idfs2stat"><code class="xref py py-func docutils literal"><span class="pre">idfs2stat</span></code></a></td>
+<td>Function to calculate cell-by-cell statistics for a list of iMOD IDF files.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.maps2stat" title="raster_func.maps2stat"><code class="xref py py-func docutils literal"><span class="pre">maps2stat</span></code></a></td>
+<td>Function to calculate cell-by-cell statistics for a list of PCRaster files.</td>
+</tr>
+</tbody>
+</table>
+<p>See also <a class="reference internal" href="#memory-mapping"><span class="std std-ref">Direct reading and writing of cell values</span></a></p>
+</div>
+<div class="section" id="type-conversion">
+<h2>Type conversion<a class="headerlink" href="#type-conversion" title="Permalink to this headline">¶</a></h2>
+<p><strong>Methods on rasterArr objects:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.bool" title="raster_func.rasterArr.bool"><code class="xref py py-func docutils literal"><span class="pre">bool</span></code></a></td>
+<td>Method to convert data type to bool.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.int" title="raster_func.rasterArr.int"><code class="xref py py-func docutils literal"><span class="pre">int</span></code></a></td>
+<td>Method to convert data type to int (int8, int16, int32 or int64).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.float" title="raster_func.rasterArr.float"><code class="xref py py-func docutils literal"><span class="pre">float</span></code></a></td>
+<td>Method to convert data type to float (float32 or float64).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="window-operations">
+<span id="id10"></span><h2>Window operations<a class="headerlink" href="#window-operations" title="Permalink to this headline">¶</a></h2>
+<p><strong>Window operation methods:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>mean</td>
+<td>Arithmetic mean</td>
+</tr>
+<tr class="row-odd"><td>harm</td>
+<td>Harmonic mean</td>
+</tr>
+<tr class="row-even"><td>log</td>
+<td>Geometric mean / Log-average (with base <cite>e</cite>)</td>
+</tr>
+<tr class="row-odd"><td>log10</td>
+<td>Geometric mean / Log-average (with base <cite>10</cite>)</td>
+</tr>
+<tr class="row-even"><td>min</td>
+<td>Minimum</td>
+</tr>
+<tr class="row-odd"><td>max</td>
+<td>Maximum</td>
+</tr>
+<tr class="row-even"><td>sum</td>
+<td>Sum</td>
+</tr>
+<tr class="row-odd"><td>std</td>
+<td>Standard deviation</td>
+</tr>
+<tr class="row-even"><td>var</td>
+<td>Variance</td>
+</tr>
+<tr class="row-odd"><td>count</td>
+<td>Number</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Function:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="52%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.window_arr" title="raster_func.window_arr"><code class="xref py py-func docutils literal"><span class="pre">window_arr</span></code></a></td>
+<td>Function to perform a window operation.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="direct-reading-and-writing-of-cell-values">
+<span id="memory-mapping"></span><h2>Direct reading and writing of cell values<a class="headerlink" href="#direct-reading-and-writing-of-cell-values" title="Permalink to this headline">¶</a></h2>
+<p>Cells values from IDF or PCRaster files could be extracted using memory mapping. This allows the programmer to extract individual cell values or a list of cell values without reading the entire raster.
+If the number of selected cells is much lower than the number of all cells run times can be reduced to a small fraction.</p>
+<p>For raster formats other than IDF and PCRaster this is not available.</p>
+<p>The selected cells could be specified as point locations (x and y coordinates) or cell indices (row and column number).</p>
+<p>With the same kind of functionality it is possible to write individual cell values of existing rasters.</p>
+<p><strong>Functions with x,y coordinates:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.xy_idf2val" title="raster_func.xy_idf2val"><code class="xref py py-func docutils literal"><span class="pre">xy_idf2val</span></code></a></td>
+<td>Function to extract cell values of an iMOD IDF file using x,y coordinates.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.xy_map2val" title="raster_func.xy_map2val"><code class="xref py py-func docutils literal"><span class="pre">xy_map2val</span></code></a></td>
+<td>Function to extract cell values of a PCRaster file using x,y coordinates.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.xy_val2idf" title="raster_func.xy_val2idf"><code class="xref py py-func docutils literal"><span class="pre">xy_val2idf</span></code></a></td>
+<td>Function to write cell values to an existing iMOD IDF file using x,y coordinates.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.xy_val2map" title="raster_func.xy_val2map"><code class="xref py py-func docutils literal"><span class="pre">xy_val2map</span></code></a></td>
+<td>Function to write cell values to an existing PCRaster file using x,y coordinates.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions with row,column indices:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rc_idf2val" title="raster_func.rc_idf2val"><code class="xref py py-func docutils literal"><span class="pre">rc_idf2val</span></code></a></td>
+<td>Function to extract cell values of an iMOD IDF file using row,col indices.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rc_map2val" title="raster_func.rc_map2val"><code class="xref py py-func docutils literal"><span class="pre">rc_map2val</span></code></a></td>
+<td>Function to extract cell values of a PCRaster file using row,col indices.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rc_val2idf" title="raster_func.rc_val2idf"><code class="xref py py-func docutils literal"><span class="pre">rc_val2idf</span></code></a></td>
+<td>Function to write cell values to an existing iMOD IDF file using row,col indices.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rc_val2map" title="raster_func.rc_val2map"><code class="xref py py-func docutils literal"><span class="pre">rc_val2map</span></code></a></td>
+<td>Function to write cell values to an existing PCRaster file using row,col indices.</td>
+</tr>
+</tbody>
+</table>
+<p>Memory mapping is also used to calculate cell-by-cell statistics for a set of raster files (only iMOD IDF or PCRaster files).
+Because reading entire rasters for a large number of files could cause memory errors, the functions read a user-defined number of cells at the same time.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.idfs2stat" title="raster_func.idfs2stat"><code class="xref py py-func docutils literal"><span class="pre">idfs2stat</span></code></a></td>
+<td>Function to calculate cell-by-cell statistics for a list of iMOD IDF files.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.maps2stat" title="raster_func.maps2stat"><code class="xref py py-func docutils literal"><span class="pre">maps2stat</span></code></a></td>
+<td>Function to calculate cell-by-cell statistics for a list of PCRaster files.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="other-functions-methods">
+<h2>Other functions/methods<a class="headerlink" href="#other-functions-methods" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="68%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.copy" title="raster_func.rasterArr.copy"><code class="xref py py-func docutils literal"><span class="pre">copy</span></code></a></td>
+<td>Method to create a deep copy of the rasterArr object.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.unique" title="raster_func.rasterArr.unique"><code class="xref py py-func docutils literal"><span class="pre">unique</span></code></a></td>
+<td>Method to get the unique values of the data array.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.xy2rc" title="raster_func.xy2rc"><code class="xref py py-func docutils literal"><span class="pre">xy2rc</span></code></a></td>
+<td>Function to convert x,y coordinates to row,col indices.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rc2xy" title="raster_func.rc2xy"><code class="xref py py-func docutils literal"><span class="pre">rc2xy</span></code></a></td>
+<td>Function to convert row,col indices to x,y coordinates.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rc2rc" title="raster_func.rc2rc"><code class="xref py py-func docutils literal"><span class="pre">rc2rc</span></code></a></td>
+<td>Function to calculated row and column indices of a raster and the corresponding indices of a second raster.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterStack" title="raster_func.rasterStack"><code class="xref py py-func docutils literal"><span class="pre">rasterStack</span></code></a></td>
+<td>Function to create a 3-D rasterArr object (map stack) from 2-D rasterArr objects.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.dtype" title="raster_func.rasterArr.dtype"><code class="xref py py-func docutils literal"><span class="pre">dtype</span></code></a></td>
+<td>Method to get the dtype of the data array.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/raster_func.html#raster_func.rasterArr.toGDALobj" title="raster_func.rasterArr.toGDALobj"><code class="xref py py-func docutils literal"><span class="pre">toGDALobj</span></code></a></td>
+<td>Method to create a GDAL in-memory object from the rasterArr object.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/raster_func.html#raster_func.idfs2mdf" title="raster_func.idfs2mdf"><code class="xref py py-func docutils literal"><span class="pre">idfs2mdf</span></code></a></td>
+<td>Function to group a list of IDF files into a MDF file.</td>
+</tr>
+</tbody>
+</table>
+<p>See also:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.shp2arr" title="gis_func.shp2arr"><code class="xref py py-func docutils literal"><span class="pre">shp2arr</span></code></a></td>
+<td>Function to rasterize an ESRI shapefile (in <a class="reference internal" href="gis_func.html#gis-func"><span class="std std-ref">Module gis_func</span></a>)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.arr2shp_contour" title="gis_func.arr2shp_contour"><code class="xref py py-func docutils literal"><span class="pre">arr2shp_contour</span></code></a></td>
+<td>Function to create an ESRI shapefile with contour lines from a raster, using gdal_contour (in <a class="reference internal" href="gis_func.html#gis-func"><span class="std std-ref">Module gis_func</span></a>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gis_func.html" title="Module gis_func"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Lib_WB’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Wiebe Borren.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

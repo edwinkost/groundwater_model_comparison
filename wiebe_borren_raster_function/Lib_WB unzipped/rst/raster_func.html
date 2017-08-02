@@ -1,0 +1,3767 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>raster_func module &#8212; Lib_WB 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.jpg" width=150 border="0" alt="Deltares python modules"/></a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/rst/raster_func.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-raster_func">
+<span id="raster-func-module"></span><h1>raster_func module<a class="headerlink" href="#module-raster_func" title="Permalink to this headline">¶</a></h1>
+<p>This module contains raster functions and methods.</p>
+<p>It comprises (amongst others) reading, writing, rescaling, sampling,
+reprojecting, operators, statistics, conditionals, window operations
+on raster data.</p>
+<p>Raster data is stored in rasterArr objects, basicly a numpy MaskedArray
+and a dict with geographical information.</p>
+<p>All GDAL supported raster formats are handled. Additionally iMOD raster
+files (IDF) are handled.</p>
+<p>Rescaling/resampling is done automatically if needed.</p>
+<dl class="function">
+<dt id="raster_func.crs2epsg">
+<code class="descclassname">raster_func.</code><code class="descname">crs2epsg</code><span class="sig-paren">(</span><em>crs</em>, <em>alt=”</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.crs2epsg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to create EPSG string from a crs reference.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>crs</strong> : int or str</p>
+<blockquote>
+<div><p>Crs reference.</p>
+<p>One of the following forms:</p>
+<p>Integer: EPSG reference number.</p>
+<p>String: ‘EPSG:i’ where i denotes a EPSG reference number.</p>
+<p>String: ‘UTMiC’ where i denotes a UTM zone number and C denotes ‘N’ or ‘S’ for the hemisphere.</p>
+<p>String: GDAL’s so called WellKnownGeogCS string, e.g. ‘WGS84’.</p>
+<p>String: Ohter recognized strings are: ‘amersfoort’, ‘rd’, ‘gda94’, ‘gda94_vicgrid’</p>
+<p>String: WKT string</p>
+</div></blockquote>
+<p><strong>alt</strong> : str (optional)</p>
+<blockquote>
+<div><p>Alternative string to be returned if <em>crs</em> could not be converted to WKT.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>epsg</strong> : str</p>
+<blockquote class="last">
+<div><p>‘EPSG:i’ string or ‘UTMiC’ string.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#projection"><span class="std std-ref">Projection</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.crs2prj">
+<code class="descclassname">raster_func.</code><code class="descname">crs2prj</code><span class="sig-paren">(</span><em>f_prj</em>, <em>crs</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.crs2prj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write crs as WKT to prj file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_prj</strong> : str</p>
+<blockquote>
+<div><p>File name of prj file.</p>
+<p>Extension of the file is replaced by ‘.prj’.</p>
+</div></blockquote>
+<p><strong>crs</strong> : int or str</p>
+<blockquote class="last">
+<div><p>Crs reference.</p>
+<p>One of the following forms:</p>
+<p>Integer: EPSG reference number.</p>
+<p>String: ‘EPSG:i’ where i denotes a EPSG reference number.</p>
+<p>String: ‘UTMiC’ where i denotes a UTM zone number and C denotes ‘N’ or ‘S’ for the hemisphere.</p>
+<p>String: GDAL’s so called WellKnownGeogCS string, e.g. ‘WGS84’.</p>
+<p>String: Ohter recognized strings are: ‘amersfoort’, ‘rd’, ‘gda94’, ‘gda94_vicgrid’</p>
+<p>String: WKT string</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.crs2wkt">
+<code class="descclassname">raster_func.</code><code class="descname">crs2wkt</code><span class="sig-paren">(</span><em>crs</em>, <em>alt=”</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.crs2wkt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to create WKT string from a crs reference.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>crs</strong> : int or str</p>
+<blockquote>
+<div><p>Crs reference.</p>
+<p>One of the following forms:</p>
+<p>Integer: EPSG reference number.</p>
+<p>String: ‘EPSG:i’ where i denotes a EPSG reference number.</p>
+<p>String: ‘UTMiC’ where i denotes a UTM zone number and C denotes ‘N’ or ‘S’ for the hemisphere.</p>
+<p>String: GDAL’s so called WellKnownGeogCS string, e.g. ‘WGS84’.</p>
+<p>String: Ohter recognized strings are: ‘amersfoort’, ‘rd’, ‘gda94’, ‘gda94_vicgrid’</p>
+<p>String: WKT string</p>
+</div></blockquote>
+<p><strong>alt</strong> : str (optional)</p>
+<blockquote>
+<div><p>Alternative string to be returned if <em>crs</em> could not be converted to WKT.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>wkt</strong> : str</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#projection"><span class="std std-ref">Projection</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.equal_gi">
+<code class="descclassname">raster_func.</code><code class="descname">equal_gi</code><span class="sig-paren">(</span><em>gi1</em>, <em>gi2</em>, <em>tol=1e-07</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.equal_gi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to check if 2 geographical information dicts/lists are equal.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>gi1</strong> : dict or list</p>
+<blockquote>
+<div><p>Geographical information dict/list.</p>
+</div></blockquote>
+<p><strong>gi2</strong> : dict or list</p>
+<blockquote>
+<div><p>Geographical information dict/list.</p>
+</div></blockquote>
+<p><strong>tol</strong> : float (optional)</p>
+<blockquote>
+<div><p>Tolerance factor. If values differ less than <em>tol</em> they are considered to be equal.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>equal</strong> : bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.get_gi">
+<code class="descclassname">raster_func.</code><code class="descname">get_gi</code><span class="sig-paren">(</span><em>rA</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.get_gi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get a list of specified geographical information elements of a rasterArr object or a geographical information dict/list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rA</strong> : rasterArr object, dict, list or tuple</p>
+<blockquote>
+<div><p>The input raster or the geographical information dict/list.</p>
+<p>If <em>rA</em> is a list or tuple it is assumed that this contains the basic geographical information, in fixed order: xll, yll, dx, dy, nrow, ncol, proj, ang, crs.</p>
+</div></blockquote>
+<p><strong>args</strong> : arguments (str)</p>
+<blockquote>
+<div><p>Recognized arguments are: ‘gi’, ‘gi_list’, ‘nodata’, ‘xll’, ‘xur’, ‘yll’, ‘yur’, ‘dx’, ‘Dx’,
+‘dy’, ‘Dy’, ‘ieq’, ‘nrow’, ‘ncol’, ‘proj’, ‘ang’.
+Other arguments are ignored.</p>
+<p>If <em>rA</em> is a dict the recognized arguments are limited to what is included in the dict.</p>
+<p>If <em>rA</em> is a list or tuple the recognized arguments are limited to ‘xll’, ‘yll’, ‘dx’, ‘dy’, ‘nrow’, ‘ncol’, ‘proj’, ‘ang’.</p>
+<p>If ‘gi’ is specified the dict of the basic geographical information is returned.
+If ‘gi_list’ is specified the basic geographical information is returned as list with fixed order: xll, yll, dx, dy, nrow, ncol, proj, ang, crs.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : list</p>
+<blockquote class="last">
+<div><p>The list with the specified elements.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.get_global_method">
+<code class="descclassname">raster_func.</code><code class="descname">get_global_method</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.get_global_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the global method for rescaling/resampling.</p>
+<p>The global method is used if rescaling/resampling is needed, but no method
+is specified by the programmer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>method</strong> : str or None</p>
+<blockquote class="last">
+<div><p>The global method for rescaling/resampling. Possible methods are:
+‘sum’, ‘min’, ‘max’, ‘harm’, ‘log10’, ‘log’, ‘mean’, ‘sample’, None.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#rescaling-resampling"><span class="std std-ref">Rescaling/resampling</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.get_nodataASC">
+<code class="descclassname">raster_func.</code><code class="descname">get_nodataASC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.get_nodataASC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the global ASC nodata value.</p>
+<p>The global ASC nodata value is used in writing an ASC file if no specific nodata value is specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>nodata</strong> : int, float or None</p>
+<blockquote class="last">
+<div><p>The global ASC nodata value.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.get_nodataIDF">
+<code class="descclassname">raster_func.</code><code class="descname">get_nodataIDF</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.get_nodataIDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the global IDF nodata value.</p>
+<p>The global IDF nodata value is used in writing an IDF file if no specific nodata value is specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>nodata</strong> : int, float or None</p>
+<blockquote class="last">
+<div><p>The global IDF nodata value.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.get_raster_crs">
+<code class="descclassname">raster_func.</code><code class="descname">get_raster_crs</code><span class="sig-paren">(</span><em>f_raster</em>, <em>f_hdr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.get_raster_crs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the crs of a file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_raster</strong> : str</p>
+<blockquote>
+<div><p>File name.</p>
+</div></blockquote>
+<p><strong>f_hdr</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Header file name for BIL file.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>crs</strong> : str</p>
+<blockquote class="last">
+<div><p>String referring to the crs of the raster file.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#projection"><span class="std std-ref">Projection</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.get_raster_format">
+<code class="descclassname">raster_func.</code><code class="descname">get_raster_format</code><span class="sig-paren">(</span><em>f_raster</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.get_raster_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the raster format of a file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_raster</strong> : str</p>
+<blockquote>
+<div><p>File name.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>raster_format</strong> : str</p>
+<blockquote class="last">
+<div><p>String referring to the format of the raster file.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#raster-formats"><span class="std std-ref">Raster formats</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.get_raster_minmax">
+<code class="descclassname">raster_func.</code><code class="descname">get_raster_minmax</code><span class="sig-paren">(</span><em>f_raster</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.get_raster_minmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the minimum and maximum value of a PCRaster or IDF file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_raster</strong> : str</p>
+<blockquote>
+<div><p>File name of PCRaster or IDF file</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : tuple</p>
+<blockquote class="last">
+<div><p>Minimum and maximum value.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.get_raster_nodata">
+<code class="descclassname">raster_func.</code><code class="descname">get_raster_nodata</code><span class="sig-paren">(</span><em>f_raster</em>, <em>f_hdr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.get_raster_nodata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the nodata value of a raster file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_raster</strong> : str</p>
+<blockquote>
+<div><p>Raster file name.</p>
+</div></blockquote>
+<p><strong>f_hdr</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Header file name for BIL file.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>nodata</strong> : float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.get_raster_pcrMapType">
+<code class="descclassname">raster_func.</code><code class="descname">get_raster_pcrMapType</code><span class="sig-paren">(</span><em>f_raster</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.get_raster_pcrMapType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the map type (valueScale) of a PCRaster file.</p>
+<p>Recognized types are: ‘boolean’, ‘nominal’, ‘scalar’, ‘directional’, ‘ordinal’, ‘ldd’.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_raster</strong> : str</p>
+<blockquote>
+<div><p>File name of PCRaster file</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pcrMapType</strong> : string</p>
+<blockquote class="last">
+<div><p>PCRaster map type; returns None if <em>f_raster</em> is not a PCRaster file.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.gi2dict">
+<code class="descclassname">raster_func.</code><code class="descname">gi2dict</code><span class="sig-paren">(</span><em>gi=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.gi2dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to convert and set geographical information into a dict with at least the basic geographical information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>gi</strong> : list, dict, None</p>
+<blockquote>
+<div><p>Existing geographical information.</p>
+<p>If <em>gi</em> is specified as a list the order of the elements should be: xll, yll, dx, dy, nrow, ncol, proj, ang, crs.</p>
+<p>If <em>gi</em> is None it is ignored.</p>
+</div></blockquote>
+<p><strong>kwargs</strong> : keyword arguments</p>
+<blockquote>
+<div><p>Existing keywords in <em>gi</em> will be overruled.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.gi2list">
+<code class="descclassname">raster_func.</code><code class="descname">gi2list</code><span class="sig-paren">(</span><em>gi=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.gi2list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to convert and set geographical information into a list with the basic geographical information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>gi</strong> : list, dict, None</p>
+<blockquote>
+<div><p>Existing geographical information.</p>
+<p>If <em>gi</em> is specified as a list the order of the elements should be: xll, yll, dx, dy, nrow, ncol, proj, ang, crs.</p>
+<p>If <em>gi</em> is None it is ignored.</p>
+</div></blockquote>
+<p><strong>kwargs</strong> : keyword arguments</p>
+<blockquote>
+<div><p>Existing keywords in <em>gi</em> will be overruled.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : list</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.gi_extended">
+<code class="descclassname">raster_func.</code><code class="descname">gi_extended</code><span class="sig-paren">(</span><em>rA</em>, <em>as_list=False</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.gi_extended" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the extended geographical information of a rasterArr object or a basic geographical information dict/list.</p>
+<p>The extended geographical information comprises: xur, yur, Dx, Dy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rA</strong> : rasterArr object, dict, list or tuple</p>
+<blockquote>
+<div><p>The input raster or the basic geographical information dict/list.</p>
+</div></blockquote>
+<p><strong>as_list</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = return result as list; order of elements is fixed: see above.</p>
+<p>False = return result as dict.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>gi</strong> : dict or list</p>
+<blockquote class="last">
+<div><p>The extended geographical information.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.gi_get_Dx">
+<code class="descclassname">raster_func.</code><code class="descname">gi_get_Dx</code><span class="sig-paren">(</span><em>gi</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.gi_get_Dx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get Dx (total extent/width in x direction) from a geographical information dict/list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>gi</strong> : dict or list</p>
+<blockquote>
+<div><p>Geographical information dict/list.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>Dx</strong> : float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.gi_get_Dy">
+<code class="descclassname">raster_func.</code><code class="descname">gi_get_Dy</code><span class="sig-paren">(</span><em>gi</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.gi_get_Dy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get Dy (total extent/height in y direction) from a geographical information dict/list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>gi</strong> : dict or list</p>
+<blockquote>
+<div><p>Geographical information dict/list.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>Dy</strong> : float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.gi_get_xur">
+<code class="descclassname">raster_func.</code><code class="descname">gi_get_xur</code><span class="sig-paren">(</span><em>gi</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.gi_get_xur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get xur (x coordinate of upper right corner) from a geographical information dict/list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>gi</strong> : dict or list</p>
+<blockquote>
+<div><p>Geographical information dict/list.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>xur</strong> : float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.gi_get_yur">
+<code class="descclassname">raster_func.</code><code class="descname">gi_get_yur</code><span class="sig-paren">(</span><em>gi</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.gi_get_yur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get yur (y coordinate of upper right corner) from a geographical information dict/list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>gi</strong> : dict or list</p>
+<blockquote>
+<div><p>Geographical information dict/list.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>yur</strong> : float</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.gi_set_dxdy">
+<code class="descclassname">raster_func.</code><code class="descname">gi_set_dxdy</code><span class="sig-paren">(</span><em>gi</em>, <em>dx=None</em>, <em>dy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.gi_set_dxdy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to set (change) the cell size of a geographical information dict/list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>gi</strong> : dict or list</p>
+<blockquote>
+<div><p>Geographical information dict/list.</p>
+</div></blockquote>
+<p><strong>dx</strong> : float, int, numpy array or array_like (optional)</p>
+<blockquote>
+<div><p>Cell size in x direction (column width)</p>
+<p>If <em>dx</em> is a numpy array (or array_like) the number of columns (ncol) is adjusted too.</p>
+</div></blockquote>
+<p><strong>dy</strong> : float, int or numpy array (optional)</p>
+<blockquote>
+<div><p>Cell size in y direction (row height)</p>
+<p>If <em>dy</em> is a numpy array (or array_like) the number of rows (nrow) is adjusted too.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : dict</p>
+<blockquote class="last">
+<div><p>New geographical information dict</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.gi_set_extent">
+<code class="descclassname">raster_func.</code><code class="descname">gi_set_extent</code><span class="sig-paren">(</span><em>gi</em>, <em>l_extent</em>, <em>snap=False</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.gi_set_extent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to set (change) the extent of a geographical information dict/list.</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>gi</strong> : dict or list</p>
+<blockquote>
+<div><p>Geographical information dict/list.</p>
+</div></blockquote>
+<p><strong>l_extent</strong> : list</p>
+<blockquote>
+<div><p>A list containing xll, yll, xur and yur of the new extent (in this order).</p>
+</div></blockquote>
+<p><strong>snap</strong> : bool (optional)</p>
+<blockquote>
+<div><p>Flag to snap (shift) the new extent to match with the original cell boundaries.</p>
+<p>True = snap is performed to the nearest cell boundaries.</p>
+<p>False = snap is not performed</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : dict</p>
+<blockquote class="last">
+<div><p>New geographical information dict</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.idfs2mdf">
+<code class="descclassname">raster_func.</code><code class="descname">idfs2mdf</code><span class="sig-paren">(</span><em>l_idf</em>, <em>f_mdf</em>, <em>rgb=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.idfs2mdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to group a list of IDF files into a MDF file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>l_idf</strong> : list</p>
+<blockquote>
+<div><p>Lisf of IDF files to be grouped.</p>
+</div></blockquote>
+<p><strong>f_mdf</strong> : string</p>
+<blockquote>
+<div><p>Output MDF file.</p>
+</div></blockquote>
+<p><strong>rgb</strong> : list, tuple or None (optional)</p>
+<blockquote class="last">
+<div><p>RGB color code(s) for the IDF files (layers).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.idfs2stat">
+<code class="descclassname">raster_func.</code><code class="descname">idfs2stat</code><span class="sig-paren">(</span><em>l_idf</em>, <em>stat=’mean’</em>, <em>ncel=100000</em>, <em>assume_same_mask=True</em>, <em>weights=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.idfs2stat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to calculate cell-by-cell statistics for a list of iMOD IDF files.</p>
+<p>Because reading entire rasters for a large number of files could cause memory errors, the function uses memory mapping to read a user-defined number of cells at the same time.</p>
+<p>All files should have the same extent and cell sizes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>l_idf</strong> : list</p>
+<blockquote>
+<div><p>List of iMOD IDF files.</p>
+</div></blockquote>
+<p><strong>stat</strong> : str (optional)</p>
+<blockquote>
+<div><p>The statistic to be calculated. Recognized are: ‘sum’, ‘count’, ‘mean’, ‘std’, ‘var’, ‘min’, ‘max’, ‘median’
+and percentiles in the form of ‘pQ’ where Q represents an integer between 0 and 100 (e.g. ‘p10’).</p>
+</div></blockquote>
+<p><strong>ncel</strong> : int or None (optional)</p>
+<blockquote>
+<div><p>The number of cells to be read at the same time.</p>
+<p>If <em>ncel</em> is None all cells will be read at the same time.</p>
+</div></blockquote>
+<p><strong>assume_same_mask</strong> : bool (optional)</p>
+<blockquote>
+<div><p>Flag to specify if the mask (nodata) of the cells could be assumed to be same or not.</p>
+<p>True = assume same masks</p>
+<p>False = do not assume same masks; this will be much slower</p>
+</div></blockquote>
+<p><strong>weights</strong> : array, array_like or None (optional)</p>
+<blockquote>
+<div><p>The weights to be applied for the IDF files. Only relevant if <em>stat</em> is ‘sum’, ‘count’, ‘mean’, ‘median’ or a percentile.
+If <em>stat</em> is ‘sum’ or ‘count’ <em>weights</em> is used as multiplier.</p>
+<p>If <em>weights</em> is an array (or array_like) it should be 1 dimensional and containing one weight for each file.</p>
+<p>If <em>weights</em> is None all files will have the same weight.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.if_then">
+<code class="descclassname">raster_func.</code><code class="descname">if_then</code><span class="sig-paren">(</span><em>if_statement</em>, <em>then_statement</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.if_then" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to perform a conditional operation (if-then).</p>
+<p>Same as <code class="docutils literal"><span class="pre">if_then_else(..)</span></code> function without an <em>else</em> statement.</p>
+<p>At least one of the <em>if</em> and <em>then</em> statements should be a rasterArr object.</p>
+<p>If needed rescaling/resampling is performed using the global method (see <a class="reference internal" href="../raster_func.html#rescaling-resampling"><span class="std std-ref">Rescaling/resampling</span></a>).
+If more than one statement is a rasterArr object the geographical information dict for rescaling/resampling is taken from one of them in the following prefered order: <em>then</em>, <em>if</em>.</p>
+<p>The datatype of the result is based on the datatype of the <em>then</em> statement.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>if_statement</strong> : rasterArr object, single numerical value, numpy array or array_like (boolean or boolean_like)</p>
+<blockquote>
+<div><p>The <em>if</em> statement.</p>
+</div></blockquote>
+<p><strong>then_statement</strong> : rasterArr object, single numerical value, numpy array or array_like</p>
+<blockquote>
+<div><p>The <em>then</em> statement.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#conditionals"><span class="std std-ref">Conditionals</span></a>, <a class="reference internal" href="#raster_func.if_then_else" title="raster_func.if_then_else"><code class="xref py py-func docutils literal"><span class="pre">raster_func.if_then_else()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.if_then_else">
+<code class="descclassname">raster_func.</code><code class="descname">if_then_else</code><span class="sig-paren">(</span><em>if_statement</em>, <em>then_statement</em>, <em>else_statement=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.if_then_else" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to perform a conditional operation (if-then-else).</p>
+<p>At least one of the <em>if</em>, <em>then</em> and <em>else</em> statements should be a rasterArr object.</p>
+<p>If needed rescaling/resampling is performed using the global method (see <a class="reference internal" href="../raster_func.html#rescaling-resampling"><span class="std std-ref">Rescaling/resampling</span></a>).
+If more than one statement is a rasterArr object the geographical information dict for rescaling/resampling is taken from one of them in the following prefered order: <em>then</em>, <em>else</em>, <em>if</em>.</p>
+<p>The datatype of the result is based on the datatype of the <em>then</em> statement.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>if_statement</strong> : rasterArr object, single numerical value, numpy array or array_like (boolean or boolean_like)</p>
+<blockquote>
+<div><p>The <em>if</em> statement.</p>
+</div></blockquote>
+<p><strong>then_statement</strong> : rasterArr object, single numerical value, numpy array or array_like</p>
+<blockquote>
+<div><p>The <em>then</em> statement.</p>
+</div></blockquote>
+<p><strong>else_statement</strong> : rasterArr object, single numerical value, numpy array or array_like</p>
+<blockquote>
+<div><p>The <em>else</em> statement.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#conditionals"><span class="std std-ref">Conditionals</span></a>, <a class="reference internal" href="#raster_func.if_then" title="raster_func.if_then"><code class="xref py py-func docutils literal"><span class="pre">raster_func.if_then()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.maps2stat">
+<code class="descclassname">raster_func.</code><code class="descname">maps2stat</code><span class="sig-paren">(</span><em>l_map</em>, <em>stat=’mean’</em>, <em>ncel=10000</em>, <em>assume_same_mask=True</em>, <em>weights=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.maps2stat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to calculate cell-by-cell statistics for a list of PCRaster files.</p>
+<p>Because reading entire rasters for a large number of files could cause memory errors, the function uses memory mapping to read a user-defined number of cells at the same time.</p>
+<p>All files should have the same extent and cell sizes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>l_map</strong> : list</p>
+<blockquote>
+<div><p>List of PCRaster files.</p>
+</div></blockquote>
+<p><strong>stat</strong> : str (optional)</p>
+<blockquote>
+<div><p>The statistic to be calculated. Recognized are: ‘sum’, ‘count’, ‘mean’, ‘std’, ‘var’, ‘min’, ‘max’, ‘median’
+and percentiles in the form of ‘pQ’ where Q represents an integer between 0 and 100 (e.g. ‘p10’).</p>
+</div></blockquote>
+<p><strong>ncel</strong> : int or None (optional)</p>
+<blockquote>
+<div><p>The number of cells to be read at the same time.</p>
+<p>If <em>ncel</em> is None all cells will be read at the same time.</p>
+</div></blockquote>
+<p><strong>assume_same_mask</strong> : bool (optional)</p>
+<blockquote>
+<div><p>Flag to specify if the mask (nodata) of the cells could be assumed to be same or not.</p>
+<p>True = assume same masks</p>
+<p>False = do not assume same masks; this will be much slower</p>
+</div></blockquote>
+<p><strong>weights</strong> : array, array_like or None (optional)</p>
+<blockquote>
+<div><p>The weights to be applied for the IDF files. Only relevant if <em>stat</em> is ‘sum’, ‘count’, ‘mean’, ‘median’ or a percentile.
+If <em>stat</em> is ‘sum’ or ‘count’ <em>weights</em> is used as multiplier.</p>
+<p>If <em>weights</em> is an array (or array_like) it should be 1 dimensional and containing one weight for each file.</p>
+<p>If <em>weights</em> is None all files will have the same weight.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.masks2rc_overlap">
+<code class="descclassname">raster_func.</code><code class="descname">masks2rc_overlap</code><span class="sig-paren">(</span><em>rA1</em>, <em>rA2</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.masks2rc_overlap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to calculated row and column indices of the overlapping area of 2 rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rA1</strong> : rasterArr object</p>
+<blockquote>
+<div><p>First raster.</p>
+</div></blockquote>
+<p><strong>rA2</strong> : rasterArr object</p>
+<blockquote>
+<div><p>Second raster.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>rc</strong> : numpy ndarray</p>
+<blockquote>
+<div><p>Array with the overlapping and non-masked row and column indices of the two rasters.</p>
+<p>2x2xN array: [[irow1 array, icol1 array],[irow2 array,icol2 array]]</p>
+</div></blockquote>
+<p><strong>rect</strong> : numpy ndarray</p>
+<blockquote class="last">
+<div><p>Array with the ‘from’ and ‘to’ row and column indices for overlapping area (including masked cells) of the two rasters.</p>
+<p>2x2x2 array: [[(irow1 from,irow1 to),(icol1 from,icol1 to)],[(irow2 from,irow2 to),(icol2 from,icol2 to)]]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.prj2crs">
+<code class="descclassname">raster_func.</code><code class="descname">prj2crs</code><span class="sig-paren">(</span><em>f_prj</em>, <em>epsg=True</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.prj2crs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to create EPSG or WKT string from prj file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_prj</strong> : str</p>
+<blockquote>
+<div><p>File name of prj file.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>wkt</strong> : str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.put_rA">
+<code class="descclassname">raster_func.</code><code class="descname">put_rA</code><span class="sig-paren">(</span><em>rA</em>, <em>rA_in</em>, <em>method=’sample’</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.put_rA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to replace a part of the data of a rasterArr object with another rasterArr object.</p>
+<p>If needed rescaling/resampling is performed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rA</strong> : rasterArr object</p>
+<blockquote>
+<div><p>Base rasterArr object.</p>
+</div></blockquote>
+<p><strong>rA_in</strong> : rasterArr object</p>
+<blockquote>
+<div><p>raterArr object containing the data to be put into the base rasterArr object.</p>
+</div></blockquote>
+<p><strong>method</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>The rescaling/resampling method. Possible methods are:
+‘sum’, ‘min’, ‘max’, ‘harm’, ‘log10’, ‘log’, ‘mean’, ‘sample’, None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#indexing-slicing"><span class="std std-ref">Indexing, slicing and data array setting</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rA_nonequi2equi">
+<code class="descclassname">raster_func.</code><code class="descname">rA_nonequi2equi</code><span class="sig-paren">(</span><em>rA</em>, <em>dx=None</em>, <em>dy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rA_nonequi2equi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to resample a non-equidistant raster to an equidistant raster.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rA</strong> : rasterArr object</p>
+<p><strong>dx</strong> : float, int or None (optional)</p>
+<blockquote>
+<div><p>Cell size in x direction (column width).</p>
+<p>If <em>dx</em> is None then the minimum column width of the non-equidistant raster is used.</p>
+</div></blockquote>
+<p><strong>dy</strong> : float, int or None (optional)</p>
+<blockquote>
+<div><p>Cell size in y direction (row height).</p>
+<p>If <em>dy</em> is None then the minimum row height of the non-equidistant raster is used.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.raster2arr">
+<code class="descclassname">raster_func.</code><code class="descname">raster2arr</code><span class="sig-paren">(</span><em>f_raster</em>, <em>nodata=None</em>, <em>gi=None</em>, <em>method=’sample’</em>, <em>step_xy=1</em>, <em>dtype_asc=None</em>, <em>f_hdr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.raster2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to read a raster file and create a rasterArr object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_raster</strong> : str</p>
+<blockquote>
+<div><p>Raster file name.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : float, int or None (optional)</p>
+<blockquote>
+<div><p>Nodata value to be applied.</p>
+</div></blockquote>
+<p><strong>gi</strong> : dict, list or None (optional)</p>
+<blockquote>
+<div><p>Basic geographical information dict/list.</p>
+<p>If <em>gi</em> is specified a rescaling/resampling is performed to meet <em>gi</em>.
+The rescaling/resampling method is specified with the parameter <em>method</em>.
+If <em>method</em> is None no rescaling/resampling is performed, but only the extent of the raster is set to meet <em>gi</em> (“crop”).</p>
+</div></blockquote>
+<p><strong>method</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>The rescaling/resampling method. Possible methods are:
+‘sum’, ‘min’, ‘max’, ‘harm’, ‘log10’, ‘log’, ‘mean’, ‘sample’, None.</p>
+<p>Rescaling/resampling is only applied if <em>gi</em> is specified. See above.</p>
+</div></blockquote>
+<p><strong>step_xy</strong> : int or list (optional)</p>
+<blockquote>
+<div><p>The resampling step size in x and y direction, with 1 as lowest value meaning no resampling.</p>
+<p>Note: if <em>step_xy</em> is specified resampling is performed irrespective of rescaling/resampling invoked by <em>gi</em> and <em>method</em>.
+Resampling with <em>step_xy</em> is done before rescaling/resampling to meet <em>gi</em>.</p>
+<p>The step size is not necessarily the same in x in y direction.</p>
+<p>If <em>step_xy</em> is an int or a list with only one value the step size in x and y direction are both set to this value.</p>
+</div></blockquote>
+<p><strong>dtype_asc</strong> : numpy dtype or None (optional)</p>
+<blockquote>
+<div><p>Data type for the resulting data array if the raster file is an ArcInfo ASCII Grid.</p>
+<p>If <em>dtype_asc</em> is not specified the resulting data type will be float64.</p>
+</div></blockquote>
+<p><strong>f_hdr: str or None (optional)</strong></p>
+<blockquote>
+<div><p>Header file name for BIL file.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#reading-rasters"><span class="std std-ref">Reading rasters</span></a>, <a class="reference internal" href="../raster_func.html#rescaling-resampling"><span class="std std-ref">Rescaling/resampling</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.raster2gi">
+<code class="descclassname">raster_func.</code><code class="descname">raster2gi</code><span class="sig-paren">(</span><em>f_raster</em>, <em>f_hdr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.raster2gi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the basic geographical information of the raster.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_raster</strong> : str</p>
+<blockquote>
+<div><p>Raster file name.</p>
+</div></blockquote>
+<p><strong>f_hdr</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Header file name for BIL file.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>gi</strong> : dict</p>
+<blockquote class="last">
+<div><p>Basic geographical information.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="raster_func.rasterArr">
+<em class="property">class </em><code class="descclassname">raster_func.</code><code class="descname">rasterArr</code><span class="sig-paren">(</span><em>arr</em>, <em>gi=None</em>, <em>nodata=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Raster data object class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : array, array_like, rasterArr object, float or int</p>
+<blockquote>
+<div><p>Raster values.</p>
+<p><em>arr</em> could be an existing rasterArr object, a numpy array (ndarray or MaskedArray) or an array_like object (list or tuple).
+It could be 2-D or 3-D (map stack).</p>
+</div></blockquote>
+<p><strong>gi</strong> : dict or list (optional)</p>
+<blockquote>
+<div><p>Geographical information.</p>
+<p>If <em>gi</em> is specified as a list the order of the elements should be: xll, yll, dx, dy, nrow, ncol, proj, ang, crs.
+If <em>arr</em> is specified as rasterArr object then <em>gi</em> is overruled with the geographical information of <em>arr</em>.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : bool, int or float (optional)</p>
+<blockquote>
+<div><p>Nodata value to be applied.</p>
+</div></blockquote>
+<p><strong>kwargs</strong> : keyword arguments (optional)</p>
+<blockquote>
+<div><p>The keyword arguments could be used to set basic geographical information. Recognized keywords are:
+xll, yll, dx, dy, nrow, ncol, proj, ang, crs.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#rasterarr-object"><span class="std std-ref">rasterArr object</span></a>, <a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>Some internal methods for consistency are applied upon initialisation.
+This comprises the number of dimensions of the object (see below), nodata value and mask, nrow and ncol of <em>arr</em> and <em>gi</em> etc.</p>
+<p>If the number of dimensions of the object is lower than 2 the number of dimensions is increased to 2 by adding new dimensions.
+E.g. the 1-D array [1,2] becomes the 2-D array [[1,2]].</p>
+<p>If the number of dimensions of the object is higher than 3 the number of dimensions is decreased to 3 by removing dimensions.
+From each dimension higher than 3 the first element is taken. The other elements are removed.
+E.g. the 4-D array [ [[(1,2),(3,4)],[(11,12),(13,14)]], [[(101,102),(103,104)],[(111,112),(113,114)]] ] becomes
+the 3-D array [[(1,2),(3,4)],[(11,12),(13,14)]].</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="raster_func.rasterArr.Dx">
+<code class="descname">Dx</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.Dx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get Dx (total extent/width in x direction).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>Dx</strong> : float</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.Dy">
+<code class="descname">Dy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.Dy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get Dy (total extent/height in y direction).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>Dy</strong> : float</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.abs">
+<code class="descname">abs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.abs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate the absolute value.</p>
+<p>result = abs(self)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>result</strong> : rasterArr object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.ang">
+<code class="descname">ang</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.ang" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get ang (angle/rotation of coordinate system in PCRaster terms).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>ang</strong> : float</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.arr2figure">
+<code class="descname">arr2figure</code><span class="sig-paren">(</span><em>colorscale=’jet’, n_class=8, scale_type=’linear’, perc_bnd=[0, 100], use_underover=True, list_of_shapes=[]</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.arr2figure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to create a matplotlib figure object with a map and a colorbar.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>colorscale</strong> : str or legendScale object (optional)</p>
+<blockquote>
+<div><p>Color scale / legend to be used.</p>
+<p>If <em>colorscale</em> is a string and refers to an existing iMOD legend file, then this legend file is used and the arguments <em>n_class</em> and <em>scale_type</em> are ignored.</p>
+<p>If <em>colorscale</em> is a string and does not refer to an iMOD legend file, it is interpreted as a colorscale name of matplotlib or plot_func (including the _r option).</p>
+<p>If <em>colorscale</em> is a legendScale object (see <a class="reference internal" href="plot_func.html#plot_func.legendScale" title="plot_func.legendScale"><code class="xref py py-class docutils literal"><span class="pre">class</span> <span class="pre">legendScale</span> <span class="pre">in</span> <span class="pre">plot_func</span> <span class="pre">library</span></code></a>), then this legend is used and the arguments <em>n_class</em> and <em>scale_type</em> are ignored.</p>
+</div></blockquote>
+<p><strong>n_class</strong> : int or None (optional)</p>
+<blockquote>
+<div><p>Number of intervals. This is an initial number; the final number of intervals may differ depending on the determined interval width.</p>
+<p>If <em>n_class</em> is None then the initial number of intervals will be 8.</p>
+<p>A minimum number of 2 is required.</p>
+</div></blockquote>
+<p><strong>scale_type</strong> : str (optional)</p>
+<blockquote>
+<div><p>Two types are supported: ‘linear’ and ‘histogram’.</p>
+<p>If <em>scale_type</em> is ‘linear’ then the intervals will have equal widths.</p>
+<p>If <em>scale_type</em> is ‘histogram’ then the interval widths will be based on the distribution of values (percentiles).</p>
+</div></blockquote>
+<p><strong>perc_bnd</strong> : numpy array or array_like (optional)</p>
+<blockquote>
+<div><p>Lower and upper percentiles to be used as initial minimum and maximum boundary values.</p>
+</div></blockquote>
+<p><strong>use_underover</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = color_under and color_over are used if needed.</p>
+<p>False = color_under and color_over are not used.</p>
+</div></blockquote>
+<p><strong>list_of_shapes</strong> : list (optional)</p>
+<blockquote>
+<div><p>List containing the information of point/polyline/polygon overlays. The list contains records; each record contains the following information (in fixed order):</p>
+<ul class="simple">
+<li>shape type (str) = type of the overlay; recognized are ‘POINT’, ‘POLYLINE’ and ‘POLYGON’</li>
+<li>shape xy (list or numpy ndarray) = x,y coordinates of the shapes; see <a class="reference internal" href="gis_func.html#gis_func.write_gen" title="gis_func.write_gen"><code class="xref py py-func docutils literal"><span class="pre">gis_func.write_gen()</span></code></a> or <a class="reference internal" href="gis_func.html#gis_func.write_shp" title="gis_func.write_shp"><code class="xref py py-func docutils literal"><span class="pre">gis_func.write_shp()</span></code></a></li>
+<li>fill color (rgb or rgba tuple; value range 0-1); optional; default = (0,0,0,0)</li>
+<li>line color (rgb or rgba tuple; value range 0-1); optional; default = (0.5,0.5,0.5,1)</li>
+<li>line width (int) = widht of the lines; optional; default = 1</li>
+<li>marker (str) = type of marker, matplotlib style; optional; default = ‘o’</li>
+<li>marker size (int) = size of the markers; optional; default = 4</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>fig</strong> : matplotlib figure object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.arr2raster">
+<code class="descname">arr2raster</code><span class="sig-paren">(</span><em>f_raster</em>, <em>raster_format=0</em>, <em>frm_asc=’%s’</em>, <em>xy_center_asc=False</em>, <em>nodata_asc=None</em>, <em>itb_idf=None</em>, <em>nodata_idf=None</em>, <em>frm_map=None</em>, <em>f_hdr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.arr2raster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to write a 2-D or 3-D rasterArr object to raster file(s).</p>
+<p>Same as method <code class="docutils literal"><span class="pre">write(..)</span></code>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#raster_func.rasterArr.write" title="raster_func.rasterArr.write"><code class="xref py py-func docutils literal"><span class="pre">raster_func.rasterArr.write()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.bool">
+<code class="descname">bool</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.bool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to convert data type to bool.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>result</strong> : rasterArr object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to create a deep copy of the rasterArr object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : rasterArr object</p>
+<blockquote class="last">
+<div><p>A deep copy of the rasterArr object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#rasterarr-assignment"><span class="std std-ref">Assignment: copy or bind a rasterArr object?</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.count">
+<code class="descname">count</code><span class="sig-paren">(</span><em>axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate the number of non-nodata elements over the given axis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>axis</strong> : int or None (optional)</p>
+<blockquote>
+<div><p>Axis over which the calculation is done.</p>
+<p>If <em>axis</em> is None the calculation is done over all dimensions, resulting in a single value.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>count</strong> : numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.cover">
+<code class="descname">cover</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.cover" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to fill (cover) nodata cells.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>other</strong> : rasterArr object, numpy array (ndarry or MaskedArray) or single numeric value</p>
+<blockquote>
+<div><p>If <em>other</em> is a rasterArr object it is rescaled/resampled to meet self if needed, using the global method.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.crop">
+<code class="descname">crop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.crop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to crop the raster to non-nodata values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>result</strong> : rasterArr object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.crs">
+<code class="descname">crs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.crs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get crs (coordinate reference system).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>ang</strong> : float</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.dtype">
+<code class="descname">dtype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the dtype of the data array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>dtype</strong> : numpy dtype object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.dx">
+<code class="descname">dx</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.dx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get dx (cell size in x direction).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dx</strong> : float or numpy array (1-D)</p>
+<blockquote class="last">
+<div><p>If the raster is non-equidistant the dx is a numpy array containing the cell sizes of each column.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.dxarr">
+<code class="descname">dxarr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.dxarr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get dx (cell size in x direction) for all cells of a rasterArr object and return them as a rasterArr object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>dx</strong> : rasterArr object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.dy">
+<code class="descname">dy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.dy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get dy (cell size in y direction).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dy</strong> : float or numpy array (1-D)</p>
+<blockquote class="last">
+<div><p>If the raster is non-equidistant the dy is a numpy array containing the cell sizes of each row.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.dyarr">
+<code class="descname">dyarr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.dyarr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get dy (cell size in y direction) for all cells of a rasterArr object and return them as a rasterArr object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>dy</strong> : rasterArr object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.exp">
+<code class="descname">exp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.exp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate exponential (base <em>e</em>).</p>
+<p>result = exp(self) = <em>e</em> ** self</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>result</strong> : rasterArr object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.exp10">
+<code class="descname">exp10</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.exp10" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate exponential (base 10).</p>
+<p>result = exp10(self) = 10 ** self</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>result</strong> : rasterArr object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.extent">
+<code class="descname">extent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.extent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the extent: xll, yll, xur, yur.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>extent</strong> : list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.float">
+<code class="descname">float</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.float" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to convert data type to float (float32 or float64).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>result</strong> : rasterArr object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.get_gi">
+<code class="descname">get_gi</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.get_gi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get a list of specified geographical information elements.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>args</strong> : arguments (str)</p>
+<blockquote>
+<div><p>Recognized arguments are: ‘gi’, ‘gi_list’, ‘nodata’, ‘xll’, ‘xur’, ‘yll’, ‘yur’, ‘dx’, ‘Dx’,
+‘dy’, ‘Dy’, ‘ieq’, ‘nrow’, ‘ncol’, ‘proj’, ‘ang’, ‘crs’.
+Other arguments are ignored.</p>
+<p>If ‘gi’ is specified the dict of the basic geographical information is returned.
+If ‘gi_list’ is specified the basic geographical information is returned as list with fixed order:
+xll, yll, dx, dy, nrow, ncol, proj, ang, crs.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : list</p>
+<blockquote class="last">
+<div><p>The list with the specified elements.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.gi">
+<code class="descname">gi</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.gi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the basic geographical information dict.</p>
+<p>The basic geographical information comprises: xll, yll, dx, dy, nrow, ncol, proj, ang, crs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>gi</strong> : dict</p>
+<blockquote class="last">
+<div><p>The basic geographical information.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.gi_extended">
+<code class="descname">gi_extended</code><span class="sig-paren">(</span><em>as_list=False</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.gi_extended" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the extended geographical information.</p>
+<p>The extended geographical information comprises: xur, yur, Dx, Dy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>as_list</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = return result as list; order of elements is fixed: see above.</p>
+<p>False = return result as dict.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>gi</strong> : dict or list</p>
+<blockquote class="last">
+<div><p>The extended geographical information.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.gi_list">
+<code class="descname">gi_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.gi_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the basic geographical information as list.</p>
+<p>The basic geographical information comprises: xll, yll, dx, dy, nrow, ncol, proj, ang, crs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>gi</strong> : list</p>
+<blockquote class="last">
+<div><p>The basic geographical information.</p>
+<p>The order of the elements is fixed: see above.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.ieq">
+<code class="descname">ieq</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.ieq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get ieq (equidistant flag).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ieq</strong> : int</p>
+<blockquote class="last">
+<div><p>0 = equidistant raster</p>
+<p>1 = non-equidistant raster</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.int">
+<code class="descname">int</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to convert data type to int (int8, int16, int32 or int64).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>result</strong> : rasterArr object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.log">
+<code class="descname">log</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate natural logarithm (base <em>e</em>).</p>
+<p>result = log(self)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>result</strong> : rasterArr object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.log10">
+<code class="descname">log10</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.log10" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate logarithm (base 10).</p>
+<p>result = log10(self)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>result</strong> : rasterArr object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.mask">
+<code class="descname">mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the mask.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>mask</strong> : numpy array</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#nodata"><span class="std std-ref">Nodata and mask (missing values)</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.max">
+<code class="descname">max</code><span class="sig-paren">(</span><em>axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the maximum value of the array elements over the given axis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>axis</strong> : int or None (optional)</p>
+<blockquote>
+<div><p>Axis over which the calculation is done.</p>
+<p>If <em>axis</em> is None the calculation is done over all dimensions, resulting in a single value.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>max</strong> : numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.mean">
+<code class="descname">mean</code><span class="sig-paren">(</span><em>axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate the mean of the array elements over the given axis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>axis</strong> : int or None (optional)</p>
+<blockquote>
+<div><p>Axis over which the calculation is done.</p>
+<p>If <em>axis</em> is None the calculation is done over all dimensions, resulting in a single value.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>mean</strong> : numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.median">
+<code class="descname">median</code><span class="sig-paren">(</span><em>axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.median" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate the median of the array elements over the given axis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>axis</strong> : int or None (optional)</p>
+<blockquote>
+<div><p>Axis over which the calculation is done.</p>
+<p>If <em>axis</em> is None the calculation is done over all dimensions, resulting in a single value.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>median</strong> : numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.min">
+<code class="descname">min</code><span class="sig-paren">(</span><em>axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the minimum value of the array elements over the given axis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>axis</strong> : int or None (optional)</p>
+<blockquote>
+<div><p>Axis over which the calculation is done.</p>
+<p>If <em>axis</em> is None the calculation is done over all dimensions, resulting in a single value.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>min</strong> : numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.ncol">
+<code class="descname">ncol</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.ncol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get ncol (number of columns).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>ncol</strong> : int</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.nodata">
+<code class="descname">nodata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.nodata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the nodata value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>nodata</strong> : bool, int or float</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#nodata"><span class="std std-ref">Nodata and mask (missing values)</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.nonequi2equi">
+<code class="descname">nonequi2equi</code><span class="sig-paren">(</span><em>dx=None</em>, <em>dy=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.nonequi2equi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to resample a non-equidistant raster to an equidistant raster.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>dx</strong> : float, int or None (optional)</p>
+<blockquote>
+<div><p>Cell size in x direction (column width).</p>
+<p>If <em>dx</em> is None then the minimum column width of the non-equidistant raster is used.</p>
+</div></blockquote>
+<p><strong>dy</strong> : float, int or None (optional)</p>
+<blockquote>
+<div><p>Cell size in y direction (row height).</p>
+<p>If <em>dy</em> is None then the minimum row height of the non-equidistant raster is used.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.nrow">
+<code class="descname">nrow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.nrow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get nrow (number of rows).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>nrow</strong> : int</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.percentile">
+<code class="descname">percentile</code><span class="sig-paren">(</span><em>p=50</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.percentile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate a percentile of the array elements over the given axis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>p</strong> : int or float in range 0-100</p>
+<p><strong>axis</strong> : int or None (optional)</p>
+<blockquote>
+<div><p>Axis over which the calculation is done.</p>
+<p>If <em>axis</em> is None the calculation is done over all dimensions, resulting in a single value.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>percentile</strong> : numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.proj">
+<code class="descname">proj</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.proj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get proj (projection flag in PCRaster terms).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>proj</strong> : int</p>
+<blockquote class="last">
+<div><p>0 = y coordinates increase from top to bottom</p>
+<p>1 = y coordinates increase from bottom to top</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.reproject">
+<code class="descname">reproject</code><span class="sig-paren">(</span><em>to_crs</em>, <em>from_crs=None</em>, <em>method=’sample’</em>, <em>xyur=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.reproject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to reproject.</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>to_crs</strong> : str, int, list or dict</p>
+<blockquote>
+<div><p>Target crs.</p>
+<p>If this is a list or a dict it is interpreted as geographical information from which the crs, extent and cell size are taken.</p>
+</div></blockquote>
+<p><strong>from_crs</strong> : str, int, list, dict or None (optional)</p>
+<blockquote>
+<div><p>Source crs. Will be used if the crs of the raster is not specified.</p>
+<p>If this is a list or a dict it is interpreted as geographical information from which the crs is taken.</p>
+</div></blockquote>
+<p><strong>method</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>The reprojecting method. Possible methods are:
+‘mean’ or ‘average’, ‘sample’ or ‘near’, ‘bilinear’, ‘cubic’, ‘cubicspline’, ‘lanczos’, ‘mode’, None.</p>
+</div></blockquote>
+<p><strong>xyur</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>X and Y coordinates of upper right corner. May be used by gdalwarp if to_crs is geographical information, but xur and yur could not be calculated (e.g. because dx and dy are None).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.resample">
+<code class="descname">resample</code><span class="sig-paren">(</span><em>step_xy=[1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.resample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to resample using a step size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>step_xy</strong> : int, list or dict</p>
+<blockquote>
+<div><p>The step size in x and y direction, with 1 as lowest value meaning no resampling.</p>
+<p>The step size is not necessarily the same in x in y direction.</p>
+<p>If <em>step_xy</em> is an int or a list with only one value the step size in x and y direction are both set to this value.</p>
+<p>If <em>step_xy</em> is a dict it is assumed that it is a basic geographical information dict.
+The step sizes are then determined using this dict. See also the <code class="docutils literal"><span class="pre">rescale(..)</span></code> method.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#rescaling-resampling"><span class="std std-ref">Rescaling/resampling</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.rescale">
+<code class="descname">rescale</code><span class="sig-paren">(</span><em>to_gi</em>, <em>method=’sample’</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.rescale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to rescale/resample.</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>to_gi</strong> : dict or list</p>
+<blockquote>
+<div><p>The target geographical information dict/list to which the rescaling/resampling is done.</p>
+<p>If <em>to_gi</em> is specified as a list the order of the elements should be: xll, yll, dx, dy, nrow, ncol, proj, ang, crs.
+See also <a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a>.</p>
+</div></blockquote>
+<p><strong>method</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>The rescaling/resampling method. Possible methods are:
+‘sum’, ‘min’, ‘max’, ‘harm’, ‘log10’, ‘log’, ‘mean’, ‘sample’, None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#rescaling-resampling"><span class="std std-ref">Rescaling/resampling</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.set_arr">
+<code class="descname">set_arr</code><span class="sig-paren">(</span><em>arr</em>, <em>method=’sample’</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.set_arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set the data array (in-place).</p>
+<p>Does not work for non-equidistant rasters if rescaling/resampling is needed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy array (ndarray or MaskedArray), rasterArr object, bool, int or float</p>
+<blockquote>
+<div><p>The new data array.</p>
+<p>If <em>arr</em> is of type bool, int or float the data array is set to this value on all cells.</p>
+<p>If <em>arr</em> is a rasterArr object a rescaling/resampling of <em>arr</em> is applied if needed.</p>
+</div></blockquote>
+<p><strong>method</strong> : str or None (optional)</p>
+<blockquote class="last">
+<div><p>Method for rescaling/resampling, if needed.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#indexing-slicing"><span class="std std-ref">Indexing, slicing and data array setting</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.set_dxdy">
+<code class="descname">set_dxdy</code><span class="sig-paren">(</span><em>dx=None</em>, <em>dy=None</em>, <em>method=’sample’</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.set_dxdy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to create a new rasterArr object with changed cellsize.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>dx</strong> : float, int, numpy array or array_like (optional)</p>
+<blockquote>
+<div><p>Cell size in x direction (column width).</p>
+<p>If <em>dx</em> is a numpy array (or array_like) the number of columns (ncol) is adjusted too.</p>
+</div></blockquote>
+<p><strong>dy</strong> : float, int or numpy array (optional)</p>
+<blockquote>
+<div><p>Cell size in y direction (row height).</p>
+<p>If <em>dy</em> is a numpy array (or array_like) the number of rows (nrow) is adjusted too.</p>
+</div></blockquote>
+<p><strong>method</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>The rescaling/resampling method. Possible methods are:
+‘sum’, ‘min’, ‘max’, ‘harm’, ‘log10’, ‘log’, ‘mean’, ‘sample’, None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : rasterArr object</p>
+<blockquote class="last">
+<div><p>RasterArr object with new cellsize.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.set_extent">
+<code class="descname">set_extent</code><span class="sig-paren">(</span><em>l_extent</em>, <em>snap=True</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.set_extent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to create a new rasterArr object with a changed extent.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>extent</strong> : list</p>
+<blockquote>
+<div><p>A list containing xll, yll, xur and yur of the new extent (in this order).</p>
+</div></blockquote>
+<p><strong>snap</strong> : bool (optional)</p>
+<blockquote>
+<div><p>Flag to snap (shift) the new extent to match with the original cell boundaries.</p>
+<p>True = snap is performed to the nearest cell boundaries.</p>
+<p>False = snap is not performed</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : rasterArr object</p>
+<blockquote class="last">
+<div><p>RasterArr object with new extent.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.set_gi">
+<code class="descname">set_gi</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.set_gi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set geographical information using keyword arguments (in-place).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>kwargs</strong> : keyword arguments</p>
+<blockquote class="last">
+<div><p>Recognized keyword arguments are: xll, yll, dx, dy, nrow, ncol, proj, ang, crs.
+Other keyword arguments are ignored.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.set_mask">
+<code class="descname">set_mask</code><span class="sig-paren">(</span><em>mask=None</em>, <em>add=False</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.set_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set the mask (in-place).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>mask</strong> : numpy array (ndarray or MaskedArray), rasterArr object, bool, int, float or str</p>
+<blockquote>
+<div><p>The mask to be applied.</p>
+<p>If <em>mask</em> is of type bool, int, float or str this value is used to set the nodata value. See <a class="reference internal" href="#raster_func.rasterArr.set_nodata" title="raster_func.rasterArr.set_nodata"><code class="xref py py-func docutils literal"><span class="pre">raster_func.rasterArr.set_nodata()</span></code></a>.</p>
+</div></blockquote>
+<p><strong>add</strong> : bool (optional)</p>
+<blockquote class="last">
+<div><p>True = add new masked cells to existing mask</p>
+<p>False = change existing mask to new mask</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#nodata"><span class="std std-ref">Nodata and mask (missing values)</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.set_nodata">
+<code class="descname">set_nodata</code><span class="sig-paren">(</span><em>nodata=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.set_nodata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set the nodata value (in-place).</p>
+<p>Original nodata cells are kept; new nodata cells are added if applicable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>nodata</strong> : bool, int, float or str</p>
+<blockquote class="last">
+<div><p>If <em>nodata</em> is of type str then nodata is used in a where condition. E.g. ‘&gt;10’ means that all values greater than 10 are set to nodata.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#nodata"><span class="std std-ref">Nodata and mask (missing values)</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.set_nodata_mask">
+<code class="descname">set_nodata_mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.set_nodata_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to set all cells with nodata value to masked cells (in-place).</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#nodata"><span class="std std-ref">Nodata and mask (missing values)</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.shape">
+<code class="descname">shape</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the shape of the data array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>shape</strong> : tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.slice">
+<code class="descname">slice</code><span class="sig-paren">(</span><em>l_rowcol</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.slice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to crop the raster to a given slice.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>l_rowcol</strong> : list</p>
+<blockquote>
+<div><p>Minimum and maximum row and column numbers: [iRow_min,iRow_max,iCol_min,iCol_max]</p>
+<p>iRow_max and iCol_max are not included in the slice.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.std">
+<code class="descname">std</code><span class="sig-paren">(</span><em>axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.std" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate the standard deviation of the array elements over the given axis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>axis</strong> : int or None (optional)</p>
+<blockquote>
+<div><p>Axis over which the calculation is done.</p>
+<p>If <em>axis</em> is None the calculation is done over all dimensions, resulting in a single value.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>std</strong> : numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.sum">
+<code class="descname">sum</code><span class="sig-paren">(</span><em>axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate the sum of the array elements over the given axis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>axis</strong> : int or None (optional)</p>
+<blockquote>
+<div><p>Axis over which the calculation is done.</p>
+<p>If <em>axis</em> is None the calculation is done over all dimensions, resulting in a single value.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>sum</strong> : numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.toGDALobj">
+<code class="descname">toGDALobj</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.toGDALobj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to create a GDAL in-memory object from the rasterArr object.</p>
+<p>Does not work for 3-D rasterArr objects and for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>result</strong> : GDAL object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.unique">
+<code class="descname">unique</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.unique" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the unique values of the data array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>result</strong> : numpy array (1-D)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.var">
+<code class="descname">var</code><span class="sig-paren">(</span><em>axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate the variance of the array elements over the given axis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>axis</strong> : int or None (optional)</p>
+<blockquote>
+<div><p>Axis over which the calculation is done.</p>
+<p>If <em>axis</em> is None the calculation is done over all dimensions, resulting in a single value.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>var</strong> : numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.warp">
+<code class="descname">warp</code><span class="sig-paren">(</span><em>to_crs</em>, <em>from_crs=None</em>, <em>exe_warp=None</em>, <em>screen_output=False</em>, <em>xyur=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.warp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to reproject by using gdalwarp.</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>to_crs</strong> : str, int, list or dict</p>
+<blockquote>
+<div><p>Target crs.</p>
+<p>If this is a list or a dict it is interpreted as geographical information from which the crs, extent and cell size are taken.</p>
+</div></blockquote>
+<p><strong>from_crs</strong> : str, int, list, dict or None (optional)</p>
+<blockquote>
+<div><p>Source crs. Will be used if the crs of the raster is not specified.</p>
+<p>If this is a list or a dict it is interpreted as geographical information from which the crs is taken.</p>
+</div></blockquote>
+<p><strong>exe_warp</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>File name of the gdalwarp executable. If <em>exe_warp</em> is None then ‘gdalwarp’ is used; this only works if ‘gdalwarp’ is known to the system (e.g. in the PATH environment).</p>
+</div></blockquote>
+<p><strong>screen_output</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = output of gdal’s process to the screen.
+False = no output of gdal’s process to the screen.</p>
+</div></blockquote>
+<p><strong>xyur</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>X and Y coordinates of upper right corner. May be used by gdalwarp if to_crs is geographical information, but xur and yur could not be calculated (e.g. because dx and dy are None).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.write">
+<code class="descname">write</code><span class="sig-paren">(</span><em>f_raster</em>, <em>raster_format=0</em>, <em>frm_asc=’%s’</em>, <em>xy_center_asc=False</em>, <em>nodata_asc=None</em>, <em>itb_idf=None</em>, <em>nodata_idf=None</em>, <em>frm_map=None</em>, <em>f_hdr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to write a 2-D or 3-D rasterArr object to raster file(s).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_raster</strong> : str or list</p>
+<blockquote>
+<div><p>Raster file name(s).</p>
+<p>For a 2-D rasterArr object only one file name is required.
+For a 3-D rasterArr object (map stack) a list of file names is required if the raster format only supports 2-D rasters.</p>
+</div></blockquote>
+<p><strong>raster_format</strong> : int or str (optional)</p>
+<blockquote>
+<div><p>Number or string referring to the format of the raster file.</p>
+<p>See <a class="reference internal" href="../raster_func.html#raster-formats"><span class="std std-ref">Raster formats</span></a>.</p>
+<p>If <em>raster_format</em> is 0 the raster format is determined from the extension of the file.</p>
+</div></blockquote>
+<p><strong>frm_asc</strong> : str (optional)</p>
+<blockquote>
+<div><p>% format for writing ASCII grid file.</p>
+<p>Include a divider if needed, e.g. ‘ %.1f’ for a single space divider; divider is set automatically to ‘ ‘ for the formats ‘%s’, ‘%d’ and ‘%f’.</p>
+</div></blockquote>
+<p><strong>xy_center_asc</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = xll,yll coordinates for the center of the cell (XLLCENTER and YLLCENTER)</p>
+<p>False = xll,yll coordinates for the corner of the cell (XLLCORNER and YLLCORNER)</p>
+</div></blockquote>
+<p><strong>nodata_asc</strong> : int, float or None (optional)</p>
+<blockquote>
+<div><p>Nodata value to be used for writing an ASCII grid file. Otherwise the global ASCII grid nodata value is used.</p>
+</div></blockquote>
+<p><strong>itb_idf</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>Top and bot values of IDF file: ITB option.</p>
+</div></blockquote>
+<p><strong>nodata_idf</strong> : int, float or None (optional)</p>
+<blockquote>
+<div><p>Nodata value to be used for writing an IDF file. Otherwise the global IDF nodata value is used.</p>
+</div></blockquote>
+<p><strong>frm_map</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>PCRaster map type.</p>
+<p>Recognized types are: ‘boolean’, ‘nominal’, ‘scalar’, ‘directional’, ‘ordinal’, ‘ldd’.</p>
+<p>If <em>frm_map</em> is None then the type is set to ‘boolean’, ‘nominal’ or ‘scalar’ depending on the dtype of the data array.</p>
+</div></blockquote>
+<p><strong>f_hdr</strong> : str, list or None (optional)</p>
+<blockquote>
+<div><p>Header file name(s) for BIL file.</p>
+<p>If <em>f_hdr</em> is None the header file name is taken from the BIL file name (<em>f_raster</em>).</p>
+<p>In the case of a map stack to be written to multiple BIL files, <em>f_hdr</em> could be a list of file names (not required).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>Raster file name(s), e.g. to be used for printing</strong> : str or list</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#writing-rasters"><span class="std std-ref">Writing rasters</span></a>, <a class="reference internal" href="../raster_func.html#raster-formats"><span class="std std-ref">Raster formats</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.x">
+<code class="descname">x</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the x coordinates of the column centers of a rasterArr object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>x</strong> : numpy ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.xarr">
+<code class="descname">xarr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.xarr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the x coordinates of the cell centers of a rasterArr object and return them as a rasterArr object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>x</strong> : rasterArr object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.xll">
+<code class="descname">xll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.xll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get xll (x coordinate of lower left corner).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>xll</strong> : float</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.xur">
+<code class="descname">xur</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.xur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get xur (x coordinate of upper right corner).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>xur</strong> : float</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.y">
+<code class="descname">y</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the y coordinates of the row centers of a rasterArr object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>y</strong> : numpy ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.yarr">
+<code class="descname">yarr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.yarr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get the y coordinates of the cell centers of a rasterArr object and return them as a rasterArr object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>y</strong> : rasterArr object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.yll">
+<code class="descname">yll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.yll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get yll (y coordinate of lower left corner).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>yll</strong> : float</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="raster_func.rasterArr.yur">
+<code class="descname">yur</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterArr.yur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to get yur (y coordinate of upper right corner).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>yur</strong> : float</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rasterStack">
+<code class="descclassname">raster_func.</code><code class="descname">rasterStack</code><span class="sig-paren">(</span><em>l_rA</em>, <em>nodata=None</em>, <em>to_gi=None</em>, <em>method=’sample’</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasterStack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to create a 3-D rasterArr object (map stack) from 2-D rasterArr objects.</p>
+<p>If needed rescaling/resampling is performed to the first rasterArr object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>l_rA</strong> : list</p>
+<blockquote>
+<div><p>List of 2-D rasterArr objects.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : float, int or None (optional)</p>
+<blockquote>
+<div><p>Nodata value to apply for the map stack.</p>
+<p>If <em>nodata</em> is None it is taken from the first rasterArr object.</p>
+</div></blockquote>
+<p><strong>to_gi</strong> : dict, list or None (optional)</p>
+<blockquote>
+<div><p>Basis geographical information dict/list to rescale/resample to.</p>
+<p>If <em>to_gi</em> is None it is taken from the first rasterArr object. If rescaling/resampling of the other rasterArr objects is performed.</p>
+</div></blockquote>
+<p><strong>method</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>The rescaling/resampling method. Possible methods are:
+‘sum’, ‘min’, ‘max’, ‘harm’, ‘log10’, ‘log’, ‘mean’, ‘sample’, None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object (3-D)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rasters2arr">
+<code class="descclassname">raster_func.</code><code class="descname">rasters2arr</code><span class="sig-paren">(</span><em>fl_raster</em>, <em>nodata=None</em>, <em>gi=None</em>, <em>method=’sample’</em>, <em>step_xy=1</em>, <em>dtype_asc=None</em>, <em>fl_hdr=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasters2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to read a list of raster files and create a rasterArr object (map stack).</p>
+<p>The raster files are not necessarily of the same raster format and may have different extents and/or cell sizes.</p>
+<p>If needed rescaling/resampling is performed to the first raster file in the list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fl_raster</strong> : list or tuple</p>
+<blockquote>
+<div><p>List of raster file names.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : float, int or None (optional)</p>
+<blockquote>
+<div><p>Nodata value to be applied.</p>
+</div></blockquote>
+<p><strong>gi</strong> : dict, list or None (optional)</p>
+<blockquote>
+<div><p>Basic geographical information dict/list.</p>
+<p>If <em>gi</em> is specified a rescaling/resampling is performed to meet <em>gi</em>.
+The rescaling/resampling method is specified with the parameter <em>method</em>.
+If <em>method</em> is None no rescaling/resampling is performed, but only the extent of the raster is set to meet <em>gi</em> (“crop”).</p>
+</div></blockquote>
+<p><strong>method</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>The rescaling/resampling method. Possible methods are:
+‘sum’, ‘min’, ‘max’, ‘harm’, ‘log10’, ‘log’, ‘mean’, ‘sample’, None.</p>
+<p>Rescaling/resampling is only applied if <em>gi</em> is specified. See above.</p>
+</div></blockquote>
+<p><strong>step_xy</strong> : int or list (optional)</p>
+<blockquote>
+<div><p>The resampling step size in x and y direction, with 1 as lowest value meaning no resampling.</p>
+<p>Note: if <em>step_xy</em> is specified resampling is performed irrespective of rescaling/resampling invoked by <em>gi</em> and <em>method</em>.
+Resampling with <em>step_xy</em> is done before rescaling/resampling to meet <em>gi</em>.</p>
+<p>The step size is not necessarily the same in x in y direction.</p>
+<p>If <em>step_xy</em> is an int or a list with only one value the step size in x and y direction are both set to this value.</p>
+</div></blockquote>
+<p><strong>dtype_asc</strong> : numpy dtype or None (optional)</p>
+<blockquote>
+<div><p>Data type for the resulting data array if the raster file is an ArcInfo ASCII Grid.</p>
+<p>If <em>dtype_asc</em> is not specified the resulting data type will be float64.</p>
+</div></blockquote>
+<p><strong>fl_hdr: str, list, tuple or None (optional)</strong></p>
+<blockquote>
+<div><p>List of header file names for the BIL files.</p>
+<p>If <em>fl_header</em> is a single file name this header file is used for all BIL files.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object (3-D map stack)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#reading-rasters"><span class="std std-ref">Reading rasters</span></a>, <a class="reference internal" href="../raster_func.html#rescaling-resampling"><span class="std std-ref">Rescaling/resampling</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rasters_max">
+<code class="descclassname">raster_func.</code><code class="descname">rasters_max</code><span class="sig-paren">(</span><em>rA</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasters_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to calculate the maximum of two or more rasters (or numpy arrays, floats, ints).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rA</strong> : rasterArr object</p>
+<p><strong>args</strong> : rasterArr object(s), numpy array(s), float(s), int(s)</p>
+<blockquote>
+<div><p>Arbitrary number of arguments.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rasters_mean">
+<code class="descclassname">raster_func.</code><code class="descname">rasters_mean</code><span class="sig-paren">(</span><em>rA</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasters_mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to calculate the mean of two or more rasters (or numpy arrays, floats, ints).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rA</strong> : rasterArr object</p>
+<p><strong>args</strong> : rasterArr object(s), numpy array(s), float(s), int(s)</p>
+<blockquote>
+<div><p>Arbitrary number of arguments.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rasters_min">
+<code class="descclassname">raster_func.</code><code class="descname">rasters_min</code><span class="sig-paren">(</span><em>rA</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rasters_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to calculate the minimum of two or more rasters (or numpy arrays, floats, ints).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rA</strong> : rasterArr object</p>
+<p><strong>args</strong> : rasterArr object(s), numpy array(s), float(s), int(s)</p>
+<blockquote>
+<div><p>Arbitrary number of arguments.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#statistics"><span class="std std-ref">Statistics</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rc2rc">
+<code class="descclassname">raster_func.</code><code class="descname">rc2rc</code><span class="sig-paren">(</span><em>gi1</em>, <em>gi2</em>, <em>raveled=False</em>, <em>rc_splitted=False</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rc2rc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to calculated row and column indices of a raster and the corresponding indices of a second raster.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>gi1</strong> : dict or list</p>
+<blockquote>
+<div><p>The basic geographical information of the first raster.</p>
+</div></blockquote>
+<p><strong>gi2</strong> : dict or list</p>
+<blockquote>
+<div><p>The basic geographical information of the second raster.</p>
+</div></blockquote>
+<p><strong>raveled</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = ravel/flatten the indices in output (see below)</p>
+<p>False = do not ravel/flatten the indices</p>
+</div></blockquote>
+<p><strong>rc_splitted</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = split row and column indices in output (see below)</p>
+<p>False = keep row and column indices in one array</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : tuple</p>
+<blockquote class="last">
+<div><p>Result is depending on <em>rc_splitted</em>: (rc1,rc2,consecutive) or (r1,c1,r2,c2,consecutive).</p>
+<p>rc1 = row and column indices of the first raster; 2-D or 3-D array depending on <em>raveled</em>.</p>
+<p>rc2 = corresponding row and column indices of the second raster; 2-D or 3-D array depending on <em>raveled</em>.</p>
+<p>consecutive = boolean: True = cells of second raster are in consecutive order; False = cells or second raster are not in consecutive order.</p>
+<p>r1 = row indices of the first raster; 1-D or 2-D array depending on <em>raveled</em>.</p>
+<p>r2 = corresponding row indices of the second raster; 1-D or 2-D array depending on <em>raveled</em>.</p>
+<p>c1 = column indices of the first raster; 1-D or 2-D array depending on <em>raveled</em>.</p>
+<p>c2 = corresponding column indices of the second raster; 1-D or 2-D array depending on <em>raveled</em>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rc2xy">
+<code class="descclassname">raster_func.</code><code class="descname">rc2xy</code><span class="sig-paren">(</span><em>rc</em>, <em>gi</em>, <em>ll=False</em>, <em>outsideVal=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rc2xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to convert row,col indices to x,y coordinates.</p>
+<p>Default the x,y coordinates are for the cell centers.</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rc</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array with the row,col indices. Indices follow Python standard, i.e. starting at 0.</p>
+</div></blockquote>
+<p><strong>gi</strong> : dict or list</p>
+<blockquote>
+<div><p>The basic geographical information.</p>
+</div></blockquote>
+<p><strong>ll</strong> : bool</p>
+<blockquote>
+<div><p>True = coordinates for lower left (ll) corner of cell</p>
+<p>False = coordinates for cell center.</p>
+</div></blockquote>
+<p><strong>outsideVal</strong> : int, float or None (optional)</p>
+<blockquote>
+<div><p>X,y coordinate value to be used for row,col indices which are outside the extent of gi.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>xy</strong> : numpy array (2-D)</p>
+<blockquote class="last">
+<div><p>A 2xN array/matrix with the x,y coordinates.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rc_arr2val">
+<code class="descclassname">raster_func.</code><code class="descname">rc_arr2val</code><span class="sig-paren">(</span><em>rc</em>, <em>rA</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rc_arr2val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to extract cell values of a rasterArr object using row,col indices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rc</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array with the row,col indices. Indices follow Python standard, i.e. starting at 0.</p>
+</div></blockquote>
+<p><strong>rA</strong> : rasterArr object</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy array (MaskedArray)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rc_idf2val">
+<code class="descclassname">raster_func.</code><code class="descname">rc_idf2val</code><span class="sig-paren">(</span><em>rc</em>, <em>f</em>, <em>nodata=None</em>, <em>consecutive=False</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rc_idf2val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to extract cell values of an iMOD IDF file using row,col indices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rc</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array/matrix with the row,col indices. Indices follow Python standard, i.e. starting at 0.</p>
+</div></blockquote>
+<p><strong>f</strong> : str</p>
+<blockquote>
+<div><p>Input IDF file.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : float, int or None (optional)</p>
+<blockquote>
+<div><p>Nodata value to be applied.</p>
+</div></blockquote>
+<p><strong>consecutive</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = specified cells form a consecutive series of cells</p>
+<p>False = specified cells do not form a consecutive series of cells</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#memory-mapping"><span class="std std-ref">Direct reading and writing of cell values</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rc_map2val">
+<code class="descclassname">raster_func.</code><code class="descname">rc_map2val</code><span class="sig-paren">(</span><em>rc</em>, <em>f</em>, <em>nodata=None</em>, <em>consecutive=False</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rc_map2val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to extract cell values of a PCRaster file using row,col indices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rc</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array/matrix with the row,col indices. Indices follow Python standard, i.e. starting at 0.</p>
+</div></blockquote>
+<p><strong>f</strong> : str</p>
+<blockquote>
+<div><p>Input PCRaster file.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : float, int or None (optional)</p>
+<blockquote>
+<div><p>Nodata value to be applied.</p>
+</div></blockquote>
+<p><strong>consecutive</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = specified cells form a consecutive series of cells</p>
+<p>False = specified cells do not form a consecutive series of cells</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#memory-mapping"><span class="std std-ref">Direct reading and writing of cell values</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rc_val2arr">
+<code class="descclassname">raster_func.</code><code class="descname">rc_val2arr</code><span class="sig-paren">(</span><em>rc</em>, <em>val</em>, <em>rA</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rc_val2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to set cell values of a rasterArr object using row,col indices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rc</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array with the row,col indices. Indices follow Python standard, i.e. starting at 0.</p>
+</div></blockquote>
+<p><strong>val</strong> : int, float, array or array_like (1-D)</p>
+<blockquote>
+<div><p>Value(s) to set. Single value or array of values for each x,y coordinate.</p>
+</div></blockquote>
+<p><strong>rA</strong> : rasterArr object</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rc_val2idf">
+<code class="descclassname">raster_func.</code><code class="descname">rc_val2idf</code><span class="sig-paren">(</span><em>rc</em>, <em>val</em>, <em>f</em>, <em>consecutive=False</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rc_val2idf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write cell values to an existing iMOD IDF file using row,col indices.</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rc</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array/matrix with the row,col indices. Indices follow Python standard, i.e. starting at 0.</p>
+</div></blockquote>
+<p><strong>val</strong> : array or array_like (1-D)</p>
+<blockquote>
+<div><p>An array/matrix with the values. The values are converted to meet the data type of the IDF file.</p>
+</div></blockquote>
+<p><strong>f</strong> : str</p>
+<blockquote>
+<div><p>Input IDF file.</p>
+</div></blockquote>
+<p><strong>consecutive</strong> : bool (optional)</p>
+<blockquote class="last">
+<div><p>True = specified cells form a consecutive series of cells</p>
+<p>False = specified cells do not form a consecutive series of cells</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#memory-mapping"><span class="std std-ref">Direct reading and writing of cell values</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rc_val2map">
+<code class="descclassname">raster_func.</code><code class="descname">rc_val2map</code><span class="sig-paren">(</span><em>rc</em>, <em>val</em>, <em>f</em>, <em>consecutive=False</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rc_val2map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write cell values to an existing PCRaster file using row,col indices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rc</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array/matrix with the row,col indices. Indices follow Python standard, i.e. starting at 0.</p>
+</div></blockquote>
+<p><strong>val</strong> : array or array_like (1-D)</p>
+<blockquote>
+<div><p>An array/matrix with the values. The values are converted to meet the data type of the PCRaster file.</p>
+</div></blockquote>
+<p><strong>f</strong> : str</p>
+<blockquote>
+<div><p>Input PCRaster file.</p>
+</div></blockquote>
+<p><strong>consecutive</strong> : bool (optional)</p>
+<blockquote class="last">
+<div><p>True = specified cells form a consecutive series of cells</p>
+<p>False = specified cells do not form a consecutive series of cells</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#memory-mapping"><span class="std std-ref">Direct reading and writing of cell values</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.reproject_rA">
+<code class="descclassname">raster_func.</code><code class="descname">reproject_rA</code><span class="sig-paren">(</span><em>rA</em>, <em>to_crs</em>, <em>from_crs=None</em>, <em>method=’sample’</em>, <em>xyur=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.reproject_rA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to reproject a rasterArr object.</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rA</strong> : rasterArr object</p>
+<p><strong>to_crs</strong> : str, int, list or dict</p>
+<blockquote>
+<div><p>Target crs.</p>
+<p>If this is a list or a dict it is interpreted as geographical information from which the crs, extent and cell size are taken.</p>
+</div></blockquote>
+<p><strong>from_crs</strong> : str, int, list, dict or None (optional)</p>
+<blockquote>
+<div><p>Source crs. Will be used if the crs of the raster is not specified.</p>
+<p>If this is a list or a dict it is interpreted as geographical information from which the crs is taken.</p>
+</div></blockquote>
+<p><strong>method</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>The reprojecting method. Possible methods are:
+‘sample’ or ‘near’, ‘bilinear’, ‘cubic’, ‘cubicspline’, ‘lanczos’, ‘mean’ or ‘average’, ‘mode’, None.</p>
+</div></blockquote>
+<p><strong>xyur</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>X and Y coordinates of upper right corner. May be used by gdalwarp if to_crs is geographical information, but xur and yur could not be calculated (e.g. because dx and dy are None).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#projection"><span class="std std-ref">Projection</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.resample_rA">
+<code class="descclassname">raster_func.</code><code class="descname">resample_rA</code><span class="sig-paren">(</span><em>rA, step_xy=[1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.resample_rA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to resample a rasterArr object using a step size.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rA</strong> : rasterArr object</p>
+<p><strong>step_xy</strong> : int, list or dict</p>
+<blockquote>
+<div><p>The step size in x and y direction, with 1 as lowest value meaning no resampling.</p>
+<p>The step size is not necessarily the same in x in y direction.</p>
+<p>If <em>step_xy</em> is an int or a list with only one value the step size in x and y direction are both set to this value.</p>
+<p>If <em>step_xy</em> is a dict it is assumed that it is a basic geographical information dict.
+The step sizes are then determined using this dict. See also <a class="reference internal" href="#raster_func.rescale_rA" title="raster_func.rescale_rA"><code class="xref py py-func docutils literal"><span class="pre">raster_func.rescale_rA()</span></code></a></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#rescaling-resampling"><span class="std std-ref">Rescaling/resampling</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.rescale_rA">
+<code class="descclassname">raster_func.</code><code class="descname">rescale_rA</code><span class="sig-paren">(</span><em>rA</em>, <em>to_gi</em>, <em>method=’sample’</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.rescale_rA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to rescale/resample a rasterArr object.</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rA</strong> : rasterArr object</p>
+<p><strong>to_gi</strong> : dict or list</p>
+<blockquote>
+<div><p>The target geographical information dict/list to which the rescaling/resampling is done.</p>
+<p>If <em>to_gi</em> is specified as a list the order of the elements should be: xll, yll, dx, dy, nrow, ncol, proj, ang, crs.
+See also <a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a>.</p>
+</div></blockquote>
+<p><strong>method</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>The rescaling/resampling method. Possible methods are:
+‘sum’, ‘min’, ‘max’, ‘harm’, ‘log10’, ‘log’, ‘mean’, ‘sample’, None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#rescaling-resampling"><span class="std std-ref">Rescaling/resampling</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.reset_global_method">
+<code class="descclassname">raster_func.</code><code class="descname">reset_global_method</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.reset_global_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to reset the global method for rescaling/resampling to None.</p>
+<p>Same as <code class="docutils literal"><span class="pre">set_global_method(None)</span></code></p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#rescaling-resampling"><span class="std std-ref">Rescaling/resampling</span></a>, <a class="reference internal" href="#raster_func.set_global_method" title="raster_func.set_global_method"><code class="xref py py-func docutils literal"><span class="pre">raster_func.set_global_method()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.same_crs">
+<code class="descclassname">raster_func.</code><code class="descname">same_crs</code><span class="sig-paren">(</span><em>crs1</em>, <em>crs2</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.same_crs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to check if two crs references are the same.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>crs1</strong> : int or str</p>
+<blockquote>
+<div><p>First crs reference.</p>
+<p>One of the following forms:</p>
+<p>Integer: EPSG reference number.</p>
+<p>String: ‘EPSG:i’ where i denotes a EPSG reference number.</p>
+<p>String: ‘UTMiC’ where i denotes a UTM zone number and C denotes ‘N’ or ‘S’ for the hemisphere.</p>
+<p>String: GDAL’s so called WellKnownGeogCS string, e.g. ‘WGS84’.</p>
+<p>String: Ohter recognized strings are: ‘amersfoort’, ‘rd’, ‘gda94’, ‘gda94_vicgrid’</p>
+<p>String: WKT string</p>
+</div></blockquote>
+<p><strong>crs2</strong> : int or str</p>
+<blockquote>
+<div><p>Second crs reference.</p>
+<p>See <em>crs1</em> for the possible forms.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : bool</p>
+<blockquote class="last">
+<div><p>True = crs references are the same.</p>
+<p>False = crs references are not the same.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#projection"><span class="std std-ref">Projection</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.set_gi">
+<code class="descclassname">raster_func.</code><code class="descname">set_gi</code><span class="sig-paren">(</span><em>rA</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.set_gi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to set geographical information using keyword arguments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rA</strong> : rasterArr object, list or dict</p>
+<blockquote>
+<div><p>If <em>rA</em> is a rasterArr object the object is modified in-place.</p>
+<p>If <em>rA</em> is a dict or list it is assumed to be a geographical information list/dict.
+If <em>rA</em> is a list the order of the elements should be: xll, yll, dx, dy, nrow, ncol, proj, ang, crs.</p>
+</div></blockquote>
+<p><strong>kwargs</strong> : keyword arguments</p>
+<blockquote>
+<div><p>Recognized keyword arguments are: xll, yll, dx, dy, nrow, ncol, proj, ang, crs.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>rA</strong> : rasterArr object, list or dict</p>
+<blockquote class="last">
+<div><p>Result is depending on input type.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.set_global_method">
+<code class="descclassname">raster_func.</code><code class="descname">set_global_method</code><span class="sig-paren">(</span><em>method=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.set_global_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to set the global method for rescaling/resampling.</p>
+<p>The global method is used if rescaling/resampling is needed, but no method
+is specified by the programmer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>method</strong> : str or None (optional)</p>
+<blockquote class="last">
+<div><p>The global method for rescaling/resampling. Possible methods are:
+‘sum’, ‘min’, ‘max’, ‘harm’, ‘log10’, ‘log’, ‘mean’, ‘sample’, None.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#rescaling-resampling"><span class="std std-ref">Rescaling/resampling</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.set_nodataASC">
+<code class="descclassname">raster_func.</code><code class="descname">set_nodataASC</code><span class="sig-paren">(</span><em>nodata=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.set_nodataASC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to set the global ASC nodata value.</p>
+<p>The global ASC nodata value is used in writing an ASC file if no specific nodata value is specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>nodata</strong> : int, float or None (optional)</p>
+<blockquote class="last">
+<div><p>The global ASC nodata value.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.set_nodataIDF">
+<code class="descclassname">raster_func.</code><code class="descname">set_nodataIDF</code><span class="sig-paren">(</span><em>nodata=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.set_nodataIDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to set the global IDF nodata value.</p>
+<p>The global IDF nodata value is used in writing an IDF file if no specific nodata value is specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>nodata</strong> : int, float or None (optional)</p>
+<blockquote class="last">
+<div><p>The global IDF nodata value.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.warp_rA">
+<code class="descclassname">raster_func.</code><code class="descname">warp_rA</code><span class="sig-paren">(</span><em>rA</em>, <em>to_crs</em>, <em>from_crs=None</em>, <em>exe_warp=None</em>, <em>method=’sample’</em>, <em>screen_output=False</em>, <em>xyur=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.warp_rA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to reproject a rasterArr object by using gdalwarp.</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>rA</strong> : rasterArr object</p>
+<p><strong>to_crs</strong> : str, int, list or dict</p>
+<blockquote>
+<div><p>Target crs.</p>
+<p>If this is a list or a dict it is interpreted as geographical information from which the crs, extent and cell size are taken.</p>
+</div></blockquote>
+<p><strong>from_crs</strong> : str, int, list, dict or None (optional)</p>
+<blockquote>
+<div><p>Source crs. Will be used if the crs of the raster is not specified.</p>
+<p>If this is a list or a dict it is interpreted as geographical information from which the crs is taken.</p>
+</div></blockquote>
+<p><strong>exe_warp</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>File name of the gdalwarp executable. If <em>exe_warp</em> is None then ‘gdalwarp’ is used; this only works if ‘gdalwarp’ is known to the system (e.g. in the PATH environment).</p>
+</div></blockquote>
+<p><strong>method</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>The reprojecting method. Possible methods are:
+‘sample’ or ‘near’, ‘bilinear’, ‘cubic’, ‘cubicspline’, ‘lanczos’, None.</p>
+</div></blockquote>
+<p><strong>screen_output</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = output of gdal’s process to the screen.
+False = no output of gdal’s process to the screen.</p>
+</div></blockquote>
+<p><strong>xyur</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>X and Y coordinates of upper right corner. May be used by gdalwarp if to_crs is geographical information, but xur and yur could not be calculated (e.g. because dx and dy are None).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#projection"><span class="std std-ref">Projection</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.window_arr">
+<code class="descclassname">raster_func.</code><code class="descname">window_arr</code><span class="sig-paren">(</span><em>arr</em>, <em>multArr=None</em>, <em>dWin=None</em>, <em>method=’mean’</em>, <em>round=False</em>, <em>unitCell=True</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.window_arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to perform a window operation.</p>
+<p>A ‘window’ could be a rectangle, a circles or a free form.</p>
+<p>Does not work for non-equidistant rasters and for different dx and dy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : rasterArr object or numpy array</p>
+<p><strong>multArr</strong> : numpy ndarray, array_like (2-D) or None (optional)</p>
+<blockquote>
+<div><p>Multipliers/weights of the cells in the ‘window’.</p>
+<p>If used this automatically determines the form/size of the window. It is possible to specify any form in the <em>multArr</em> array.
+Zeros in the array are ignored (not used as multipliers).</p>
+<p><em>dWin</em> is not used if <em>multArr</em> is specified.</p>
+</div></blockquote>
+<p><strong>dWin</strong> : float, int, str or None (optional)</p>
+<blockquote>
+<div><p>Window size/radius and form. Will be used if <em>multArr</em> is None. From <em>dWin</em> the multipliers/weights array is constructed.</p>
+<p><em>dWin</em> is an int: ‘radius’ of a square window. The size of the square will be (<em>dWin</em> * 2) + 1.
+The multipliers/weights will be 1 in all cells within the square.</p>
+<p><em>dWin</em> is a float: same as int, but not necessarily a whole number.
+The multipliers/weights in the outer cells of the window will be the remaining fraction between 0 and 1.</p>
+<p><em>dWin</em> is a str:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘circle_radius=&lt;size&gt;’ ==&gt; circle with radius &lt;size&gt;; multipliers are 1 within circle; remaining fraction between 0 and 1 in outer cells.</li>
+<li>‘circle_dist_radius=&lt;size&gt;,&lt;offset&gt;’ ==&gt; circle with radius &lt;size&gt;; multipliers are the distance from the centre + &lt;offset&gt;.</li>
+<li>‘rectangle_rc=&lt;size R&gt;,&lt;size C&gt;’ ==&gt; rectangle with &lt;size R&gt; and &lt;size C&gt; the ‘radius’ in resp. row (y) and column (x) direction;
+multipliers are 1 within rectangle; remaining fraction between 0 and 1 in outer cells.</li>
+</ul>
+</div></blockquote>
+<p>Size(s) in cell units unless <em>unitCell</em> is False.</p>
+</div></blockquote>
+<p><strong>method</strong> : str</p>
+<blockquote>
+<div><p>The window operation method. Possible methods are:
+‘mean’, ‘harm’, ‘log’, ‘log10’, ‘min’, ‘max’, ‘sum’, ‘std’, ‘var’, ‘count’.</p>
+</div></blockquote>
+<p><strong>round</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = multipliers/weights constructed from <em>dWin</em> are rounded off.</p>
+<p>False = multipliers/weights constructed from <em>dWin</em> are not rounded off.</p>
+</div></blockquote>
+<p><strong>unitCell</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = size(s) used in <em>dWin</em> are in cell units.</p>
+<p>False = size(s) used in <em>dWin</em> are in raster units (if <em>arr</em> is a rasterArr object).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object or numpy MaskedArray (depending on input)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#window-operations"><span class="std std-ref">Window operations</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.xy2rc">
+<code class="descclassname">raster_func.</code><code class="descname">xy2rc</code><span class="sig-paren">(</span><em>xy</em>, <em>gi</em>, <em>outsideVal=None</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.xy2rc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to convert x,y coordinates to row,col indices.</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array/matrix with the x,y coordinates.</p>
+</div></blockquote>
+<p><strong>gi</strong> : dict or list</p>
+<blockquote>
+<div><p>The basic geographical information.</p>
+</div></blockquote>
+<p><strong>outsideVal</strong> : int or None (optional)</p>
+<blockquote>
+<div><p>Row,col index value to be used for x,y coordinates which are outside the extent of gi.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>rc</strong> : numpy array (2-D)</p>
+<blockquote class="last">
+<div><p>A 2xN array with the row,col indices. Indices follow Python standard, i.e. starting at 0.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.xy_arr2val">
+<code class="descclassname">raster_func.</code><code class="descname">xy_arr2val</code><span class="sig-paren">(</span><em>xy</em>, <em>rA</em>, <em>interpolate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.xy_arr2val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to extract cell values of a rasterArr object using x,y coordinates.</p>
+<p>It is possible to enable linear interpolation from cell centers to the exact x,y location(s).</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array/matrix with the x,y coordinates.</p>
+</div></blockquote>
+<p><strong>rA</strong> : rasterArr object</p>
+<p><strong>interpolate</strong> : bool</p>
+<blockquote>
+<div><p>Flag for linear interpolation from cell centers to x,y location(s).</p>
+<p>True = enable linear interpolation</p>
+<p>False = disable linear interpolation</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy array (MaskedArray)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.xy_idf2val">
+<code class="descclassname">raster_func.</code><code class="descname">xy_idf2val</code><span class="sig-paren">(</span><em>xy</em>, <em>f</em>, <em>nodata=None</em>, <em>interpolate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.xy_idf2val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to extract cell values of an iMOD IDF file using x,y coordinates.</p>
+<p>It is possible to enable linear interpolation from cell centers to the exact x,y location(s).</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array/matrix with the x,y coordinates.</p>
+</div></blockquote>
+<p><strong>f</strong> : str</p>
+<blockquote>
+<div><p>Input IDF file.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : float, int or None (optional)</p>
+<blockquote>
+<div><p>Nodata value to be applied.</p>
+</div></blockquote>
+<p><strong>interpolate</strong> : bool (optional)</p>
+<blockquote>
+<div><p>Flag for linear interpolation from cell centers to x,y location.</p>
+<p>True = enable linear interpolation</p>
+<p>False = disable linear interpolation</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#memory-mapping"><span class="std std-ref">Direct reading and writing of cell values</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.xy_map2val">
+<code class="descclassname">raster_func.</code><code class="descname">xy_map2val</code><span class="sig-paren">(</span><em>xy</em>, <em>f</em>, <em>nodata=None</em>, <em>interpolate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.xy_map2val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to extract cell values of a PCRaster file using x,y coordinates.</p>
+<p>Does not work on non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array/matrix with the x,y coordinates.</p>
+</div></blockquote>
+<p><strong>f</strong> : str</p>
+<blockquote>
+<div><p>Input PCRaster file.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : float, int or None (optional)</p>
+<blockquote>
+<div><p>Nodata value to be applied.</p>
+</div></blockquote>
+<p><strong>interpolate</strong> : bool</p>
+<blockquote>
+<div><p>Flag for linear interpolation from cell centers to x,y location.</p>
+<p>True = enable linear interpolation</p>
+<p>False = disable linear interpolation</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#memory-mapping"><span class="std std-ref">Direct reading and writing of cell values</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.xy_val2arr">
+<code class="descclassname">raster_func.</code><code class="descname">xy_val2arr</code><span class="sig-paren">(</span><em>xy</em>, <em>val</em>, <em>rA</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.xy_val2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to set cell values of a rasterArr object using x,y coordinates.</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array/matrix with the x,y coordinates.</p>
+</div></blockquote>
+<p><strong>val</strong> : int, float, array or array_like (1-D)</p>
+<blockquote>
+<div><p>Value(s) to set. Single value or array of values for each x,y coordinate.</p>
+</div></blockquote>
+<p><strong>rA</strong> : rasterArr object</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.xy_val2idf">
+<code class="descclassname">raster_func.</code><code class="descname">xy_val2idf</code><span class="sig-paren">(</span><em>xy</em>, <em>val</em>, <em>f</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.xy_val2idf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write cell values to an existing iMOD IDF file using x,y coordinates.</p>
+<p>Does not work for non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array/matrix with the x,y coordinates.</p>
+</div></blockquote>
+<p><strong>val</strong> : array or array_like (1-D)</p>
+<blockquote>
+<div><p>An array/matrix with the values. The values are converted to meet the data type of the IDF file.</p>
+</div></blockquote>
+<p><strong>f</strong> : str</p>
+<blockquote class="last">
+<div><p>Input IDF file.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#memory-mapping"><span class="std std-ref">Direct reading and writing of cell values</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="raster_func.xy_val2map">
+<code class="descclassname">raster_func.</code><code class="descname">xy_val2map</code><span class="sig-paren">(</span><em>xy</em>, <em>val</em>, <em>f</em><span class="sig-paren">)</span><a class="headerlink" href="#raster_func.xy_val2map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write cell values to an existing PCRaster file using x,y coordinates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy</strong> : array or array_like (2-D)</p>
+<blockquote>
+<div><p>A 2xN array/matrix with the x,y coordinates.</p>
+</div></blockquote>
+<p><strong>val</strong> : array or array_like (1-D)</p>
+<blockquote>
+<div><p>An array/matrix with the values. The values are converted to meet the data type of the PCRaster file.</p>
+</div></blockquote>
+<p><strong>f</strong> : str</p>
+<blockquote class="last">
+<div><p>Input PCRaster file.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../raster_func.html#memory-mapping"><span class="std std-ref">Direct reading and writing of cell values</span></a></p>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Wiebe Borren.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,218 @@
+.. _gis_func:
+
+***************
+Module gis_func
+***************
+
+This module contains GIS functions.
+
+
+Introduction
+============
+
+Getting started
+---------------
+
+Module file: gis_func.py
+
+Recommended import statement::
+
+	from gis_func import *
+
+**Python installation and modules:**
+
+============ ==================================================================================
+Python       Developed and tested with Python 2.7
+Numpy        Developed and tested with numpy 1.8.2
+GDAL         Developed and tested with GDAL 1.10.1
+pyshp        shapefile.py (`pyshp <http://code.google.com/p/pyshp>`_)
+shapely      Developed and tested with shapely 1.5.13
+PIL          Python Image Library (PIL / Image). See remark below.
+rtree        Used in function :func:`points_polygon2val`. Developed and tested with rtree 0.8.2
+table_func   table_func.py from Lib_WB (:ref:`table_func`)
+raster_func  raster_func.py from Lib_WB (:ref:`raster_func`)
+============ ==================================================================================
+
+**PIL**
+
+PIL is used in the function :func:`gis_func.shp2arr_PIL`.
+
+In the standard PythonXY installation at Deltares there could be a bug in the PIL\ImageDraw.py file. 
+
+See how to fix this bug at `Fix AttributeError: 'module' object has no attribute 'isNumberType' <https://github.com/python-imaging/Pillow/commit/1f41e25b4feec620ad32e8b3a9b28466f63b3afe>`_
+
+
+.. _shapefile:
+
+ESRI shapefile
+--------------
+
+Recognized are point, polyline and polygon shapefiles (one geometry per file). Multi-part features are supported.
+
+In gis_func shapefiles are read with pyshp (shapefile.py) and written with pyshp or GDAL.
+
+See also:
+
+`ESRI shapefile <http://www.gdal.org/ogr/drv_shapefile.html>`_
+
+`pyshp <http://code.google.com/p/pyshp>`_
+
+
+.. _gen_file:
+
+ArcInfo generate file
+---------------------
+
+ASCII files in special format for points, polylines and polygons (one geometry per file).
+
+In gis_func a polygon file is distinguished from a polyline file by the existence of an x,y coordinate for the label of each polygon.
+These coordinates are absent in polyline files.
+
+See also `ArcInfo generate file <http://www.gdal.org/ogr/drv_arcgen.html>`_
+
+
+iMOD vector files
+-----------------
+
+Reading of IFF files (flow path lines) and reading and writing of ISG files (surface water lines) is supported.
+
+Reading and writing of IPF files (points) are supported by functions in table_func.
+
+See also the description of the iMOD files in `iMOD User Manual <http://content.oss.deltares.nl/delft3d/manuals/iMOD_User_Manual.pdf>`_
+
+
+Rasters
+-------
+
+The rasterArr object of :ref:`raster_func` is used.
+
+
+Geometries
+----------
+
+3 types of geometries (also called shapes or features) are supported: points, (poly)lines and polygons.
+The corresponding shape type references (shptype) used in gis_func are: 'POINT', 'POLYLINE', 'POLYGON'.
+
+The geometries can have 2 different forms in gis_func:
+
+* xy array/list
+* shapely geometries
+
+**xy array/list**
+
+The coordinates of the points/vertices are stored as numpy ndarrays or a list of numpy ndarray.
+
+If the type of the shapes is 'POINT' this should be a Nx2 array: [(x1,y1), (x2,y2) ... (xN,yN)].
+
+If the type of the shapes is 'POLYLINE' or 'POLYGON' this should be a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] ...].
+
+The distinction between polygons and polylines is that the first and last vertex of a polygon are equal.
+
+Interior polygons ('holes') are not supported in this format.
+
+**shapely geometries**
+
+The coordinates of the points/vertices are stored as shapely geometries: Point, LineString, Polygon.
+
+The advantages of shapely geometries compared to xy array/list are:
+
+* interior polygons ('holes') are supported
+* shapely offers GIS functions and methods which can be used on these geometries
+
+The disadvantage is that the creation of the shapely geometries is slower. 
+
+**summary of shape types**
+
+=================== ================== ================
+gis_func shape type xy array/list      shapely geometry
+=================== ================== ================
+POINT               Nx2 array          Point
+POLYLINE            list of Nx2 arrays LineString
+POLYGON             list of Nx2 arrays Polygon
+=================== ================== ================
+
+
+Functions
+=========
+
+**Reading:**
+
+==================================================== =======================================================================
+:func:`get_shp_data <gis_func.get_shp_data>`         Function to get the data of an ESRI shape file.
+:func:`get_gen_data <gis_func.get_gen_data>`         Function to get the data of an ArcInfo generate file.
+:func:`get_iff_data <gis_func.get_iff_data>`         Function to get the data of an iMOD iff file.
+:func:`get_isg_data <gis_func.get_isg_data>`         Function to get the data of an iMOD isg file.
+:func:`shp2xy <gis_func.shp2xy>`                     Function to get the data of an ESRI shape file.
+:func:`shp2shapelyGeoms <gis_func.shp2shapelyGeoms>` Function to get the shapes of an ESRI shape file as shapely geometries.
+==================================================== =======================================================================
+
+**Writing:**
+
+==================================================== ===========================================================
+:func:`write_shp <gis_func.write_shp>`               Function to write an ESRI shape file.
+:func:`write_gen <gis_func.write_gen>`               Function to write an ArcInfo generate file.
+:func:`write_isg <gis_func.write_isg>`               Function to write an iMOD isg file.
+:func:`shapelyGeoms2shp <gis_func.shapelyGeoms2shp>` Function to write shapely geometries to an ESRI shape file.
+==================================================== ===========================================================
+
+**Conversion of ArcInfo generate files and ESRI shape files:**
+
+============================================ ====================================================================
+:func:`gen2shp <gis_func.gen2shp>`           Function to convert an ArcInfo generate file into an ESRI shapefile.
+:func:`shp2gen <gis_func.shp2gen>`           Function to convert an ESRI shapefile into an ArcInfo generate file.
+============================================ ====================================================================
+
+**Shape type and format conversion**
+
+================================================== =================================================================================
+:func:`get_shptype <gis_func.get_shptype>`         Function to get the shape type of a xy array/list or shapely geometry/geometries.
+:func:`xy2shapelyGeoms <gis_func.xy2shapelyGeoms>` Function to convert xy array/list to shapely geometries.
+:func:`shapelyGeoms2xy <gis_func.shapelyGeoms2xy>` Function to convert shapely geometries to xy array/list.
+================================================== =================================================================================
+
+**Rasterizing:**
+
+==================================================== ================================================================================================================
+:func:`shp2arr <gis_func.shp2arr>`                   Function to rasterize an ESRI shapefile.
+:func:`shp2arr_refined <gis_func.shp2arr_refined>`   Function to rasterize an ESRI shapefile using GDAL's RasterizeLayer function by using a refined underlying grid.
+:func:`shp2arr_PIL <gis_func.shp2arr_PIL>`           Function to rasterize an ESRI shapefile using PIL.
+:func:`shapelyGeoms2arr <gis_func.shapelyGeoms2arr>` Function to rasterize shapely geometries using GDAL's RasterizeLayer function.
+==================================================== ================================================================================================================
+
+**Raster to shape conversion:**
+
+================================================== ==========================================================================================
+:func:`arr2shp_contour <gis_func.arr2shp_contour>` Function to create an ESRI shapefile with contour lines from a raster, using gdal_contour.
+================================================== ==========================================================================================
+
+**Conversion of coordinates:**
+
+============================================ ===========================================================
+:func:`xy_reproject <gis_func.xy_reproject>` Function to reproject x,y coordinates of shapes.
+:func:`xy_rotate <gis_func.xy_rotate>`       Function to rotate x,y coordinates of shapes.
+:func:`xy_shift <gis_func.xy_shift>`         Function to shift/translate x,y coordinates of shapes.
+:func:`utm2latlong <gis_func.utm2latlong>`   Function to convert UTM coordinates to LatLong coordinates.
+:func:`latlong2utm <gis_func.latlong2utm>`   Function to convert LatLong coordinates to UTM coordinates.
+:func:`rd2latlong <gis_func.rd2latlong>`     Function to convert RD coordinates to LatLong coordinates.
+:func:`latlong2rd <gis_func.latlong2rd>`     Function to convert LatLong coordinates to RD coordinates.
+============================================ ===========================================================
+
+**GIS operations:**
+
+==================================================================== ====================================================================================================================
+:func:`points_polygons2val <gis_func.points_polygons2val>`           Function to extract polygon values of an ESRI shape file on points.
+:func:`split_polygons <gis_func.split_polygons>`                     Function to split shapely polygons in regular blocks.
+:func:`polyline2interval_points <gis_func.polyline2interval_points>` Function to get points at a regular interval along the polylines in a set of polylines.
+:func:`polyline_idf2val <gis_func.polyline_idf2val>`                 Function to get values of a list of IDF files at a regular interval along the polylines in a set of polylines.
+:func:`xy_rotate <gis_func.xy_rotate>`                               Function to rotate x,y coordinates of shapes.
+:func:`xy_shift <gis_func.xy_shift>`                                 Function to shift/translate x,y coordinates of shapes.
+:func:`poly2slopes_intersects <gis_func.poly2slopes_intersects>`     Function to calculate the slopes and y-axis intersects of all line elements of a set of polylines or polygons.
+:func:`intersect_poly <gis_func.intersect_poly>`                     Function to get the intersection points of a set of polylines or polygons with another set of polylines or polygons.
+:func:`point_in_polygon <gis_func.point_in_polygon>`                 Function to perform a point-in-polygon test for a set of points and a set of polygons.
+==================================================================== ====================================================================================================================
+
+**Other functions/methods**
+
+======================================== ====================================================================
+:func:`delete_shp <gis_func.delete_shp>` Function to delete an ESRI shapefile including all associated files.
+======================================== ====================================================================

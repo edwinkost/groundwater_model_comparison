@@ -1,0 +1,325 @@
+.. _table_func:
+
+*****************
+Module table_func
+*****************
+
+This module contains table (file) functions.
+
+It comprises reading, writing and a limited number of manipulations.
+
+The data is stored in numpy recarrays.
+
+The main purpose of the module is to make it easier to read and write
+different formats of table files.
+
+
+Introduction
+============
+
+Getting started
+---------------
+
+Module file: table_func.py
+
+Recommended import statement::
+
+	from table_func import *
+
+**Python installation and modules:**
+
+============ =====================================
+Python       Developed and tested with Python 2.7
+Numpy        Developed and tested with numpy 1.8.2
+============ =====================================
+
+
+Tables
+------
+
+Tables are data structured in fields (columns) and records (rows).
+The fields have a name and could have different data types, e.g. float, int and string.
+A record contains a value for each field.
+
+In table_func tables are stored in numpy recarrays (structured arrays). See below.
+
+
+Numpy recarray (structured array)
+---------------------------------
+
+See also `Numpy documentation on structured arrays <http://docs.scipy.org/doc/numpy/user/basics.rec.html>`_
+
+Numpy recarrays make it possible to store data of different type (dtype) in one array.
+Data is structured in fields and records and is therefore suitable to store data in tabular form (tables).
+
+Although one may think of a table as a 2-dimensional dataset, it is called 1-dimensional, with the records on dimension 1.
+
+Fields could be accessed by their field names, e.g.::
+
+	myTable['myField']
+
+It returns an array with the value of each record in the field 'myField'.
+
+Records could be accessed by index number, e.g.::
+
+	myTable[0]
+
+It returns the first record.
+
+In table_func all values in the table are 0-dimensional values, i.e. single values.
+It is not possible to store a sequence of values in a field within one record. This is possible with numpy recarrays, but not used here.::
+
+	# single values in each field
+	[(1, 3.0, 'a'),
+	 (2, 4.0, 'b')]
+
+	# sequence of values in the first field; this is not possible in table_func
+	[([1,10,100], 3.0, 'a'),
+	 ([2,20,200], 4.0, 'b')]
+
+Ways to get field names and data types of a recarray::
+
+	# getting the field names:
+	myTable.dtype.names
+	
+	# getting the field names and data types:
+	myTable.dtype
+
+
+.. _table_formats:
+
+Table file formats
+------------------
+
+.. _csv_file:
+
+Comma-separated files
++++++++++++++++++++++
+
+A text-formatted table file. The fields are separated by commas. This file format is also refered to as 'csv' file.
+
+In some functions it is assumed that there is 1 header line (also comma-separated) which contains the field names. See function description if this assumption is made.
+
+.. _dbf_file:
+
+DBF files
++++++++++
+
+A binary table file. File format used by the dBASE database management system to store tables of data.
+
+The data file of an ESRI shapefile is a DBF file.
+
+See also: `DBF file <http://www.digitalpreservation.gov/formats/fdd/fdd000325.shtml>`_
+
+The field specs comprise type, size and deci where
+
+            type is one of:
+
+                C for ascii character data
+
+                M for ascii character memo data (real memo fields not supported)
+
+                D for datetime objects
+
+                N for ints or decimal objects
+
+                F for floats
+
+                L for logical values 'T', 'F', or '?'
+
+            size is the field width
+
+            deci is the number of decimal places in the provided decimal object
+
+
+.. _imod_file:
+
+iMOD IPF file
++++++++++++++
+
+A text-formatted table file. This is a table file used by iMOD. It may be space or comma-separated.
+
+The header of the file consists of several lines.
+The number of records, number of fields, each field name are all stored in a separate header line.
+The last header line contains an index number (refering to one of the fields) and a file extension. The index number starts at 1 (the first field).
+If the index number is > 0 it is used to construct file names from that specific field and the extension.
+These file names point to iMOD timeseries files (see below).
+
+The records consist of one line each.
+
+Example of an IPF file with 4 fields and 3 records::
+
+	3
+	4
+	X
+	Y
+	Z
+	Q
+	0,TXT
+	110000.0  750000.0  15.0  -300.0
+	109000.0  760000.0  25.0  -300.0
+	108000.0  770000.0  26.0  -300.0
+
+And now the 4th field refer to timeseries files with extention \*.TXT::
+
+	3
+	4
+	X
+	Y
+	Z
+	Q
+	4,TXT
+	110000.0  750000.0  15.0  "data\abstraction 1"
+	110000.0  750000.0  15.0  "data\abstraction 2"
+	110000.0  750000.0  15.0  "data\abstraction 3"
+
+
+iMOD timeseries file
+++++++++++++++++++++
+
+A text-formatted table file. This is a table file used by iMOD for timeseries. It may be space or comma-separated.
+
+The first field is used to store dates (or date-times). The missing value is specified for each field.
+
+Example of timeseries file with 2 fields and with 14 year of data on a daily basis (5114 dates)::
+
+	5114
+	2
+	DATE,-999
+	HEAD,-999999
+	20000101 -10.5
+	20000102 -10.4
+	..
+	20131231 -10.9
+
+.. _dat_file:
+
+Space-separated files
++++++++++++++++++++++
+
+A text-formatted table file. The fields are separated by spaces: any (combination of) whitespaces, i.e. space and tab. This file format is sometimes refered to as 'dat' file.
+
+In some functions it is assumed that there is 1 header line (also space-separated) which contains the field names. See function description if this assumption is made.
+
+.. _txt_file:
+
+Other text-formatted files
+++++++++++++++++++++++++++
+
+It is possible to use other text-formatted files, which resemble the comma or space-separated files but use other separators/delimiters.
+
+.. _xls_file:
+
+Excel files
++++++++++++
+
+Microsoft Excel files: \*.xls and \*.xlsx.
+
+Only reading of Excel files (workbooks) is currently supported. Tables from any worksheet in the workbook can be read.
+
+By default it is assumed that all data in the worksheet belong to the table. However, empty rows at the top and empty columns on the left are skipped automatically.
+
+Additionally it is possible to specify the block of cells containing the table.
+
+
+.. _reading_tables:
+
+Reading table files
+===================
+
+**Main function for reading table files:**
+
+========================================               =============================================================================
+:func:`table2arr <table_func.table2arr>`               Function to read a table file and create a numpy recarray (structured array).
+========================================               =============================================================================
+
+**Functions for reading table files in specific formats:**
+
+======================================================== ====================================================================================
+:func:`ipf2arr <table_func.ipf2arr>`                     Function to read an iMOD IPF file and create a numpy recarray.
+:func:`imodtss2arr <table_func.imodtss2arr>`             Function to read an iMOD timeseries file and create a numpy recarray.
+:func:`csv2arr <table_func.csv2arr>`                     Function to read a comma-separated file and create a numpy recarray.
+:func:`dbf2arr <table_func.dbf2arr>`                     Function to read a DBF file and create a numpy recarray.
+:func:`dat2arr <table_func.dat2arr>`                     Function to read a space-separated file and create a numpy recarray.
+:func:`txt2arr <table_func.txt2arr>`                     Function to read a text-formatted table file and create a numpy recarray or ndarray.
+:func:`xls2arr <table_func.xls2arr>`                     Function to read a table from a worksheet in an Excel workbook.
+:func:`xls2arr_allsheets <table_func.xls2arr_allsheets>` Function to read the tables from all worksheets in an Excel workbook.
+======================================================== ====================================================================================
+
+**Functions for getting field information:**
+
+====================================================== =============================================================================================================================
+:func:`table2fields <table_func.table2fields>`         Function to get the field names of a table file.
+:func:`ipf2fields <table_func.ipf2fields>`             Function to get the field names of an iMOD IPF file.
+:func:`ipf2iext <table_func.ipf2iext>`                 Function to get the field number of the iMOD timeseries file references (IEXT) and the extension (EXT) from an iMOD IPF file.
+:func:`csv2fields <table_func.csv2fields>`             Function to get the field names of a comma-separated file.
+:func:`dbf2fields <table_func.dbf2fields>`             Function to get the field names of a DBF file.
+:func:`dbf2fields_specs <table_func.dbf2fields_specs>` Function to get the field names and field specs of a DBF file.
+:func:`dat2fields <table_func.dat2fields>`             Function to get the field names of a space-separated file.
+:func:`xls2fields <table_func.xls2fields>`             Function to get the field names of a table in a worksheet in an Excel workbook.
+:func:`get_fields <table_func.get_fields>`             Function to get the field names of a text-formatted table file.
+====================================================== =============================================================================================================================
+
+**Other functions related to reading table files:**
+
+==========================================             ==========================================================
+:func:`dbfreader <table_func.dbfreader>`               Function to create a generator over records in a DBF file.
+:func:`xls2sheets <table_func.xls2sheets>`             Function to get the worksheet names of an Excel workbook.
+==========================================             ==========================================================
+
+
+.. _writing_tables:
+
+Writing table files
+===================
+
+**Main function for writing table files:**
+
+========================================               ===================================================
+:func:`arr2table <table_func.arr2table>`               Function to write a numpy recarray to a table file.
+========================================               ===================================================
+
+**Functions for writing table files in specific formats:**
+
+============================================           ==================================================================
+:func:`arr2ipf <table_func.arr2ipf>`                   Function to write a numpy recarray to an iMOD IPF file.
+:func:`arr2imodtss <table_func.arr2imodtss>`           Function to write a numpy recarray to an iMOD timeseries file.
+:func:`arr2csv <table_func.arr2csv>`                   Function to write numpy recarray to a comma-separated file.
+:func:`arr2dbf <table_func.arr2dbf>`                   Function to write numpy recarray to a DBF file.
+:func:`arr2dat <table_func.arr2dat>`                   Function to write numpy recarray to a space-separated file.
+:func:`arr2txt <table_func.arr2txt>`                   Function to write a numpy recarray to a text-formatted table file.
+============================================           ==================================================================
+
+**Other functions related to writing table files:**
+
+========================================               ============================================================================
+:func:`dbfwriter <table_func.dbfwriter>`               Function to create and write a binary string directly to an opened DBF file.
+========================================               ============================================================================
+
+
+Modifying numpy recarrays
+=========================
+
+**Functions:**
+
+========================================================== ===============================================================================
+:func:`recarray2ndarray <table_func.recarray2ndarray>`     Function to convert a numpy recarray to a regular numpy ndarray.
+:func:`make_recarr <table_func.make_recarr>`               Function to create a numpy recarray filled with nodata.
+:func:`take_from_recarr <table_func.take_from_recarr>`     Function to take specific fields from a numpy recarray.
+:func:`add_to_recarr <table_func.add_to_recarr>`           Function to add fields to a numpy recarray.
+:func:`remove_from_recarr <table_func.remove_from_recarr>` Function to remove fields from a numpy recarray.
+:func:`change_dtype <table_func.change_dtype>`             Function to change the datatype (dtype) of specific fields in a numpy recarray.
+========================================================== ===============================================================================
+
+
+Other functions
+===============
+
+======================================================  ===========================================================
+:func:`arr2dbfspecs <table_func.arr2dbfspecs>`          Function to get DBF field specs for a numpy recarray.
+:func:`split_csv <table_func.split_csv>`                Function to split a string according to 'csv' rules.
+:func:`split_ipf <table_func.split_ipf>`                Function to split a string according to 'ipf' rules.
+:func:`split_freeformat <table_func.split_freeformat>`  Function to split a string according to 'freeformat' rules.
+:func:`split_string <table_func.split_string>`          Function to split a string using one or more delimiters.
+:func:`replace_string<table_func.replace_string>`       Function to replace substrings by other substrings.
+======================================================  ===========================================================

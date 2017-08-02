@@ -1,0 +1,1632 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>table_func module &#8212; Lib_WB 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.jpg" width=150 border="0" alt="Deltares python modules"/></a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/rst/table_func.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-table_func">
+<span id="table-func-module"></span><h1>table_func module<a class="headerlink" href="#module-table_func" title="Permalink to this headline">¶</a></h1>
+<p>This module contains table (file) functions.</p>
+<p>It comprises reading, writing and a limited number of manipulations.</p>
+<p>The data is stored in numpy recarrays.</p>
+<p>The main purpose of the module is to make it easier to read and write
+different formats of table files.</p>
+<dl class="function">
+<dt id="table_func.add_to_recarr">
+<code class="descclassname">table_func.</code><code class="descname">add_to_recarr</code><span class="sig-paren">(</span><em>arr</em>, <em>dt_or_arr</em>, <em>nodata=0</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.add_to_recarr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to add fields to a numpy recarray.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy recarray</p>
+<p><strong>dt_or_arr</strong> : list of dtype(s) or numpy recarray</p>
+<blockquote>
+<div><p>The dtypes of the fields to be added or the recarray to be added.</p>
+<p>If <em>dt_or_arr</em> is specified as list it should be a list of dtypes in the form (field name, dtype).</p>
+<p>If <em>dt_or_arr</em> is a recarray containing field names which already exist in <em>arr</em> these field names are extended with a number.
+If the number of records differs from <em>arr</em> records are removed or new records are added to <em>dt_or_arr</em>.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : bool, int, float, str or sequence (optional)</p>
+<blockquote>
+<div><p>Nodata value(s) to be applied if <em>dt_or_arr</em> is specified as dtype.</p>
+<p>If <em>nodata</em> is a single value (bool, int or float) this value is applied for all fields, if possible.</p>
+<p>If <em>nodata</em> is a sequence (list, tuple or array) it should contain one value for each field.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy recarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.arr2csv">
+<code class="descclassname">table_func.</code><code class="descname">arr2csv</code><span class="sig-paren">(</span><em>arr, f_csv, header=True, formats=[‘%s’]</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.arr2csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write numpy recarray to a comma-separated file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy recarray</p>
+<p><strong>f_table</strong> : str</p>
+<blockquote>
+<div><p>Comma-separated file.</p>
+</div></blockquote>
+<p><strong>header</strong> : bool</p>
+<blockquote>
+<div><p>True = a header line containing the field names is written.</p>
+<p>False = no header line is written.</p>
+</div></blockquote>
+<p><strong>formats</strong> : str, sequence or None (optional)</p>
+<blockquote class="last">
+<div><p>The Python % format(s) used to write the values.</p>
+<p>See <a class="reference external" href="http://docs.python.org/2/library/stdtypes.html#string-formatting-operations">http://docs.python.org/2/library/stdtypes.html#string-formatting-operations</a>.</p>
+<p>If <em>formats</em> is None the format ‘%s’ is used.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#writing-tables"><span class="std std-ref">Writing table files</span></a>, <a class="reference internal" href="../table_func.html#csv-file"><span class="std std-ref">Comma-separated files</span></a>, <a class="reference internal" href="#table_func.arr2table" title="table_func.arr2table"><code class="xref py py-func docutils literal"><span class="pre">table_func.arr2table()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.arr2dat">
+<code class="descclassname">table_func.</code><code class="descname">arr2dat</code><span class="sig-paren">(</span><em>arr, f_dat, header=True, formats=[‘%s’]</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.arr2dat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write numpy recarray to a space-separated file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy recarray</p>
+<p><strong>f_dat</strong> : str</p>
+<blockquote>
+<div><p>Space-separated file.</p>
+</div></blockquote>
+<p><strong>header</strong> : bool</p>
+<blockquote>
+<div><p>True = a header line containing the field names is written.</p>
+<p>False = no header line is written.</p>
+</div></blockquote>
+<p><strong>formats</strong> : str, sequence or None (optional)</p>
+<blockquote class="last">
+<div><p>The Python % format(s) used to write the values.</p>
+<p>See <a class="reference external" href="http://docs.python.org/2/library/stdtypes.html#string-formatting-operations">http://docs.python.org/2/library/stdtypes.html#string-formatting-operations</a>.</p>
+<p>If <em>formats</em> is None the format ‘%s’ is used.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#writing-tables"><span class="std std-ref">Writing table files</span></a>, <a class="reference internal" href="../table_func.html#dat-file"><span class="std std-ref">Space-separated files</span></a>, <a class="reference internal" href="#table_func.arr2table" title="table_func.arr2table"><code class="xref py py-func docutils literal"><span class="pre">table_func.arr2table()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.arr2dbf">
+<code class="descclassname">table_func.</code><code class="descname">arr2dbf</code><span class="sig-paren">(</span><em>arr</em>, <em>f_dbf</em>, <em>fieldspecs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.arr2dbf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write numpy recarray to a DBF file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy recarray</p>
+<p><strong>f_dbf</strong> : str</p>
+<blockquote>
+<div><p>DBF file.</p>
+</div></blockquote>
+<p><strong>fieldspecs</strong> : list or None (optional)</p>
+<blockquote class="last">
+<div><p>List of field specs in the form (type, size, deci).</p>
+<p>See <a class="reference internal" href="../table_func.html#dbf-file"><span class="std std-ref">DBF files</span></a> and <code class="xref py py-func docutils literal"><span class="pre">arr2dbfspecs</span> <span class="pre">&lt;table_func.arr2dbfspecs()</span></code>.</p>
+<p>If <em>fieldspecs</em> is None the specs are determined automatically.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#writing-tables"><span class="std std-ref">Writing table files</span></a>, <a class="reference internal" href="../table_func.html#dbf-file"><span class="std std-ref">DBF files</span></a>, <a class="reference internal" href="#table_func.arr2table" title="table_func.arr2table"><code class="xref py py-func docutils literal"><span class="pre">table_func.arr2table()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.arr2dbfspecs">
+<code class="descclassname">table_func.</code><code class="descname">arr2dbfspecs</code><span class="sig-paren">(</span><em>arr</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.arr2dbfspecs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get DBF field specs for a numpy recarray.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy recarray</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dbfspecs</strong> : list</p>
+<blockquote class="last">
+<div><p>List with field specs in the form (type, size, deci).</p>
+<p>See <a class="reference internal" href="../table_func.html#dbf-file"><span class="std std-ref">DBF files</span></a>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#dbf-file"><span class="std std-ref">DBF files</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.arr2imodtss">
+<code class="descclassname">table_func.</code><code class="descname">arr2imodtss</code><span class="sig-paren">(</span><em>arr</em>, <em>f_tss</em>, <em>l_nodata=-999999</em>, <em>delimiter=’</em>, <em>’</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.arr2imodtss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write a numpy recarray to an iMOD timeseries file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy recarray</p>
+<p><strong>f_tss</strong> : str</p>
+<blockquote>
+<div><p>iMOD timeseries file.</p>
+</div></blockquote>
+<p><strong>l_nodata</strong> : dict, list, int or float (optional)</p>
+<blockquote>
+<div><p>Nodata values(s) of the fields.</p>
+<p>If <em>l_nodata</em> is a dict the keys in the dict are the field names and the values the nodata values.</p>
+<p>If <em>l_nodata</em> is a single value (int, float) this value is used for all fields.</p>
+</div></blockquote>
+<p><strong>delimiter</strong> : str (optional)</p>
+<blockquote class="last">
+<div><p>The delimiter/separator used to separate values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#writing-tables"><span class="std std-ref">Writing table files</span></a>, <a class="reference internal" href="../table_func.html#imod-file"><span class="std std-ref">iMOD IPF file</span></a>, <a class="reference internal" href="#table_func.arr2table" title="table_func.arr2table"><code class="xref py py-func docutils literal"><span class="pre">table_func.arr2table()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.arr2ipf">
+<code class="descclassname">table_func.</code><code class="descname">arr2ipf</code><span class="sig-paren">(</span><em>arr, f_ipf, formats=[‘%s’], delimiter=’,’, i_ext=0, relpath=False</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.arr2ipf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write a numpy recarray to an iMOD IPF file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy recarray</p>
+<p><strong>f_ipf</strong> : str</p>
+<blockquote>
+<div><p>iMOD IPF file.</p>
+</div></blockquote>
+<p><strong>formats</strong> : str, sequence or None (optional)</p>
+<blockquote>
+<div><p>The Python % format(s) used to write the values.</p>
+<p>See <a class="reference external" href="http://docs.python.org/2/library/stdtypes.html#string-formatting-operations">http://docs.python.org/2/library/stdtypes.html#string-formatting-operations</a>.</p>
+<p>If <em>formats</em> is None the format ‘%s’ is used.</p>
+</div></blockquote>
+<p><strong>delimiter</strong> : str (optional)</p>
+<blockquote>
+<div><p>The delimiter/separator used to separate values.</p>
+</div></blockquote>
+<p><strong>i_ext</strong> : int (optional)</p>
+<blockquote>
+<div><p>Index number.</p>
+<p>See <a class="reference internal" href="../table_func.html#imod-file"><span class="std std-ref">iMOD IPF file</span></a>.</p>
+<p>The extension is determined automatically and (if possbile) stripped off from the values in the field.
+If this is not possible the extension is set to ‘TXT’ by default.</p>
+</div></blockquote>
+<p><strong>relpath</strong> : bool (optional)</p>
+<blockquote class="last">
+<div><p>True = convert references to iMOD timeseries files (if existing) to relative path names.</p>
+<p>False = do not convert references to iMOD timeseries files (if existing) to relative path names.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#writing-tables"><span class="std std-ref">Writing table files</span></a>, <a class="reference internal" href="../table_func.html#imod-file"><span class="std std-ref">iMOD IPF file</span></a>, <a class="reference internal" href="#table_func.arr2table" title="table_func.arr2table"><code class="xref py py-func docutils literal"><span class="pre">table_func.arr2table()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.arr2table">
+<code class="descclassname">table_func.</code><code class="descname">arr2table</code><span class="sig-paren">(</span><em>arr, f_table, formats=[‘%s’], delimiter=’ ‘, i_ext=0, relpath=False, fieldspecs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.arr2table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write a numpy recarray to a table file.</p>
+<p>The table file could be a comma-separated file (*.csv), DBF file (*.dbf), iMOD IPF file (*.ipf) or space-separated file.
+The first three file types are recognized by the file extension.</p>
+<p>There are also separate writers for the various file formats, but this overall writer is suitable for most cases.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy recarray</p>
+<p><strong>f_table</strong> : str</p>
+<blockquote>
+<div><p>Table file name.</p>
+</div></blockquote>
+<p><strong>formats</strong> : str, sequence or None (optional)</p>
+<blockquote>
+<div><p>The Python % format(s) used to write the values.</p>
+<p>Only relevant for text-formatted files (including iMOD IPF files).</p>
+<p>See <a class="reference external" href="http://docs.python.org/2/library/stdtypes.html#string-formatting-operations">http://docs.python.org/2/library/stdtypes.html#string-formatting-operations</a>.</p>
+<p>If <em>formats</em> is None the format ‘%s’ is used.</p>
+</div></blockquote>
+<p><strong>delimiter</strong> : str (optional)</p>
+<blockquote>
+<div><p>The delimiter/separator used to separate values.</p>
+<p>Only relevant for iMOD files and text-formatted files other than *.csv.</p>
+</div></blockquote>
+<p><strong>i_ext</strong> : int (optional)</p>
+<blockquote>
+<div><p>Index number. Only relevant for iMOD IPF files.</p>
+<p>See <a class="reference internal" href="../table_func.html#imod-file"><span class="std std-ref">iMOD IPF file</span></a>.</p>
+</div></blockquote>
+<p><strong>relpath</strong> : bool (optional)</p>
+<blockquote>
+<div><p>Only relevant for iMOD IPF files.</p>
+<p>True = convert references to iMOD timeseries files (if existing) to relative path names.</p>
+<p>False = do not convert references to iMOD timeseries files (if existing) to relative path names.</p>
+</div></blockquote>
+<p><strong>fieldspecs</strong> : list or None (optional)</p>
+<blockquote class="last">
+<div><p>List of field specs in the form (type, size, deci). Only relevant for DBF files.</p>
+<p>See <a class="reference internal" href="../table_func.html#dbf-file"><span class="std std-ref">DBF files</span></a> and <code class="xref py py-func docutils literal"><span class="pre">arr2dbfspecs</span> <span class="pre">&lt;table_func.arr2dbfspecs()</span></code>.</p>
+<p>If <em>fieldspecs</em> is None the specs are determined automatically.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#writing-tables"><span class="std std-ref">Writing table files</span></a>, <a class="reference internal" href="../table_func.html#table-formats"><span class="std std-ref">Table file formats</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.arr2txt">
+<code class="descclassname">table_func.</code><code class="descname">arr2txt</code><span class="sig-paren">(</span><em>arr, f_txt, delimiter=’,’, header=True, formats=[‘%s’]</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.arr2txt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write a numpy recarray to a text-formatted table file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy recarray</p>
+<p><strong>f_txt</strong> : str</p>
+<blockquote>
+<div><p>Text-formatted file.</p>
+</div></blockquote>
+<p><strong>delimiter</strong> : str (optional)</p>
+<blockquote>
+<div><p>The delimiter/separator used to separate values.</p>
+</div></blockquote>
+<p><strong>header</strong> : bool</p>
+<blockquote>
+<div><p>True = a header line containing the field names is written.</p>
+<p>False = no header line is written.</p>
+</div></blockquote>
+<p><strong>formats</strong> : str, sequence or None (optional)</p>
+<blockquote class="last">
+<div><p>The Python % format(s) used to write the values.</p>
+<p>See <a class="reference external" href="http://docs.python.org/2/library/stdtypes.html#string-formatting-operations">http://docs.python.org/2/library/stdtypes.html#string-formatting-operations</a>.</p>
+<p>If <em>formats</em> is None the format ‘%s’ is used.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#writing-tables"><span class="std std-ref">Writing table files</span></a>, <a class="reference internal" href="../table_func.html#txt-file"><span class="std std-ref">Other text-formatted files</span></a>, <a class="reference internal" href="#table_func.arr2table" title="table_func.arr2table"><code class="xref py py-func docutils literal"><span class="pre">table_func.arr2table()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.change_dtype">
+<code class="descclassname">table_func.</code><code class="descname">change_dtype</code><span class="sig-paren">(</span><em>arr</em>, <em>flds</em>, <em>new_types</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.change_dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to change the datatype (dtype) of specific fields in a numpy recarray.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy recarray</p>
+<p><strong>flds: list</strong></p>
+<blockquote>
+<div><p>List of fields to be changed.</p>
+</div></blockquote>
+<p><strong>new_types</strong> : list</p>
+<blockquote>
+<div><p>List of new dtypes.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy recarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.csv2arr">
+<code class="descclassname">table_func.</code><code class="descname">csv2arr</code><span class="sig-paren">(</span><em>f_csv</em>, <em>n_header=1</em>, <em>l_flds=None</em>, <em>fld_str=None</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.csv2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to read a comma-separated file and create a numpy recarray.</p>
+<p>It is not necessary to read the entire table file, but a selection of fields could be made.
+This is useful for large table files if not all fields are to be usued.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_csv</strong> : str</p>
+<blockquote>
+<div><p>Comma-separated file.</p>
+</div></blockquote>
+<p><strong>n_header</strong> : int (optional)</p>
+<blockquote>
+<div><p>Number of header lines.
+The field names are expected to be in the last line of the header.</p>
+</div></blockquote>
+<p><strong>l_flds</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of field names to read. If <em>l_flds</em> is None all fields are read.</p>
+</div></blockquote>
+<p><strong>fld_str</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>An arbitrary string which is scanned for occurences of field names.
+Occuring field names will be included in the list of fields to be read.</p>
+<p>Such a string could originate from user input, e.g. a condition string which is specified in an input file for a tool.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy recarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#csv-file"><span class="std std-ref">Comma-separated files</span></a>, <a class="reference internal" href="#table_func.table2arr" title="table_func.table2arr"><code class="xref py py-func docutils literal"><span class="pre">table_func.table2arr()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.csv2fields">
+<code class="descclassname">table_func.</code><code class="descname">csv2fields</code><span class="sig-paren">(</span><em>f_csv</em>, <em>n_header=1</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.csv2fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the field names of a comma-separated file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_csv</strong> : str</p>
+<blockquote>
+<div><p>Comma-separated file.</p>
+</div></blockquote>
+<p><strong>n_header</strong> : int (optional)</p>
+<blockquote>
+<div><p>Number of header lines. The field names are expected to be in the last line of the header.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : list</p>
+<blockquote class="last">
+<div><p>List of the field names.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#csv-file"><span class="std std-ref">Comma-separated files</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.dat2arr">
+<code class="descclassname">table_func.</code><code class="descname">dat2arr</code><span class="sig-paren">(</span><em>f_dat</em>, <em>n_header=1</em>, <em>l_flds=None</em>, <em>fld_str=None</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.dat2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to read a space-separated file and create a numpy recarray.</p>
+<p>It is not necessary to read the entire table file, but a selection of fields could be made.
+This is useful for large table files if not all fields are to be usued.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_dat</strong> : str</p>
+<blockquote>
+<div><p>Space-separated file.</p>
+</div></blockquote>
+<p><strong>n_header</strong> : int (optional)</p>
+<blockquote>
+<div><p>Number of header lines.
+The field names are expected to be in the last line of the header.</p>
+</div></blockquote>
+<p><strong>l_flds</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of field names to read. If <em>l_flds</em> is None all fields are read.</p>
+</div></blockquote>
+<p><strong>fld_str</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>An arbitrary string which is scanned for occurences of field names.
+Occuring field names will be included in the list of fields to be read.</p>
+<p>Such a string could originate from user input, e.g. a condition string which is specified in an input file for a tool.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy recarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#dat-file"><span class="std std-ref">Space-separated files</span></a>, <a class="reference internal" href="#table_func.table2arr" title="table_func.table2arr"><code class="xref py py-func docutils literal"><span class="pre">table_func.table2arr()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.dat2fields">
+<code class="descclassname">table_func.</code><code class="descname">dat2fields</code><span class="sig-paren">(</span><em>f_dat</em>, <em>n_header=1</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.dat2fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the field names of a space-separated file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_dat</strong> : str</p>
+<blockquote>
+<div><p>Space-separated file.</p>
+</div></blockquote>
+<p><strong>n_header</strong> : int (optional)</p>
+<blockquote>
+<div><p>Number of header lines. The field names are expected to be in the last line of the header.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : list</p>
+<blockquote class="last">
+<div><p>List of the field names.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#dat-file"><span class="std std-ref">Space-separated files</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.dbf2arr">
+<code class="descclassname">table_func.</code><code class="descname">dbf2arr</code><span class="sig-paren">(</span><em>f_dbf</em>, <em>l_flds=None</em>, <em>fld_str=None</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.dbf2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to read a DBF file and create a numpy recarray.</p>
+<p>It is not necessary to read the entire table file, but a selection of fields could be made.
+This is useful for large table files if not all fields are to be usued.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_dbf</strong> : str</p>
+<blockquote>
+<div><p>DBF file.</p>
+</div></blockquote>
+<p><strong>l_flds</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of field names to read. If <em>l_flds</em> is None all fields are read.</p>
+</div></blockquote>
+<p><strong>fld_str</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>An arbitrary string which is scanned for occurences of field names.
+Occuring field names will be included in the list of fields to be read.</p>
+<p>Such a string could originate from user input, e.g. a condition string which is specified in an input file for a tool.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy recarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#dbf-file"><span class="std std-ref">DBF files</span></a>, <a class="reference internal" href="#table_func.table2arr" title="table_func.table2arr"><code class="xref py py-func docutils literal"><span class="pre">table_func.table2arr()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.dbf2fields">
+<code class="descclassname">table_func.</code><code class="descname">dbf2fields</code><span class="sig-paren">(</span><em>f_dbf</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.dbf2fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the field names of a DBF file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_dbf</strong> : str</p>
+<blockquote>
+<div><p>DBF file.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : list</p>
+<blockquote class="last">
+<div><p>List of the field names.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#dbf-file"><span class="std std-ref">DBF files</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.dbf2fields_specs">
+<code class="descclassname">table_func.</code><code class="descname">dbf2fields_specs</code><span class="sig-paren">(</span><em>f_dbf</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.dbf2fields_specs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the field names and field specs of a DBF file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : list</p>
+<blockquote class="last">
+<div><p>The returned list contains:</p>
+<p>List with field names.</p>
+<p>List with field specs in the form (type, size, deci).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#dbf-file"><span class="std std-ref">DBF files</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.dbfreader">
+<code class="descclassname">table_func.</code><code class="descname">dbfreader</code><span class="sig-paren">(</span><em>f</em>, <em>only_fields=False</em>, <em>l_flds=None</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.dbfreader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to create a generator over records in a DBF file.</p>
+<p>Adapted from: <a class="reference external" href="http://code.activestate.com/recipes/362715-dbf-reader-and-writer/">http://code.activestate.com/recipes/362715-dbf-reader-and-writer/</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f</strong> : file object (DBF file opened for binary reading)</p>
+<p><strong>only_fields</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = only field names and specs are returned.</p>
+<p>False = field names and specs and data records are returned.</p>
+</div></blockquote>
+<p><strong>l_flds</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of field names to read. If <em>l_flds</em> is None all fields are read.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : generator</p>
+<blockquote class="last">
+<div><p>First row: field names.</p>
+<p>Second row: field specs (type, size, decimal places).</p>
+<p>Subsequent rows: data records.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#dbf-file"><span class="std std-ref">DBF files</span></a>, <a class="reference internal" href="#table_func.dbf2arr" title="table_func.dbf2arr"><code class="xref py py-func docutils literal"><span class="pre">table_func.dbf2arr()</span></code></a>, <a class="reference internal" href="#table_func.dbf2fields_specs" title="table_func.dbf2fields_specs"><code class="xref py py-func docutils literal"><span class="pre">table_func.dbf2fields_specs()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.dbfwriter">
+<code class="descclassname">table_func.</code><code class="descname">dbfwriter</code><span class="sig-paren">(</span><em>f</em>, <em>fieldnames</em>, <em>fieldspecs</em>, <em>records</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.dbfwriter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to create and write a binary string directly to an opened DBF file.</p>
+<p>Adapted from: <a class="reference external" href="http://code.activestate.com/recipes/362715-dbf-reader-and-writer/">http://code.activestate.com/recipes/362715-dbf-reader-and-writer/</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f</strong> : file object (file opened for binary writing)</p>
+<p><strong>fieldnames</strong> : list</p>
+<blockquote>
+<div><p>List of fieldnames.</p>
+<p>Fieldnames should be no longer than ten characters and not include x00.</p>
+</div></blockquote>
+<p><strong>fieldspecs</strong> : list</p>
+<blockquote>
+<div><p>List of fieldspecs for each field.</p>
+<p>Fieldspecs are in the form (type, size, deci) where</p>
+<blockquote>
+<div><p>type is one of:</p>
+<blockquote>
+<div><p>C for ascii character data</p>
+<p>M for ascii character memo data (real memo fields not supported)</p>
+<p>D for datetime objects</p>
+<p>N for ints or decimal objects</p>
+<p>F for floats</p>
+<p>L for logical values ‘T’, ‘F’, or ‘?’</p>
+</div></blockquote>
+<p>size is the field width</p>
+<p>deci is the number of decimal places in the provided decimal object</p>
+</div></blockquote>
+</div></blockquote>
+<p><strong>records</strong> : array or array_like</p>
+<blockquote class="last">
+<div><p>Sequences of field values (the records or rows of the table).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#writing-tables"><span class="std std-ref">Writing table files</span></a>, <a class="reference internal" href="../table_func.html#dbf-file"><span class="std std-ref">DBF files</span></a>, <a class="reference internal" href="#table_func.arr2dbfspecs" title="table_func.arr2dbfspecs"><code class="xref py py-func docutils literal"><span class="pre">table_func.arr2dbfspecs()</span></code></a>, <a class="reference internal" href="#table_func.arr2dbf" title="table_func.arr2dbf"><code class="xref py py-func docutils literal"><span class="pre">table_func.arr2dbf()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.dtype2nodata">
+<code class="descclassname">table_func.</code><code class="descname">dtype2nodata</code><span class="sig-paren">(</span><em>dtype</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.dtype2nodata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="table_func.get_fields">
+<code class="descclassname">table_func.</code><code class="descname">get_fields</code><span class="sig-paren">(</span><em>f_table</em>, <em>delimiter=’</em>, <em>’</em>, <em>autostrip=False</em>, <em>n_header=1</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.get_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the field names of a text-formatted table file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_table</strong> : str</p>
+<blockquote>
+<div><p>Text-formatted table file.</p>
+<p>It is assumed that the field names are on one header line (in contrast to the text-formatted iMOD IPF file).</p>
+</div></blockquote>
+<p><strong>delimiter</strong> : str or None</p>
+<blockquote>
+<div><p>The delimiter/separator used to separate values.</p>
+<p>If <em>delimiter</em> is None it is assumed that the file is space-separated.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : list</p>
+<blockquote class="last">
+<div><p>List of the field names.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#txt-file"><span class="std std-ref">Other text-formatted files</span></a>, <a class="reference internal" href="#table_func.csv2fields" title="table_func.csv2fields"><code class="xref py py-func docutils literal"><span class="pre">table_func.csv2fields()</span></code></a>, <a class="reference internal" href="#table_func.dat2fields" title="table_func.dat2fields"><code class="xref py py-func docutils literal"><span class="pre">table_func.dat2fields()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.imodtss2arr">
+<code class="descclassname">table_func.</code><code class="descname">imodtss2arr</code><span class="sig-paren">(</span><em>f_tss</em>, <em>l_flds=None</em>, <em>fld_str=None</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.imodtss2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to read an iMOD timeseries file and create a numpy recarray.</p>
+<p>It is not necessary to read the entire table file, but a selection of fields could be made.
+This is useful for large table files if not all fields are to be usued.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_tss</strong> : str</p>
+<blockquote>
+<div><p>iMOD timeseries file.</p>
+</div></blockquote>
+<p><strong>l_flds</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of field names to read. If <em>l_flds</em> is None all fields are read.</p>
+</div></blockquote>
+<p><strong>fld_str</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>An arbitrary string which is scanned for occurences of field names.
+Occuring field names will be included in the list of fields to be read.</p>
+<p>Such a string could originate from user input, e.g. a condition string which is specified in an input file for a tool.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>data</strong> : numpy recarray</p>
+<p><strong>nodata</strong> : dict</p>
+<blockquote class="last">
+<div><p>The returned dict contains the nodata values of the fields in the numpy recarray.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#imod-file"><span class="std std-ref">iMOD IPF file</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.ipf2arr">
+<code class="descclassname">table_func.</code><code class="descname">ipf2arr</code><span class="sig-paren">(</span><em>f_ipf</em>, <em>l_flds=None</em>, <em>fld_str=None</em>, <em>abspath=False</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.ipf2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to read an iMOD IPF file and create a numpy recarray.</p>
+<p>It is not necessary to read the entire table file, but a selection of fields could be made.
+This is useful for large table files if not all fields are to be usued.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_ipf</strong> : str</p>
+<blockquote>
+<div><p>iMOD IPF file.</p>
+</div></blockquote>
+<p><strong>l_flds</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of field names to read. If <em>l_flds</em> is None all fields are read.</p>
+</div></blockquote>
+<p><strong>fld_str</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>An arbitrary string which is scanned for occurences of field names.
+Occuring field names will be included in the list of fields to be read.</p>
+<p>Such a string could originate from user input, e.g. a condition string which is specified in an input file for a tool.</p>
+</div></blockquote>
+<p><strong>abspath</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = convert references to iMOD timeseries files (if existing) to absolute path names.</p>
+<p>False = do not convert references to iMOD timeseries files (if existing) to absolute path names.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy recarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#imod-file"><span class="std std-ref">iMOD IPF file</span></a>, <a class="reference internal" href="#table_func.table2arr" title="table_func.table2arr"><code class="xref py py-func docutils literal"><span class="pre">table_func.table2arr()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.ipf2fields">
+<code class="descclassname">table_func.</code><code class="descname">ipf2fields</code><span class="sig-paren">(</span><em>f_ipf</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.ipf2fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the field names of an iMOD IPF file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_ipf</strong> : str</p>
+<blockquote>
+<div><p>iMOD IPF file.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : list</p>
+<blockquote class="last">
+<div><p>List of the field names.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#imod-file"><span class="std std-ref">iMOD IPF file</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.ipf2iext">
+<code class="descclassname">table_func.</code><code class="descname">ipf2iext</code><span class="sig-paren">(</span><em>f_ipf</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.ipf2iext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the field number of the iMOD timeseries file references (IEXT) and the extension (EXT) from an iMOD IPF file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_ipf</strong> : str</p>
+<blockquote>
+<div><p>iMOD IPF file.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>iext</strong> : int</p>
+<blockquote>
+<div><p>Field number of timeseries file references. The values in this field refer to iMOD timeseries files.</p>
+<p>0 = no timeseries file references specified.</p>
+<p>1 = first field</p>
+<p>etc.</p>
+</div></blockquote>
+<p><strong>ext</strong> : str</p>
+<blockquote class="last">
+<div><p>Extension of timeseries files.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#imod-file"><span class="std std-ref">iMOD IPF file</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.make_recarr">
+<code class="descclassname">table_func.</code><code class="descname">make_recarr</code><span class="sig-paren">(</span><em>n</em>, <em>dt</em>, <em>nodata=0</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.make_recarr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to create a numpy recarray filled with nodata.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n</strong> : int</p>
+<blockquote>
+<div><p>Number of records.</p>
+</div></blockquote>
+<p><strong>dt</strong> : list</p>
+<blockquote>
+<div><p>List of dtypes in the form (field name, dtype).</p>
+</div></blockquote>
+<p><strong>nodata</strong> : bool, int, float, str or sequence (optional)</p>
+<blockquote>
+<div><p>Nodata value(s).</p>
+<p>If <em>nodata</em> is a single value (bool, int or float) this value is applied for all fields, if possible.</p>
+<p>If <em>nodata</em> is a sequence (list, tuple or array) it should contain one value for each field.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy recarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.recarray2ndarray">
+<code class="descclassname">table_func.</code><code class="descname">recarray2ndarray</code><span class="sig-paren">(</span><em>arr</em>, <em>i_flds=None</em>, <em>format=None</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.recarray2ndarray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to convert a numpy recarray to a regular numpy ndarray.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy recarray</p>
+<p><strong>i_flds</strong> : list, int or None (optional)</p>
+<blockquote>
+<div><p>The index number(s) of the field(s) to be converted.</p>
+<p>If <em>i_flds</em> is None all fields are read.</p>
+</div></blockquote>
+<p><strong>format</strong> : dtype or None (optional)</p>
+<blockquote>
+<div><p>The dtype to convert the data to.</p>
+<p>If <em>format</em> is None the dtype is taken from the first field to be converted.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.remove_from_recarr">
+<code class="descclassname">table_func.</code><code class="descname">remove_from_recarr</code><span class="sig-paren">(</span><em>arr</em>, <em>flds</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.remove_from_recarr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to remove fields from a numpy recarray.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy recarray</p>
+<p><strong>flds: list</strong></p>
+<blockquote>
+<div><p>List of fields to be removed.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy recarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.replace_string">
+<code class="descclassname">table_func.</code><code class="descname">replace_string</code><span class="sig-paren">(</span><em>s, sourceList=[], targetList=[], whitespaceTarget=None, keeptogether=[[‘”’]]</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.replace_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to replace substrings by other substrings.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>s</strong> : string</p>
+<blockquote>
+<div><p>Source string within which substrings are replaced.</p>
+</div></blockquote>
+<p><strong>sourceList</strong> : list (optional)</p>
+<blockquote>
+<div><p>List containing substrings to be replaced.</p>
+</div></blockquote>
+<p><strong>targetList</strong> : list (optional)</p>
+<blockquote>
+<div><p>List containing substrings which are used as replacements. If the number of strings is less than in <em>sourceList</em> then empty strings are used.</p>
+</div></blockquote>
+<p><strong>whitespaceTarget</strong> : string or None (optional)</p>
+<blockquote>
+<div><p>String to be used as replacement for whitespace. None = not specified.</p>
+</div></blockquote>
+<p><strong>keeptogether</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List containing the string(s) between which replacements are not performed (e.g. double quotes). Examples:</p>
+<p>[] or None = not specified</p>
+<p>[‘”’] = between double quotes no replacements are performed</p>
+<p>[[‘(‘, ‘)’] , ‘”’] = between parentheses (open and close parenthesis) and double quotes no replacements are performed</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : string</p>
+<blockquote class="last">
+<div><p>Resulting string.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.split_csv">
+<code class="descclassname">table_func.</code><code class="descname">split_csv</code><span class="sig-paren">(</span><em>s</em>, <em>commaSplit=True</em>, <em>semicolonSplit=False</em>, <em>whitespaceSplit=False</em>, <em>multiLines=False</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.split_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to split a string according to ‘csv’ rules.</p>
+<p>Split on commas and/or semicolons and/or whitespace. String may contain multiple lines, in which case \n is used as delimiter.</p>
+<p>Double-quoted substrings are not split.</p>
+<p>Whitespace is stripped off from the substrings.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>s</strong> : string</p>
+<blockquote>
+<div><p>The string to be split.</p>
+</div></blockquote>
+<p><strong>commaSplit</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = comma is used as delimiter.</p>
+<p>False = comma is not used as delimiter.</p>
+</div></blockquote>
+<p><strong>semicolonSplit</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = semicolon is used as delimiter.</p>
+<p>False = semicolon is not used as delimiter.</p>
+</div></blockquote>
+<p><strong>whitespaceSplit</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = whitespace is used as delimiter. Whitespace around comma or semicolon is not treated as separate delimiter.</p>
+<p>False = whitespace is not used as delimiter.</p>
+</div></blockquote>
+<p><strong>multiLines</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = string is split into multiple lines at occurences of \n.</p>
+<p>False = string is not split into multiple lines.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>record</strong> : list</p>
+<blockquote class="last">
+<div><p>Record contains the substrings. If <em>multiLines</em> is True then a list of records is returned.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.split_freeformat">
+<code class="descclassname">table_func.</code><code class="descname">split_freeformat</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.split_freeformat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to split a string according to ‘freeformat’ rules.</p>
+<p>Split on whitespace and commas. Subsequent delimiters (whitespace and commas) are treated as one delimiter.</p>
+<p>Double-quoted substrings are not split.</p>
+<p>Whitespace is stripped off from the substrings.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>s</strong> : string</p>
+<blockquote>
+<div><p>The string to be split.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>record</strong> : list</p>
+<blockquote class="last">
+<div><p>Record contains the substrings.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.split_ipf">
+<code class="descclassname">table_func.</code><code class="descname">split_ipf</code><span class="sig-paren">(</span><em>s</em>, <em>multiLines=False</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.split_ipf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to split a string according to ‘ipf’ rules.</p>
+<p>Split on whitespace, commas and semicolons. String may contain multiple lines, in which case \n is used as delimiter.</p>
+<p>Double-quoted substrings are not split.</p>
+<p>Whitespace is stripped off from the substrings.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>s</strong> : string</p>
+<blockquote>
+<div><p>The string to be split.</p>
+</div></blockquote>
+<p><strong>multiLines</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = string is split into multiple lines at occurences of \n.</p>
+<p>False = string is not split into multiple lines.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>record</strong> : list</p>
+<blockquote class="last">
+<div><p>Record contains the substrings. If <em>multiLines</em> is True then a list of records is returned.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.split_string">
+<code class="descclassname">table_func.</code><code class="descname">split_string</code><span class="sig-paren">(</span><em>s, splitList=[‘,’], whitespace=True, autostrip=True, keeptogether=[[‘”’]], removekeepChars=[‘”’], double2one=False, multiLines=False</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.split_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to split a string using one or more delimiters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>s :</strong></p>
+<blockquote>
+<div><p>String to be split.</p>
+</div></blockquote>
+<p><strong>splitList</strong> : list (optional)</p>
+<blockquote>
+<div><p>List containing the delimiter string(s). This may be an empty list if no delimiter string will apply.</p>
+</div></blockquote>
+<p><strong>whitespace</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = whitespace is used as delimiter. Whitespace around other delimiters is not treated as separate delimiter.</p>
+<p>False = whitespace is not used as delimiter.</p>
+</div></blockquote>
+<p><strong>autostrip</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = whitespace is stripped off from the substrings.</p>
+<p>False = whitespace is not stripped off.</p>
+</div></blockquote>
+<p><strong>keeptogether</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List containing the string(s) between which the string is not split (e.g. double quotes). Examples:</p>
+<p>[] or None = not specified</p>
+<p>[‘”’] = substrings between double quotes are not split</p>
+<p>[[‘(‘, ‘)’] , ‘”’] = substrings between parentheses (open and close parenthesis) and substrings between double quotes are not split</p>
+</div></blockquote>
+<p><strong>removekeepChars</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of strings specified at <em>keeptogether</em> which should be removed from the resulting substrings.</p>
+<p>[] or None = not specified, all (optional) strings specified at <em>keeptogether</em> will be preserved.</p>
+<p>[‘”’] = double quotes will be removed from the respective substrings.</p>
+<p>[‘(‘, ‘)’, ‘”’] = parentheses and double quotes will be removed from the respective substrings.</p>
+</div></blockquote>
+<p><strong>double2one</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = subsequent (double or multiple) delimiters are treated as one delimiter.</p>
+<p>False = subsequent delimiters are treated as separate delimiters.</p>
+</div></blockquote>
+<p><strong>multiLines</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = string is split into multiple lines at occurences of \n.</p>
+<p>False = string is not split into multiple lines.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>record</strong> : list</p>
+<blockquote class="last">
+<div><p>Record contains the substrings.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.table2arr">
+<code class="descclassname">table_func.</code><code class="descname">table2arr</code><span class="sig-paren">(</span><em>f_table</em>, <em>l_flds=None</em>, <em>n_header=1</em>, <em>fld_str=None</em>, <em>abspath=False</em>, <em>sheet=0</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.table2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to read a table file and create a numpy recarray (structured array).</p>
+<p>The table file could be a comma-separated file (*.csv), DBF file (*.dbf), Excel file (*.xls, *.xlsx), iMOD IPF file (*.ipf) or space-separated file.
+The first three file types are recognized by the file extension.</p>
+<p>It is not necessary to read the entire table file, but a selection of fields could be made.
+This is useful for large table files if not all fields are to be usued.</p>
+<p>There are also separate readers for the various file formats, but this overall reader is suitable for most cases.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_table</strong> : str</p>
+<blockquote>
+<div><p>Table file name.</p>
+</div></blockquote>
+<p><strong>l_flds</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of field names to read. If <em>l_flds</em> is None all fields are read.</p>
+</div></blockquote>
+<p><strong>n_header</strong> : int (optional)</p>
+<blockquote>
+<div><p>Number of header lines. Only relevant for comma- and space-separated files and Excel files.
+The field names are expected to be in the last line of the header.</p>
+</div></blockquote>
+<p><strong>fld_str</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>An arbitrary string which is scanned for occurences of field names.
+Occuring field names will be included in the list of fields to be read.</p>
+<p>Such a string could originate from user input, e.g. a condition string which is specified in an input file for a tool.</p>
+</div></blockquote>
+<p><strong>abspath</strong> : bool (optional)</p>
+<blockquote>
+<div><p>Only relevant for iMOD IPF files.</p>
+<p>True = convert references to iMOD timeseries files (if existing) to absolute path names.</p>
+<p>False = do not convert references to iMOD timeseries files (if existing) to absolute path names.</p>
+</div></blockquote>
+<p><strong>sheet</strong> : int or str (optional)</p>
+<blockquote>
+<div><p>Sheet index number or sheet name. Only relevant for Excel files.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy recarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#table-formats"><span class="std std-ref">Table file formats</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.table2fields">
+<code class="descclassname">table_func.</code><code class="descname">table2fields</code><span class="sig-paren">(</span><em>f_table</em>, <em>n_header=1</em>, <em>sheet=0</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.table2fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the field names of a table file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_table</strong> : str</p>
+<blockquote>
+<div><p>Table file name.</p>
+</div></blockquote>
+<p><strong>n_header</strong> : int (optional)</p>
+<blockquote>
+<div><p>Number of header lines. Only relevant for comma- and space-separated files and Excel files.
+The field names are expected to be in the last line of the header.</p>
+</div></blockquote>
+<p><strong>sheet</strong> : int or str (optional)</p>
+<blockquote>
+<div><p>Sheet index number or sheet name. Onley relevant for Excel files.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : list</p>
+<blockquote class="last">
+<div><p>List of the field names.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#table-formats"><span class="std std-ref">Table file formats</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.take_from_recarr">
+<code class="descclassname">table_func.</code><code class="descname">take_from_recarr</code><span class="sig-paren">(</span><em>arr</em>, <em>flds</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.take_from_recarr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to take specific fields from a numpy recarray.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : numpy recarray</p>
+<p><strong>flds</strong> : sequence</p>
+<blockquote>
+<div><p>Field name(s) to be taken from <em>arr</em>.</p>
+<p>If a field name occurs more than once in <em>flds</em> the field name is extended with a number.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy recarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.txt2arr">
+<code class="descclassname">table_func.</code><code class="descname">txt2arr</code><span class="sig-paren">(</span><em>f_table</em>, <em>delimiter=’</em>, <em>’</em>, <em>autostrip=False</em>, <em>i_flds=None</em>, <em>formats=None</em>, <em>n_header=0</em>, <em>recarr2ndarr=False</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.txt2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to read a text-formatted table file and create a numpy recarray or ndarray.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_table</strong> : str</p>
+<blockquote>
+<div><p>Text-formatted table file.</p>
+</div></blockquote>
+<p><strong>delimiter</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>The delimiter/separator used to separate values.</p>
+<p>If <em>delimiter</em> is None it is assumed that the file is space-separated.</p>
+</div></blockquote>
+<p><strong>autostrip</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = field names and string values are stripped.</p>
+<p>False = field names and string values are not stripped.</p>
+</div></blockquote>
+<p><strong>i_flds</strong> : list, int or None (optional)</p>
+<blockquote>
+<div><p>The index number(s) of the field(s) to be read.</p>
+<p>If <em>i_flds</em> is None or an empty list all fields are read.</p>
+</div></blockquote>
+<p><strong>formats</strong> : list/tuple, dtype or None (optional)</p>
+<blockquote>
+<div><p>The formats (dtypes) used for the fields. These overrule the dtypes automatically applied by numpy.</p>
+<p>If <em>formats</em> is a list containing less dtypes than the number of fields the last dtype is repeated for the remaining fields.</p>
+<p>If <em>formats</em> is a single dtype this is used for all fields.</p>
+</div></blockquote>
+<p><strong>n_header</strong> : int (optional)</p>
+<blockquote>
+<div><p>Number of header lines.
+The field names are expected to be in the last line of the header.</p>
+</div></blockquote>
+<p><strong>recarr2ndarr</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = the result is returned as a numpy ndarray instead of a numpy recarray.
+If <em>i_flds</em> is a single integer the result will be 1-dimensional instead of 2-dimensional.</p>
+<p>False = the result is returned as numpy recarray.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : numpy recarray or ndarray</p>
+<blockquote class="last">
+<div><p>If <em>recarr2ndarr</em> is False the data is returned as numpy recarray.</p>
+<p>If <em>recarr2ndarr</em> is True the data is returned as numpy ndarray.
+If <em>i_flds</em> is specified as a single integer the resulting ndarray is 1-dimensional; otherwise it is 2-dimensional.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="#table_func.table2arr" title="table_func.table2arr"><code class="xref py py-func docutils literal"><span class="pre">table_func.table2arr()</span></code></a>, <a class="reference internal" href="#table_func.get_fields" title="table_func.get_fields"><code class="xref py py-func docutils literal"><span class="pre">table_func.get_fields()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.xls2arr">
+<code class="descclassname">table_func.</code><code class="descname">xls2arr</code><span class="sig-paren">(</span><em>f_xls</em>, <em>sheet=0</em>, <em>n_header=1</em>, <em>l_flds=None</em>, <em>fld_str=None</em>, <em>date2datetime64=True</em>, <em>datablock=None</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.xls2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to read a table from a worksheet in an Excel workbook.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_xls</strong> : str</p>
+<blockquote>
+<div><p>Excel file name.</p>
+</div></blockquote>
+<p><strong>sheet</strong> : int or str (optional)</p>
+<blockquote>
+<div><p>Sheet index number or sheet name.</p>
+</div></blockquote>
+<p><strong>n_header</strong> : int (optional)</p>
+<blockquote>
+<div><p>Number of header lines. The field names are expected to be in the last line of the header.</p>
+<p>Note that empty rows are always ignored; n_header is counted from the first non-empty row.</p>
+</div></blockquote>
+<p><strong>l_flds</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of field names to read. If <em>l_flds</em> is None all fields are read.</p>
+</div></blockquote>
+<p><strong>fld_str</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>An arbitrary string which is scanned for occurences of field names.
+Occuring field names will be included in the list of fields to be read.</p>
+<p>Such a string could originate from user input, e.g. a condition string which is specified in an input file for a tool.</p>
+</div></blockquote>
+<p><strong>date2datetime64</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = convert Excel dates to numpy datetime64 dtype.</p>
+<p>False = do not convert Excel dates to numpy datetime64 dtype; dates are returned as strings in the format ‘YYYY-MM-DD hh:mm:ss’.</p>
+</div></blockquote>
+<p><strong>datablock</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>Data block: [irow_start,irow_end,icol_start,icol_end].</p>
+<p>The indices may be None, which means that default values are used: 0 for <em>irow_start</em> and <em>icol_start</em>, nrow and ncol for <em>irow_end</em> and <em>icol_end</em>.</p>
+<p>The indices <em>irow_end</em> and <em>icol_end</em> may be negative, which means that they are counted backward from nrow and ncol.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy recarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#xls-file"><span class="std std-ref">Excel files</span></a>, <a class="reference internal" href="#table_func.table2arr" title="table_func.table2arr"><code class="xref py py-func docutils literal"><span class="pre">table_func.table2arr()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.xls2arr_allsheets">
+<code class="descclassname">table_func.</code><code class="descname">xls2arr_allsheets</code><span class="sig-paren">(</span><em>f_xls</em>, <em>skip_empty_sheets=True</em>, <em>n_header=1</em>, <em>l_flds=None</em>, <em>fld_str=None</em>, <em>date2datetime64=True</em>, <em>datablock=None</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.xls2arr_allsheets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to read the tables from all worksheets in an Excel workbook.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_xls</strong> : str</p>
+<blockquote>
+<div><p>Excel file name.</p>
+</div></blockquote>
+<p><strong>skip_empty_sheets</strong> : bool (optional)</p>
+<blockquote>
+<div><p>Option to skip empty worksheets in the workbook.</p>
+</div></blockquote>
+<p><strong>n_header</strong> : int (optional)</p>
+<blockquote>
+<div><p>Number of header lines. The field names are expected to be in the last line of the header.</p>
+<p>Note that empty rows are always ignored; n_header is counted from the first non-empty row.</p>
+</div></blockquote>
+<p><strong>l_flds</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of field names to read. If <em>l_flds</em> is None all fields are read.</p>
+</div></blockquote>
+<p><strong>fld_str</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>An arbitrary string which is scanned for occurences of field names.
+Occuring field names will be included in the list of fields to be read.</p>
+<p>Such a string could originate from user input, e.g. a condition string which is specified in an input file for a tool.</p>
+</div></blockquote>
+<p><strong>date2datetime64</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = convert Excel dates to numpy datetime64 dtype.</p>
+<p>False = do not convert Excel dates to numpy datetime64 dtype; dates are returned as strings.</p>
+</div></blockquote>
+<p><strong>datablock</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>Data block: [irow_start,irow_end,icol_start,icol_end].</p>
+<p>The indices may be None, which means that default values are used: 0 for <em>irow_start</em> and <em>icol_start</em>, nrow and ncol for <em>irow_end</em> and <em>icol_end</em>.</p>
+<p>The indices <em>irow_end</em> and <em>icol_end</em> may be negative, which means that they are counted backward from nrow and ncol.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : list</p>
+<blockquote>
+<div><p>List containing a numpy recarray for each table.</p>
+</div></blockquote>
+<p><strong>sheets</strong> : list</p>
+<blockquote class="last">
+<div><p>List of corresponding worksheet names.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../table_func.html#reading-tables"><span class="std std-ref">Reading table files</span></a>, <a class="reference internal" href="../table_func.html#xls-file"><span class="std std-ref">Excel files</span></a>, <a class="reference internal" href="#table_func.table2arr" title="table_func.table2arr"><code class="xref py py-func docutils literal"><span class="pre">table_func.table2arr()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.xls2fields">
+<code class="descclassname">table_func.</code><code class="descname">xls2fields</code><span class="sig-paren">(</span><em>f_xls</em>, <em>sheet=0</em>, <em>n_header=1</em>, <em>return_irowcol=False</em>, <em>datablock=None</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.xls2fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the field names of a table in a worksheet in an Excel workbook.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_xls</strong> : str</p>
+<blockquote>
+<div><p>Excel file name.</p>
+</div></blockquote>
+<p><strong>sheet</strong> : int or str (optional)</p>
+<blockquote>
+<div><p>Sheet index number or sheet name.</p>
+</div></blockquote>
+<p><strong>n_header</strong> : int (optional)</p>
+<blockquote>
+<div><p>Number of header lines. The field names are expected to be in the last line of the header.</p>
+<p>Note that empty rows are always ignored; n_header is counted from the first non-empty row.</p>
+</div></blockquote>
+<p><strong>return_irowcol</strong> : bool (optional)</p>
+<blockquote>
+<div><p>Option to return the row and column indices of the table.</p>
+</div></blockquote>
+<p><strong>datablock</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>Data block: [irow_start,irow_end,icol_start,icol_end].</p>
+<p>The indices may be None, which means that default values are used: 0 for <em>irow_start</em> and <em>icol_start</em>, nrow and ncol for <em>irow_end</em> and <em>icol_end</em>.</p>
+<p>The indices <em>irow_end</em> and <em>icol_end</em> may be negative, which means that they are counted backward from nrow and ncol.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>fields</strong> : list</p>
+<blockquote>
+<div><p>List of field names.</p>
+</div></blockquote>
+<p><strong>irow</strong> : list</p>
+<blockquote>
+<div><p>List of row indices.</p>
+<p>Only return if <em>return_irowcol</em> is True. <em>irow</em> includes the header of the table.</p>
+</div></blockquote>
+<p><strong>icol</strong> : list</p>
+<blockquote class="last">
+<div><p>List of column indices.</p>
+<p>Only return if <em>return_irowcol</em> is True.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="table_func.xls2sheets">
+<code class="descclassname">table_func.</code><code class="descname">xls2sheets</code><span class="sig-paren">(</span><em>f_xls</em><span class="sig-paren">)</span><a class="headerlink" href="#table_func.xls2sheets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the worksheet names of an Excel workbook.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_xls</strong> : str</p>
+<blockquote>
+<div><p>Excel file name.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sheets</strong> : list</p>
+<blockquote class="last">
+<div><p>List of sheet names</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Wiebe Borren.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

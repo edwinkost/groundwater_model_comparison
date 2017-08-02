@@ -1,0 +1,7 @@
+table\_func module
+==================
+
+.. automodule:: table_func
+    :members:
+    :undoc-members:
+    :show-inheritance:

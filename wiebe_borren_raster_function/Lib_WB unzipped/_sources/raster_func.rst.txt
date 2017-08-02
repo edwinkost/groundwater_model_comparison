@@ -1,0 +1,856 @@
+.. _raster_func:
+
+******************
+Module raster_func
+******************
+
+This module contains raster functions and methods.
+
+It comprises (amongst others) reading, writing, rescaling, sampling,
+reprojecting, operators, statistics, conditionals, window operations
+on raster data.
+
+Raster data is stored in rasterArr objects, basicly a numpy MaskedArray
+and a dict with geographical information.
+
+All GDAL supported raster formats are handled. Additionally iMOD raster
+files (IDF) are handled.
+
+Rescaling/resampling is done automatically if needed.
+
+
+Introduction
+============
+
+Getting started
+---------------
+
+Module file: raster_func.py
+
+Recommended import statement::
+
+	from raster_func import *
+
+**Python installation:**
+
+====== ====================================================================================================================
+Python Developed and tested with Python 2.7
+Numpy  Developed and tested with numpy 1.8.2
+GDAL   Developed and tested with osgeo.gdal 1.10.1
+
+       GDAL is used for reading/writing raster formats other than ArcInfo ASCII Grid, PCRaster, iMOD IDF and USGS/FEWS BIL.
+
+       Without GDAL raster_func will only work for these 4 raster formats.
+
+       See also :ref:`raster_formats`
+====== ====================================================================================================================
+
+
+.. _rasterArr_object:
+
+rasterArr object
+----------------
+
+The rasterArr object is a container which include:
+
+* Data array: numpy MaskedArray object including the nodata mask.
+* Geographical information: dict with basic metadata of the raster (see also :ref:`geo_info`).
+* Nodata value (see also :ref:`nodata`.
+
+The data array is 2-D or 3-D (rank 2 or 3). 3-D is also referred to as a map stack.
+
+The data array could be modified or overwritten directly by the programmer. The geographical information and nodata value are private attributes and could only be changed by methods. 
+
+If the raster_func methods and functions are used correctly, the rasterArr object remains internally consistent.
+This means that the geographical information, the mask and the nodata value remain correct and consistent to each other, also after rescaling/resampling etc.
+
+A rasterArr object is created by reading an existing raster file (see :ref:`reading_rasters`) or from scratch using:
+
+:class:`rasterArr(arr, gi=None, nodata=None, **kwargs) <raster_func.rasterArr>`
+
+Some internal methods for consistency are applied upon initialisation.
+This comprises the rank of the object (see below), nodata value and mask, nrow and ncol of *arr* and *gi* etc.
+
+If the rank of the object is lower than 2 the rank is increased to 2 by adding new dimensions.
+If the rank of the object is higher than 3 the rank is decreased to 3 by removing dimensions.
+
+
+.. _geo_info:
+
+Geographical information
+------------------------
+
+The basic geographical information stored as dict in the rasterArr object comprises:
+
+==== =============================================== ==========================
+xll  X coordinate of lower left corner               float
+---- ----------------------------------------------- --------------------------
+yll  Y coordinate of lower left corner               float
+---- ----------------------------------------------- --------------------------
+dx   Cell size in x direction                        float or numpy array (1-D)
+---- ----------------------------------------------- --------------------------
+dy   Cell size in y direction                        float or numpy array (1-D)
+---- ----------------------------------------------- --------------------------
+nrow Number of rows                                  int
+---- ----------------------------------------------- --------------------------
+ncol Number of columns                               int
+---- ----------------------------------------------- --------------------------
+proj | Projection in PCRaster terms                  int
+     | 0 = y coordinates increase from top to bottom
+     | 1 = y coordinates increase from bottom to top
+---- ----------------------------------------------- --------------------------
+ang  Angle in PCRaster terms                         float
+---- ----------------------------------------------- --------------------------
+crs  Coordinate reference system                     str
+==== =============================================== ==========================
+
+*dx* and *dy* are numpy arrays if the raster is non-equidistant.
+
+Strictly spoken *nrow* and *ncol* are not necessary because these are the dimensions of the data array.
+However, because the geographical information is often used as an "stand-alone" dict in rescaling/resampling methods/functions it is needed to have *nrow* and *ncol* included in the dict.
+
+*ang* is not yet used in the raster_func methods/functions. By default it is assumed to be 0, meaning no rotation of the coordinate system. 
+
+*crs* is the coordinate reference system in WKT format. It can also be set as EPSG number or by a recognizable string reference (see :ref:`projection`).
+
+Extended geographical information which could be get with methods/functions comprises:
+
+==== ====================================== =========
+xur  X coordinate of the upper right corner float
+---- -------------------------------------- ---------
+yur  Y coordinate of the upper right corner float
+---- -------------------------------------- ---------
+Dx   Total extent/width in x direction      float
+---- -------------------------------------- ---------
+Dy   Total extent/heigt in y direction      float
+---- -------------------------------------- ---------
+ieq  | Equidistant flag in iMOD terms       int
+     | 0 = equidistant raster
+     | 1 = non-equidistant raster
+---- -------------------------------------- ---------
+x    X coordinates of column centers        array
+---- -------------------------------------- ---------
+xarr X coordinates of cell centers          rasterArr
+---- -------------------------------------- ---------
+y    Y coordinates of row centers           array
+---- -------------------------------------- ---------
+yarr Y coordinates of cell centers          rasterArr
+==== ====================================== =========
+
+
+.. _nodata:
+
+Nodata and mask (missing values)
+--------------------------------
+
+Cells with nodata value (missing value) are masked and will not be used in operations. In most cases the nodata value is less important than the mask.
+The mask determines which cells are not active in operations and stored as missing value in output raster files.
+In some output raster files the nodata value will not be stored as 'NAN' and in that case the programmer may want to use a specific (recognizable) value as nodata.
+
+Both the nodata value and the mask could be changed/set by the programmer using methods.
+The nodata value of masked cells which is available in the numpy MaskedArray "under water" could change during operations,
+e.g. if there is a risk that the nodata value falls within the range of valid raster values.
+
+
+.. _raster_formats:
+
+Raster formats
+--------------
+
+Below the supported raster formats are shown. Basically all GDAL supported formats could be read. For writing a limited number of formats is supported.
+
+Reading and writing of AAIGrid, IDF, PCRaster and BIL is done without GDAL. Without a valid installation of GDAL reading and writing will work for these 4 formats.
+
+See also `GDAL Raster Formats <http://www.gdal.org/formats_list.html>`_
+
+**Formats supported for reading:**
+
+=============================== ====== ========== =====================
+Format                          Number Short name Default extension
+=============================== ====== ========== =====================
+ArcInfo ASCII Grid              1      AAIGrid    .asc
+------------------------------- ------ ---------- ---------------------
+iMOD IDF                        2      IDF        .idf
+------------------------------- ------ ---------- ---------------------
+PCRaster                        3      PCRaster   .map
+------------------------------- ------ ---------- ---------------------
+ArcInfo Binary Grid (ESRI Grid) 4      AIG
+------------------------------- ------ ---------- ---------------------
+USGS/FEWS BIL                   5      BIL        .bil
+------------------------------- ------ ---------- ---------------------
+GeoTIFF                         6      GTiff      .tif
+------------------------------- ------ ---------- ---------------------
+netCDF                          7      netCDF     .nc
+------------------------------- ------ ---------- ---------------------
+HDF4Image                       8      HDF4Image  .hdf
+------------------------------- ------ ---------- ---------------------
+other GDAL supported formats    9 >    see GDAL   lower-case short name
+=============================== ====== ========== =====================
+
+**Formats supported for writing:**
+
+=============================== ====== ========== =====================
+Format                          Number Short name Default extension
+=============================== ====== ========== =====================
+ArcInfo ASCII Grid              1      AAIGrid    .asc
+------------------------------- ------ ---------- ---------------------
+iMOD IDF                        2      IDF        .idf
+------------------------------- ------ ---------- ---------------------
+PCRaster                        3      PCRaster   .map
+------------------------------- ------ ---------- ---------------------
+USGS/FEWS BIL                   5      BIL        .bil
+------------------------------- ------ ---------- ---------------------
+GeoTIFF                         6      GTiff      .tif
+------------------------------- ------ ---------- ---------------------
+netCDF                          7      netCDF     .nc
+------------------------------- ------ ---------- ---------------------
+HDF4Image                       8      HDF4Image  .hdf
+------------------------------- ------ ---------- ---------------------
+other GDAL supported formats    8 >    see GDAL   lower-case short name
+=============================== ====== ========== =====================
+
+
+Non-equidistant rasters
+-----------------------
+
+Support for non-equidistant rasters is limited. Rescaling/resampling is not working on non-equidistant rasters and therefore all methods/functions using rescaling/resampling
+do not support non-equidistant rasters.
+It is possible to resample a non-equidistant raster to an equidistant raster.
+
+
+.. _rescaling_resampling:
+
+Rescaling/resampling
+--------------------
+
+Rescaling/resampling could be done with several methods. These are listed below.
+If new cell values are to be calculated from more than one original cell value these original cell values are area-weighted.
+
+Rescaling/resampling is done if 2 rasterArr objects differ from each other with respect to cell size and/or extent. It is assumed that the coordinate systems are equal.
+A shift in the cell boundaries will also lead to rescaling/resampling if this shift is larger than 1e-7.
+
+The default method is in most cases 'sample'.
+A **"global method"** is used in functions/method in which rescaling/resampling may be applied,
+but for which no specific method could be given by the programmer. E.g. mathematical and comparison operations.
+The global method could be set/reset by the programmer and overrules the default method.
+
+====== ====================================================
+Method Description
+====== ====================================================
+mean   Arithmetic mean
+------ ----------------------------------------------------
+harm   Harmonic mean
+------ ----------------------------------------------------
+log    Geometric mean / Log-average (with base `e`)
+------ ----------------------------------------------------
+log10  Geometric mean / Log-average (with base `10`)
+------ ----------------------------------------------------
+min    Minimum
+------ ----------------------------------------------------
+max    Maximum
+------ ----------------------------------------------------
+sum    Sum
+------ ----------------------------------------------------
+sample Sample original raster at cell centres of new raster
+====== ====================================================
+
+
+.. _projection:
+
+Projection
+----------
+
+Projection information (i.e. coordinate reference system) could be stored in the geographical information (see 'crs' in :ref:`geo_info`).
+The default format of the crs is WKT (Well Known Text). Additionally, the crs may be specified as EPSG reference number (an integer) and some
+strings are recognized as crs (see table below). These are converted to WKT automatically on initializing a rasterArr object;
+they can also be converted using a function. Further, a PRJ file with crs information can be read.
+
+If a rasterArr is written to a file and the crs is set then the projection information is either stored in the raster file (if supported by the
+raster format) or in a seperate PRJ file.
+
+Reprojecting a rasterArr object to another crs is possible. For this OSR and GDAL are used (osgeo). If 'gdalwarp' is callable on the system
+this is used to speed up the reprojection process.
+
+For information about coordinate reference systems, EPSG numbers, WKT formatted strings etc.: see `Spatial Reference <http://spatialreference.org>`_.
+
+**Strings recognized as crs / convertable to crs:**
+
+============= ===== ====== =======================================
+String        EPSG  Unit   Description
+============= ===== ====== =======================================
+WGS84         4326  Degree WGS 1984
+------------- ----- ------ ---------------------------------------
+WGS72         4322  Degree WGS 1972
+------------- ----- ------ ---------------------------------------
+NAD27         4267  Degree North America Datum 1927
+------------- ----- ------ ---------------------------------------
+NAD83         4269  Degree North America Datum 1983
+------------- ----- ------ ---------------------------------------
+EPSG:i                     Any EPSG reference number (i)
+------------- ----- ------ ---------------------------------------
+UTMiN               Meter  Any UTM zone (i) on Northern hemisphere
+------------- ----- ------ ---------------------------------------
+UTMiS               Meter  Any UTM zone (i) on Southern hemisphere
+------------- ----- ------ ---------------------------------------
+amersfoort    28992 Meter  Dutch Amersfoort coordinate system (RD)
+------------- ----- ------ ---------------------------------------
+rd            28992 Meter  Dutch Amersfoort coordinate system (RD)
+------------- ----- ------ ---------------------------------------
+gda94         4283  Degree GDA94
+------------- ----- ------ ---------------------------------------
+gda94_vicgrid 3111  Meter  GDA94 / Vicgrid94
+============= ===== ====== =======================================
+
+See also the 'SetFromUserInput' method in the `OGRSpatialReference class <http://www.gdal.org/classOGRSpatialReference.html>`_.
+
+
+.. _reading_rasters:
+
+Reading rasters
+===============
+
+See also :ref:`raster_formats`
+
+**Functions:**
+
+================================================================= ==================================================================================
+:func:`raster2arr <raster_func.raster2arr>`                       Function to read a raster file and create a rasterArr object.
+:func:`rasters2arr <raster_func.rasters2arr>`                     Function to read a list of raster files and create a rasterArr object (map stack).
+:func:`raster2gi <raster_func.raster2gi>`                         Function to get the basic geographical information of the raster.
+:func:`get_raster_format <raster_func.get_raster_format>`         Function to get the raster format of a file.
+:func:`get_raster_crs <raster_func.get_raster_crs>`               Function to get the crs of a file.
+:func:`get_raster_nodata <raster_func.get_raster_nodata>`         Function to get the nodata value of a raster file.
+:func:`get_raster_minmax <raster_func.get_raster_minmax>`         Function to get the minimum and maximum value of a PCRaster or IDF file.
+:func:`get_raster_pcrMapType <raster_func.get_raster_pcrMapType>` Function to get the map type (valueScale) of a PCRaster file.
+================================================================= ==================================================================================
+
+
+.. _writing_rasters:
+
+Writing rasters
+===============
+
+See also :ref:`raster_formats`
+
+**Main methods on rasterArr objects:**
+
+=====================================================          =========================================================================
+:func:`write <raster_func.rasterArr.write>`                    Method to write a 2-D or 3-D rasterArr object to raster file(s).
+:func:`arr2raster <raster_func.rasterArr.arr2raster>`          Method to write a 2-D or 3-D rasterArr object to raster file(s).
+:func:`arr2figure <raster_func.rasterArr.arr2figure>`          Method to plot a 2-D rasterArr object to a map (matplotlib figure object)
+=====================================================          =========================================================================
+
+
+.. _indexing_slicing:
+
+Indexing, slicing and data array setting
+========================================
+
+Indexing and slicing is done similar to a numpy array, e.g.::
+
+	myRasterArr[0]
+	myRasterArr[0,0]
+	myRasterArr[:10,30:50]
+	myRasterArr[:]
+
+A single value or slice of the numpy MaskedArray is returned.
+
+In the same way the single value or slice could be set/changed by another value/array, e.g.::
+
+	myRasterArr[0] = (10,11,12,...)
+	myRasterArr[0,0] = 10
+	myRasterArr[:10,30:50] = np.ones((10,20,),float32)
+	myRasterArr[:] = 10
+
+It is possible to set/change (a part of) a rasterArr object with another rasterArr object:
+
+===============================================                ===========================================================================================
+:func:`put_rA <raster_func.put_rA>`                            Function to replace a part of the data of a rasterArr object with another rasterArr object.
+:func:`set_arr <raster_func.rasterArr.set_arr>`                Method to set the data array (in-place).
+===============================================                ===========================================================================================
+
+**Functions for getting cell values based on a list of x,y coordinates or row,col indices:**
+
+===========================================                    ============================================================================
+:func:`xy_arr2val <raster_func.xy_arr2val>`                    Function to extract cell values of a rasterArr object using x,y coordinates.
+:func:`rc_arr2val <raster_func.rc_arr2val>`                    Function to extract cell values of a rasterArr object using row,col indices.
+===========================================                    ============================================================================
+
+**Functions for setting cell values based on a list of x,y coordinates or row,col indices:**
+
+===========================================                    ============================================================================
+:func:`xy_val2arr <raster_func.xy_val2arr>`                    Function to set cell values of a rasterArr object using x,y coordinates.
+:func:`rc_val2arr <raster_func.rc_val2arr>`                    Function to set cell values of a rasterArr object using row,col indices.
+===========================================                    ============================================================================
+
+**Methods for slicing/cropping to new rasterArr objects:**
+
+===========================================                    ============================================================================
+:func:`slice <raster_func.rasterArr.slice>`                    Method to crop the raster to a given slice.
+:func:`crop <raster_func.rasterArr.crop>`                      Method to crop the raster to non-nodata values.
+===========================================                    ============================================================================
+
+
+.. _rasterArr_assignment:
+
+Assignment: copy or bind a rasterArr object?
+============================================
+
+Assignment statements in Python do not copy objects, they create bindings between a target and an object.
+For mutable objects (like rasterArr objects) this could lead to unexpected behaviour.
+
+Try::
+
+	A=rasterArr([[1,2]])
+	B=A
+	B.arr=[[10,20]]
+	print A
+
+and see that A has been changed! B is not a copy of A but refers to the same object.
+
+If B was intended to be a copy of A you should use the :func:`copy <raster_func.rasterArr.copy>` method.
+
+
+Try::
+
+	A=rasterArr([[1,2]])
+	B=A.copy()
+	B.arr=[[10,20]]
+	print A
+	print B
+
+and see that A is unchanged.
+
+
+Geographical information: getting and setting
+=============================================
+
+See also :ref:`geo_info`
+
+**Methods on rasterArr objects to get basic geographical information:**
+
+===============================================                ==========================================================================
+:func:`gi <raster_func.rasterArr.gi>`                          Method to get the basic geographical information dict.
+:func:`gi_list <raster_func.rasterArr.gi_list>`                Method to get the basic geographical information as list.
+:func:`xll <raster_func.rasterArr.xll>`                        Method to get xll (x coordinate of lower left corner).
+:func:`yll <raster_func.rasterArr.yll>`                        Method to get yll (y coordinate of lower left corner).
+:func:`dx <raster_func.rasterArr.dx>`                          Method to get dx (cell size in x direction).
+:func:`dy <raster_func.rasterArr.dy>`                          Method to get dy (cell size in y direction).
+:func:`nrow <raster_func.rasterArr.nrow>`                      Method to get nrow (number of rows).
+:func:`ncol <raster_func.rasterArr.ncol>`                      Method to get ncol (number of columns).
+:func:`proj <raster_func.rasterArr.proj>`                      Method to get proj (projection flag in PCRaster terms).
+:func:`ang <raster_func.rasterArr.ang>`                        Method to get ang (angle/rotation of coordinate system in PCRaster terms).
+:func:`crs <raster_func.rasterArr.crs>`                        Method to get crs (coordinate reference system).
+===============================================                ==========================================================================
+
+**Methods on rasterArr objects to get extended geographical information:**
+
+=======================================================        ============================================================================
+:func:`gi_extended <raster_func.rasterArr.gi_extended>`        Method to get the extended geographical information (xur, yur, Dx, Dy).
+:func:`xur <raster_func.rasterArr.xur>`                        Method to get xur (x coordinate of upper right corner).
+:func:`yur <raster_func.rasterArr.yur>`                        Method to get yur (y coordinate of upper right corner).
+:func:`Dx <raster_func.rasterArr.Dx>`                          Method to get Dx (total extent/width in x direction).
+:func:`Dy <raster_func.rasterArr.Dy>`                          Method to get Dy (total extent/height in y direction).
+:func:`ieq <raster_func.rasterArr.ieq>`                        Method to get ieq (equidistant flag).
+:func:`shape <raster_func.rasterArr.shape>`                    Method to get the shape of the data array.
+:func:`x <raster_func.rasterArr.x>`                            Method to get the x coordinates of the column centers.
+:func:`y <raster_func.rasterArr.y>`                            Method to get the y coordinates of the row centers.
+:func:`xarr <raster_func.rasterArr.xarr>`                      Method to get a rasterArr object with the x coordinates of the cell centers.
+:func:`yarr <raster_func.rasterArr.yarr>`                      Method to get a rasterArr object with the y coordinates of the cell centers.
+:func:`dxarr <raster_func.rasterArr.dxarr>`                    Method to get a rasterArr object with the dx values of the cells.
+:func:`dyarr <raster_func.rasterArr.dyarr>`                    Method to get a rasterArr object with the dy values of the cells.
+=======================================================        ============================================================================
+
+**Methods on rasterArr objects to set/change geographical information:**
+
+=====================================================          ==========================================================================
+:func:`set_gi <raster_func.rasterArr.set_gi>`                  Method to set geographical information using keyword arguments (in-place).
+:func:`set_extent <raster_func.rasterArr.set_extent>`          Method to create a new rasterArr object with a changed extent.
+:func:`set_dxdy <raster_func.rasterArr.set_dxdy>`              Method to create a new rasterArr object with changed cellsize.
+=====================================================          ==========================================================================
+
+**Other methods on rasterArr objects:**
+
+=============================================                  ====================================================================
+:func:`get_gi <raster_func.rasterArr.get_gi>`                  Method to get a list of specified geographical information elements.
+---------------------------------------------                  --------------------------------------------------------------------
+:func:`extent <raster_func.rasterArr.extent>`                  Method to get the extent: xll, yll, xur, yur.
+=============================================                  ====================================================================
+
+**Functions to get basic geographical information:**
+
+===================================================            =================================================================
+:func:`raster2gi <raster_func.raster2gi>`                      Function to get the basic geographical information of the raster.
+:func:`get_raster_crs <raster_func.get_raster_crs>`            Function to get the crs of a file.
+===================================================            =================================================================
+
+**Functions to get extended geographical information:**
+
+=============================================                  ==========================================================================================================================
+:func:`gi_extended <raster_func.gi_extended>`                  Function to get the extended geographical information of a rasterArr object or a basic geographical information dict/list.
+:func:`gi_get_xur <raster_func.gi_get_xur>`                    Function to get xur (x coordinate of upper right corner) from a geographical information dict/list.
+:func:`gi_get_yur <raster_func.gi_get_yur>`                    Function to get yur (y coordinate of upper right corner) from a geographical information dict/list.
+:func:`gi_get_Dx <raster_func.gi_get_Dx>`                      Function to get Dx (total extent/width in x direction) from a geographical information dict/list.
+:func:`gi_get_Dy <raster_func.gi_get_Dy>`                      Function to get Dy (total extent/height in y direction) from a geographical information dict/list.
+=============================================                  ==========================================================================================================================
+
+**Functions to set/change geographical information:**
+
+=================================================              ===============================================================================
+:func:`set_gi <raster_func.set_gi>`                            Function to set geographical information using keyword arguments.
+:func:`gi_set_extent <raster_func.gi_set_extent>`              Function to set (change) the extent of a geographical information dict/list.
+:func:`gi_set_dxdy <raster_func.gi_set_dxdy>`                  Function to set (change) the cell size of a geographical information dict/list.
+=================================================              ===============================================================================
+
+**Other functions:**
+
+=======================================                        ====================================================================================================================================
+:func:`get_gi <raster_func.get_gi>`                            Function to get a list of specified geographical information elements of a rasterArr object or a geographical information dict/list.
+:func:`gi2dict <raster_func.gi2dict>`                          Function to convert and set geographical information into a dict with at least the basic geographical information.
+:func:`gi2list <raster_func.gi2list>`                          Function to convert and set geographical information into a list with the basic geographical information.
+:func:`equal_gi <raster_func.equal_gi>`                        Function to check if 2 geographical information dicts/lists are equal.
+=======================================                        ====================================================================================================================================
+
+
+Nodata and mask: getting, setting and filling
+=============================================
+
+See also :ref:`nodata`
+
+**Methods on rasterArr objects to get nodata and mask:**
+
+=============================================                  ===============================
+:func:`nodata <raster_func.rasterArr.nodata>`                  Method to get the nodata value.
+:func:`mask <raster_func.rasterArr.mask>`                      Method to get the mask.
+=============================================                  ===============================
+
+**Methods on rasterArr objects to set nodata and mask:**
+
+=============================================================== =====================================================================
+:func:`set_nodata <raster_func.rasterArr.set_nodata>`           Method to set the nodata value (in-place).
+:func:`set_mask <raster_func.rasterArr.set_mask>`               Method to set the mask (in-place).
+:func:`set_nodata_mask <raster_func.rasterArr.set_nodata_mask>` Method to set all cells with nodata value to masked cells (in-place).
+:func:`cover <raster_func.rasterArr.cover>`                     Method to fill (cover) nodata cells.
+=============================================================== =====================================================================
+
+**Global functions:**
+
+=============================================================  =====================================================================
+:func:`set_nodataIDF <raster_func.set_nodataIDF>`              Function to set the global IDF nodata value.
+:func:`get_nodataIDF <raster_func.get_nodataIDF>`              Function to get the global IDF nodata value.
+:func:`set_nodataASC <raster_func.set_nodataASC>`              Function to set the global ASC nodata value.
+:func:`get_nodataASC <raster_func.get_nodataASC>`              Function to get the global ASC nodata value.
+=============================================================  =====================================================================
+
+**Other functions:**
+
+=============================================================== =====================================================================
+:func:`get_raster_nodata <raster_func.get_raster_nodata>`       Function to get the nodata value of a raster file.
+=============================================================== =====================================================================
+
+
+Rescaling/resampling
+====================
+
+See also :ref:`rescaling_resampling`
+
+**Main functions:**
+
+===================================================== =======================================================================
+:func:`rescale_rA <raster_func.rescale_rA>`           Function to rescale/resample a rasterArr object.
+:func:`resample_rA <raster_func.resample_rA>`         Function to resample a rasterArr object using a step size.
+:func:`rA_nonequi2equi <raster_func.rA_nonequi2equi>` Function to resample a non-equidistant raster to an equidistant raster.
+===================================================== =======================================================================
+
+**Main methods on rasterArr objects:**
+
+========================================================= =====================================================================
+:func:`rescale <raster_func.rasterArr.rescale>`           Method to rescale/resample.
+:func:`resample <raster_func.rasterArr.resample>`         Method to resample using a step size.
+:func:`nonequi2equi <raster_func.rasterArr.nonequi2equi>` Method to resample a non-equidistant raster to an equidistant raster.
+========================================================= =====================================================================
+
+**Global functions:**
+
+=============================================================  =====================================================================
+:func:`set_global_method <raster_func.set_global_method>`      Function to set the global method for rescaling/resampling.
+:func:`reset_global_method <raster_func.reset_global_method>`  Function to reset the global method for rescaling/resampling to None.
+:func:`get_global_method <raster_func.get_global_method>`      Function to get the global method for rescaling/resampling.
+=============================================================  =====================================================================
+
+
+Reprojecting
+============
+
+See also :ref:`projection`
+
+**Functions to reproject rasterArr objects:**
+
+================================================================ ===========================================================
+:func:`reproject_rA <raster_func.reproject_rA>`                  Function to reproject a rasterArr object.
+:func:`warp_rA <raster_func.warp_rA>`                            Function to reproject a rasterArr object by using gdalwarp.
+================================================================ ===========================================================
+
+**Methods on rasterArr objects:**
+
+================================================================ ===========================================================
+:func:`reproject <raster_func.rasterArr.reproject>`              Method to reproject.
+:func:`warp <raster_func.rasterArr.warp>`                        Method to reproject by using gdalwarp.
+================================================================ ===========================================================
+
+**Functions to convert crs to WKT or EPSG string:**
+
+================================================================ ===========================================================
+:func:`prj2crs <raster_func.prj2crs>`                            Function to create EPSG or WKT string from prj file.
+:func:`crs2wkt <raster_func.crs2wkt>`                            Function to create WKT string from a crs reference.
+:func:`crs2epsg <raster_func.crs2epsg>`                          Function to create EPSG string from a crs reference.
+================================================================ ===========================================================
+
+**Other functions:**
+
+================================================================ ===========================================================
+:func:`crs2prj <raster_func.crs2prj>`                            Function to write crs as WKT to prj file.
+:func:`same_crs <raster_func.same_crs>`                          Function to check if two crs references are the same.
+:func:`get_raster_crs <raster_func.get_raster_crs>`              Function to get the crs of a file.
+================================================================ ===========================================================
+
+
+Mathematical operations
+=======================
+
+Below a list of mathematical operations.
+
+*other* could be a rasterArr object, numpy array (ndarry or MaskedArray) or single numeric value.
+If *other* is a rasterArr object it is rescaled/resampled to meet *self* if needed, using the global method.
+
+====================== ===== ========================================================
+Addition               \+    | result = self + other                 
+                             | result = other + self
+                             | self += other
+---------------------- ----- --------------------------------------------------------
+Subtraction            \-    | result = self - other
+                             | result = other - self
+                             | self -= other
+---------------------- ----- --------------------------------------------------------
+Negation               \-    result = -self
+---------------------- ----- --------------------------------------------------------
+Multiplication         \*    | result = self * other
+                             | result = other * self
+                             | self \*= other
+---------------------- ----- --------------------------------------------------------
+Division               /     | result = self / other
+                             | result = other / self
+                             | self /= other
+---------------------- ----- --------------------------------------------------------
+Exponentiation         \**   | result = self ** other
+                             | result = other ** self
+                             | self \**= other
+---------------------- ----- --------------------------------------------------------
+Modulo                 \%    | result = self % other
+                             | result = other % self
+                             | self %= other
+---------------------- ----- --------------------------------------------------------
+Absolute               abs   | result = self.abs()
+                             | See also :func:`abs <raster_func.rasterArr.abs>`
+---------------------- ----- --------------------------------------------------------
+Logarithm (base *e*)   log   | result = self.log()
+                             | See also :func:`log <raster_func.rasterArr.log>`
+---------------------- ----- --------------------------------------------------------
+Logarithm (base 10)    log10 | result = self.log10()
+                             | See also :func:`log10 <raster_func.rasterArr.log10>`
+---------------------- ----- --------------------------------------------------------
+Exponential (base *e*) exp   | result = self.exp() = *e* ** self
+                             | See also :func:`exp <raster_func.rasterArr.exp>`
+---------------------- ----- --------------------------------------------------------
+Exponential (base 10)  exp10 | result = self.exp10() = 10 ** self
+                             | See also :func:`exp10 <raster_func.rasterArr.exp10>`
+====================== ===== ========================================================
+
+
+Comparison operations
+=====================
+
+Below a list of comparison operations.
+
+*other* could be a rasterArr object, numpy array (ndarry or MaskedArray) or single numeric value.
+If *other* is a rasterArr object it is rescaled/resampled to meet *self* if needed, using the global method.
+
+The return values are of int8 dtype: 1 = True, 0 = False, -1 = masked
+
+===================== === ======================
+Equal                 \== result = self == other
+--------------------- --- ----------------------
+Not equal             \!= result = self != other
+--------------------- --- ----------------------
+Less than             \<  result = self < other
+--------------------- --- ----------------------
+Less than or equal    \<= result = self <= other
+--------------------- --- ----------------------
+Greater than          \>  result = self > other
+--------------------- --- ----------------------
+Greater than or equal \>= result = self >= other
+===================== === ======================
+
+
+.. _conditionals:
+
+Conditionals
+============
+
+**Functions:**
+
+===============================================                ===========================================================
+:func:`if_then <raster_func.if_then>`                          Function to perform a conditional operation (if-then).
+:func:`if_then_else <raster_func.if_then_else>`                Function to perform a conditional operation (if-then-else).
+===============================================                ===========================================================
+
+
+.. _statistics:
+
+Statistics
+==========
+
+**Methods on rasterArr objects:**
+
+=====================================================          =====================================================================================
+:func:`sum <raster_func.rasterArr.sum>`                        Method to calculate the sum of the array elements over the given axis.
+:func:`count <raster_func.rasterArr.count>`                    Method to calculate the number of non-nodata elements over the given axis.
+:func:`mean <raster_func.rasterArr.mean>`                      Method to calculate the mean of the array elements over the given axis.
+:func:`std <raster_func.rasterArr.std>`                        Method to calculate the standard deviation of the array elements over the given axis.
+:func:`var <raster_func.rasterArr.var>`                        Method to calculate the variance of the array elements over the given axis.
+:func:`min <raster_func.rasterArr.min>`                        Method to get the minimum value of the array elements over the given axis.
+:func:`max <raster_func.rasterArr.max>`                        Method to get the maximum value of the array elements over the given axis.
+:func:`median <raster_func.rasterArr.median>`                  Method to calculate the median of the array elements over the given axis.
+:func:`percentile <raster_func.rasterArr.percentile>`          Method to calculate a percentile of the array elements over the given axis.
+=====================================================          =====================================================================================
+
+**Functions on rasterArr objects:**
+
+=====================================================          =========================================================================================
+:func:`rasters_mean <raster_func.rasters_mean>`                Function to calculate the mean of two or more rasters (or numpy arrays, floats, ints).
+:func:`rasters_min <raster_func.rasters_min>`                  Function to calculate the minimum of two or more rasters (or numpy arrays, floats, ints).
+:func:`rasters_max <raster_func.rasters_max>`                  Function to calculate the maximum of two or more rasters (or numpy arrays, floats, ints).
+=====================================================          =========================================================================================
+
+**Functions on raster files:**
+
+=========================================                      ===========================================================================
+:func:`idfs2stat <raster_func.idfs2stat>`                      Function to calculate cell-by-cell statistics for a list of iMOD IDF files.
+:func:`maps2stat <raster_func.maps2stat>`                      Function to calculate cell-by-cell statistics for a list of PCRaster files.
+=========================================                      ===========================================================================
+
+See also :ref:`memory_mapping`
+
+
+Type conversion
+===============
+
+**Methods on rasterArr objects:**
+
+===========================================                    =================================================================
+:func:`bool <raster_func.rasterArr.bool>`                      Method to convert data type to bool.
+:func:`int <raster_func.rasterArr.int>`                        Method to convert data type to int (int8, int16, int32 or int64).
+:func:`float <raster_func.rasterArr.float>`                    Method to convert data type to float (float32 or float64).
+===========================================                    =================================================================
+
+
+.. _window_operations:
+
+Window operations
+=================
+
+**Window operation methods:**
+
+====== =============================================
+Method Description
+====== =============================================
+mean   Arithmetic mean
+------ ---------------------------------------------
+harm   Harmonic mean
+------ ---------------------------------------------
+log    Geometric mean / Log-average (with base `e`)
+------ ---------------------------------------------
+log10  Geometric mean / Log-average (with base `10`)
+------ ---------------------------------------------
+min    Minimum
+------ ---------------------------------------------
+max    Maximum
+------ ---------------------------------------------
+sum    Sum
+------ ---------------------------------------------
+std    Standard deviation
+------ ---------------------------------------------
+var    Variance
+------ ---------------------------------------------
+count  Number
+====== =============================================
+
+**Function:**
+
+===========================================                    =======================================
+:func:`window_arr <raster_func.window_arr>`                    Function to perform a window operation.
+===========================================                    =======================================
+
+
+.. _memory_mapping:
+
+Direct reading and writing of cell values
+=========================================
+
+Cells values from IDF or PCRaster files could be extracted using memory mapping. This allows the programmer to extract individual cell values or a list of cell values without reading the entire raster.
+If the number of selected cells is much lower than the number of all cells run times can be reduced to a small fraction.
+
+For raster formats other than IDF and PCRaster this is not available.
+
+The selected cells could be specified as point locations (x and y coordinates) or cell indices (row and column number).
+
+With the same kind of functionality it is possible to write individual cell values of existing rasters.
+
+**Functions with x,y coordinates:**
+
+===========================================                    =================================================================================
+:func:`xy_idf2val <raster_func.xy_idf2val>`                    Function to extract cell values of an iMOD IDF file using x,y coordinates.
+:func:`xy_map2val <raster_func.xy_map2val>`                    Function to extract cell values of a PCRaster file using x,y coordinates.
+:func:`xy_val2idf <raster_func.xy_val2idf>`                    Function to write cell values to an existing iMOD IDF file using x,y coordinates.
+:func:`xy_val2map <raster_func.xy_val2map>`                    Function to write cell values to an existing PCRaster file using x,y coordinates.
+===========================================                    =================================================================================
+
+**Functions with row,column indices:**
+
+===========================================                    =================================================================================
+:func:`rc_idf2val <raster_func.rc_idf2val>`                    Function to extract cell values of an iMOD IDF file using row,col indices.
+:func:`rc_map2val <raster_func.rc_map2val>`                    Function to extract cell values of a PCRaster file using row,col indices.
+:func:`rc_val2idf <raster_func.rc_val2idf>`                    Function to write cell values to an existing iMOD IDF file using row,col indices.
+:func:`rc_val2map <raster_func.rc_val2map>`                    Function to write cell values to an existing PCRaster file using row,col indices.
+===========================================                    =================================================================================
+
+Memory mapping is also used to calculate cell-by-cell statistics for a set of raster files (only iMOD IDF or PCRaster files).
+Because reading entire rasters for a large number of files could cause memory errors, the functions read a user-defined number of cells at the same time.
+
+=========================================                      ===========================================================================
+:func:`idfs2stat <raster_func.idfs2stat>`                      Function to calculate cell-by-cell statistics for a list of iMOD IDF files.
+:func:`maps2stat <raster_func.maps2stat>`                      Function to calculate cell-by-cell statistics for a list of PCRaster files.
+=========================================                      ===========================================================================
+
+
+Other functions/methods
+=======================
+
+===================================================            ===========================================================================================================
+:func:`copy <raster_func.rasterArr.copy>`                      Method to create a deep copy of the rasterArr object.
+:func:`unique <raster_func.rasterArr.unique>`                  Method to get the unique values of the data array.
+:func:`xy2rc <raster_func.xy2rc>`                              Function to convert x,y coordinates to row,col indices.
+:func:`rc2xy <raster_func.rc2xy>`                              Function to convert row,col indices to x,y coordinates.
+:func:`rc2rc <raster_func.rc2rc>`                              Function to calculated row and column indices of a raster and the corresponding indices of a second raster.
+:func:`rasterStack <raster_func.rasterStack>`                  Function to create a 3-D rasterArr object (map stack) from 2-D rasterArr objects.
+:func:`dtype <raster_func.rasterArr.dtype>`                    Method to get the dtype of the data array.
+:func:`toGDALobj <raster_func.rasterArr.toGDALobj>`            Method to create a GDAL in-memory object from the rasterArr object.
+:func:`idfs2mdf <raster_func.idfs2mdf>`                        Function to group a list of IDF files into a MDF file.
+===================================================            ===========================================================================================================
+
+See also:
+
+================================================== ==============================================================================================================
+:func:`shp2arr <gis_func.shp2arr>`                 Function to rasterize an ESRI shapefile (in :ref:`gis_func`)
+:func:`arr2shp_contour <gis_func.arr2shp_contour>` Function to create an ESRI shapefile with contour lines from a raster, using gdal_contour (in :ref:`gis_func`)
+================================================== ==============================================================================================================

@@ -1,0 +1,1642 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gis_func module &#8212; Lib_WB 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.jpg" width=150 border="0" alt="Deltares python modules"/></a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/rst/gis_func.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-gis_func">
+<span id="gis-func-module"></span><h1>gis_func module<a class="headerlink" href="#module-gis_func" title="Permalink to this headline">¶</a></h1>
+<p>This module contains GIS functions.</p>
+<dl class="function">
+<dt id="gis_func.arr2shp_contour">
+<code class="descclassname">gis_func.</code><code class="descname">arr2shp_contour</code><span class="sig-paren">(</span><em>arr</em>, <em>f_shp</em>, <em>contourLevels=None</em>, <em>contourBase=None</em>, <em>contourInterval=None</em>, <em>exe_gdal_contour=None</em>, <em>screen_output=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.arr2shp_contour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to create an ESRI shapefile with contour lines from a raster, using gdal_contour.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>arr</strong> : str or rasterArr object</p>
+<blockquote>
+<div><p>Raster file name or rasterArr object.</p>
+</div></blockquote>
+<p><strong>f_shp</strong> : str</p>
+<blockquote>
+<div><p>The ESRI shape file to be created.</p>
+</div></blockquote>
+<p><strong>contourLevels</strong> : numpy ndarray, array-like or None (optional)</p>
+<blockquote>
+<div><p>Fixed contour levels.</p>
+</div></blockquote>
+<p><strong>contourBase</strong> : int, float or None (optional)</p>
+<blockquote>
+<div><p>Base value: offset from zero relative to which to interpret interval between contour levels..</p>
+</div></blockquote>
+<p><strong>contourInterval</strong> : int, float or None (optional)</p>
+<blockquote>
+<div><p>Interval between contour levels.</p>
+</div></blockquote>
+<p><strong>exe_gdal_contour</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>File name of the gdal_contour executable. If <em>exe_gdal_contour</em> is None then ‘gdal_contour’ is used; this only works if ‘gdal_contour’ is known to the system (e.g. in the PATH environment).</p>
+</div></blockquote>
+<p><strong>screen_output</strong> : bool (optional)</p>
+<blockquote class="last">
+<div><p>True = output of gdal’s process to the screen.
+False = no output of gdal’s process to the screen.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.delete_shp">
+<code class="descclassname">gis_func.</code><code class="descname">delete_shp</code><span class="sig-paren">(</span><em>f_shp</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.delete_shp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to delete an ESRI shapefile including all associated files.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_shp</strong> : str</p>
+<blockquote class="last">
+<div><p>The ESRI shapefile to be deleted.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.gen2shp">
+<code class="descclassname">gis_func.</code><code class="descname">gen2shp</code><span class="sig-paren">(</span><em>f_gen</em>, <em>f_shp</em>, <em>f_table=None</em>, <em>fld_id=’ID’</em>, <em>shptype=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.gen2shp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to convert an ArcInfo generate file into an ESRI shapefile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_gen</strong> : str</p>
+<blockquote>
+<div><p>The ArcInfo generate file to be converted.</p>
+</div></blockquote>
+<p><strong>f_shp</strong> : str</p>
+<blockquote>
+<div><p>The ESRI shapefile to be created (*.shp).</p>
+</div></blockquote>
+<p><strong>f_table</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Table file containing data to be included in the shapefile.
+This file may be a comma-separated file (*.csv), dbf file (*.dbf), iMOD ipf file (*.ipf) or space-separated file.</p>
+<p>The table file is structured in fields (columns) and records (rows). It should contain a name for each field.
+Comma-separated and space-separated files should contain 1 header line with the field names.</p>
+</div></blockquote>
+<p><strong>fld_id</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Field name of the field to link the table data to the IDs of the shapes in the generate file.</p>
+<p>If <em>f_table</em> is specified and <em>fld_id</em> is not a field name in <em>f_table</em> then an error is raised.</p>
+<p>If <em>f_table</em> is not specified then <em>fld_id</em> is used as field name for the IDs of the shapes in the generate file.
+However, if <em>fld_id</em> is None in this case then the default name ‘ID’ is used.</p>
+</div></blockquote>
+<p><strong>shptype</strong> : str or None (optional)</p>
+<blockquote class="last">
+<div><p>Type of the shapes: ‘POINT’, ‘POLYLINE’ or ‘POLYGON’.</p>
+<p>If <em>shptype</em> is None the type will be the same as the gen file.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../gis_func.html#gen-file"><span class="std std-ref">ArcInfo generate file</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.get_gen_data">
+<code class="descclassname">gis_func.</code><code class="descname">get_gen_data</code><span class="sig-paren">(</span><em>f_gen</em>, <em>f_table=None</em>, <em>fld_id=’ID’</em>, <em>l_flds=None</em>, <em>fld_str=None</em>, <em>center_points=False</em>, <em>return_shapelyGeoms=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.get_gen_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the data of an ArcInfo generate file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_gen</strong> : str</p>
+<blockquote>
+<div><p>The ArcInfo generate file to be converted.</p>
+</div></blockquote>
+<p><strong>f_table</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Table file containing data linked to the generate file.
+This file may be a comma-separated file (*.csv), dbf file (*.dbf), iMOD ipf file (*.ipf) or space-separated file.</p>
+<p>The table file is structured in fields (columns) and records (rows). It should contain a name for each field.
+Comma-separated and space-separated files should contain 1 header line with the field names.</p>
+</div></blockquote>
+<p><strong>fld_id</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Field name of the field to link the table data to the IDs of the shapes in the generate file.</p>
+</div></blockquote>
+<p><strong>l_flds</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of field names to read. If <em>l_flds</em> is None all fields are read.</p>
+</div></blockquote>
+<p><strong>fld_str</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>An arbitrary string which is scanned for occurences of field names.
+Occuring field names will be included in the list of fields to be read.</p>
+<p>Such a string could originate from user input, e.g. a condition string which is specified in an input file for a tool.</p>
+</div></blockquote>
+<p><strong>center_points</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = return additionally the x,y coordinates of the centers of the polylines or polygons.</p>
+<p>False = do not return the x,y coordinates of the centers of the polylines or polygons.</p>
+</div></blockquote>
+<p><strong>return_shapelyGeoms</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = return shapely geometries in stead of xy array/list.</p>
+<p>False = do not return shapely geometries.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>shptype</strong> : str</p>
+<blockquote>
+<div><p>Type of the shapes: ‘POINT’, ‘POLYLINE’ or ‘POLYGON’.</p>
+</div></blockquote>
+<p><strong>xy</strong> : list or numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the shapes.</p>
+<p>If <em>shptype</em> is ‘POINT’ this is a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If <em>shptype</em> is ‘POLYLINE’ or ‘POLYGON’ this is a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+<p>If <em>return_shapelyGeoms</em> is True then a list of shapely geometries (Point, LineString or Polygon) is returned in stead of the above mentioned xy array/list.</p>
+</div></blockquote>
+<p><strong>data</strong> : numpy recarray</p>
+<blockquote>
+<div><p>The data belonging to the shapes.</p>
+<p>The number of records is equal to the number of shapes (i.e. the length of <em>xy</em>).</p>
+</div></blockquote>
+<p><strong>xy_center</strong> : numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the centers of the polylines or polygons.</p>
+<p>Only returned if <em>center_points</em> is True.</p>
+<p>If <em>return_shapelyGeoms</em> is True then a list of shapely Point geometries is returned.</p>
+</div></blockquote>
+<p><strong>i_center</strong> : numpy ndarray</p>
+<blockquote class="last">
+<div><p>Index numbers of the center points refering to the data belonging to the shapes.</p>
+<p>Only returned if <em>center_points</em> is True.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.get_iff_data">
+<code class="descclassname">gis_func.</code><code class="descname">get_iff_data</code><span class="sig-paren">(</span><em>f_iff</em>, <em>shptype=’POLYLINE’</em>, <em>line_parts=True</em>, <em>return_shapelyGeoms=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.get_iff_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the data of an iMOD iff file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_iff</strong> : str</p>
+<blockquote>
+<div><p>The iMOD iff file to be read.</p>
+</div></blockquote>
+<p><strong>shptype</strong> : str (optional)</p>
+<blockquote>
+<div><p>Type of the shapes to be returned: ‘POINT’ or ‘POLYLINE’.</p>
+</div></blockquote>
+<p><strong>line_parts</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = polylines are returned in parts (individual line segments); only relevant if <em>shptype</em> is ‘POLYLINE’.</p>
+<p>False = polylines are returned as whole lines (multi segments).</p>
+</div></blockquote>
+<p><strong>return_shapelyGeoms</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = return shapely geometries in stead of xy array/list.</p>
+<p>False = do not return shapely geometries.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>shptype</strong> : str</p>
+<blockquote>
+<div><p>Type of the shapes: ‘POINT’ or ‘POLYLINE’.</p>
+</div></blockquote>
+<p><strong>xy</strong> : list or numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the shapes.</p>
+<p>If <em>shptype</em> is ‘POINT’ this is a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If <em>shptype</em> is ‘POLYLINE’ this is a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+<p>If <em>return_shapelyGeoms</em> is True then a list of shapely geometries (Point, LineString or Polygon) is returned in stead of the above mentioned xy array/list.</p>
+</div></blockquote>
+<p><strong>data</strong> : numpy recarray</p>
+<blockquote class="last">
+<div><p>The data belonging to the shapes.</p>
+<p>The number of records is equal to the number of shapes (i.e. the length of <em>xy</em>).</p>
+<p>If <em>shptype</em> is ‘POINT’ the fields are: ‘particle’, ‘lay’, ‘row’, ‘col’, ‘x’, ‘y’, ‘z’, ‘time’, ‘velocity’.</p>
+<p>If <em>shptype</em> is ‘POLYLINE’ the fields are: ‘particle’, ‘lay_start’, ‘row_start’, ‘col_start’, ‘x_start’, ‘y_start’, ‘z_start’, ‘time_start’, ‘lay_end’, ‘row_end’, ‘col_end’, ‘x_end’, ‘y_end’, ‘z_end’, ‘time_end’, ‘velocity’.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.get_isg_data">
+<code class="descclassname">gis_func.</code><code class="descname">get_isg_data</code><span class="sig-paren">(</span><em>f_isg</em>, <em>return_shapelyGeoms=False</em>, <em>return_dataMinMax=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.get_isg_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the data of an iMOD isg file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_isg</strong> : str</p>
+<blockquote>
+<div><p>The iMOD isg file to be read.</p>
+</div></blockquote>
+<p><strong>return_shapelyGeoms</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = return shapely geometries in stead of xy array/list.</p>
+<p>False = do not return shapely geometries.</p>
+</div></blockquote>
+<p><strong>return_dataMinMax</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = return min and max values in data tables</p>
+<p>False = do not return min and max values in data tables</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>result</strong> : tuple</p>
+<blockquote class="last">
+<div><p>Three sets of data: the isg lines, the isd1 (calculation) points and the isc1 (cross section) points:</p>
+<p>(isg shptype,isg xy,isg data), (isd1 shptype,isd1 xy,isd1 data), (isc1 shptype,isc1 xy,isc1 data)</p>
+<p>Isg:</p>
+<ul class="simple">
+<li>shptype : ‘POLYLINE’.</li>
+<li>xy : list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</li>
+<li>data : numpy recarray with the data belonging to the lines.</li>
+</ul>
+<p>Isd1 and isc1:</p>
+<ul class="simple">
+<li>shptype : ‘POINT’.</li>
+<li>xy : Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</li>
+<li>data : numpy recarray with the data belonging to the points.</li>
+</ul>
+<p>If <em>return_shapelyGeoms</em> is True then a list of shapely geometries (Point, LineString) is returned in stead of the above mentioned xy array/list.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.get_shp_data">
+<code class="descclassname">gis_func.</code><code class="descname">get_shp_data</code><span class="sig-paren">(</span><em>f_shp</em>, <em>l_flds=None</em>, <em>fld_str=None</em>, <em>center_points=False</em>, <em>l_extent=None</em>, <em>return_shapelyGeoms=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.get_shp_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the data of an ESRI shape file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_shp</strong> : str</p>
+<blockquote>
+<div><p>The ESRI shape file to be converted.</p>
+</div></blockquote>
+<p><strong>l_flds</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of field names to read. If <em>l_flds</em> is None all fields are read.</p>
+</div></blockquote>
+<p><strong>fld_str</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>An arbitrary string which is scanned for occurences of field names.
+Occuring field names will be included in the list of fields to be read.</p>
+<p>Such a string could originate from user input, e.g. a condition string which is specified in an input file for a tool.</p>
+</div></blockquote>
+<p><strong>center_points</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = return additionally the x,y coordinates of the centers of the polylines or polygons.</p>
+<p>False = do not return the x,y coordinates of the centers of the polylines or polygons.</p>
+</div></blockquote>
+<p><strong>l_extent</strong> : list (optional)</p>
+<blockquote>
+<div><p>A list containing xll, yll, xur and yur of the target extent (in this order).</p>
+<p>Shapes which are entirely outside this extent are not returned.</p>
+</div></blockquote>
+<p><strong>return_shapelyGeoms</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = return shapely geometries in stead of xy array/list.</p>
+<p>False = do not return shapely geometries.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>shptype</strong> : str</p>
+<blockquote>
+<div><p>Type of the shapes: ‘POINT’, ‘POLYLINE’ or ‘POLYGON’.</p>
+</div></blockquote>
+<p><strong>xy</strong> : list or numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the shapes.</p>
+<p>If <em>shptype</em> is ‘POINT’ this is a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If <em>shptype</em> is ‘POLYLINE’ or ‘POLYGON’ this is a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+<p>If <em>return_shapelyGeoms</em> is True then a list of shapely geometries (Point, LineString or Polygon) is returned in stead of the above mentioned xy array/list.</p>
+</div></blockquote>
+<p><strong>data</strong> : numpy recarray</p>
+<blockquote>
+<div><p>The data belonging to the shapes.</p>
+<p>The number of records is equal to the number of shapes (i.e. the length of <em>xy</em>).</p>
+</div></blockquote>
+<p><strong>xy_center</strong> : numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the centers of the polylines or polygons.</p>
+<p>Only returned if <em>center_points</em> is True.</p>
+<p>If <em>return_shapelyGeoms</em> is True then a list of shapely Point geometries is returned.</p>
+</div></blockquote>
+<p><strong>i_center</strong> : numpy ndarray</p>
+<blockquote>
+<div><p>Index numbers of the center points refering to the data belonging to the shapes.</p>
+<p>Only returned if <em>center_points</em> is True.</p>
+</div></blockquote>
+<p><strong>i_center_shapes</strong> : list</p>
+<blockquote class="last">
+<div><p>List with for each center point the index numbers of the shapes on which the center point is based.</p>
+<p>Only returned if <em>center_points</em> is True.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.get_shptype">
+<code class="descclassname">gis_func.</code><code class="descname">get_shptype</code><span class="sig-paren">(</span><em>xy_or_geom</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.get_shptype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the shape type of a xy array/list or shapely geometry/geometries.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy_or_geom</strong> : array, list or shapely geometry</p>
+<blockquote>
+<div><p>XY array/list: Nx2 array (points) or list of Nx2 arrays (polylines, polygons).</p>
+<p>Single shapely geometry or list of shapely geometries.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>shptype</strong> : str</p>
+<blockquote class="last">
+<div><p>Shape type: ‘POINT’, ‘POLYLINE’ or ‘POLYGON’.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.intersect_poly">
+<code class="descclassname">gis_func.</code><code class="descname">intersect_poly</code><span class="sig-paren">(</span><em>poly1</em>, <em>poly2</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.intersect_poly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the intersection points of a set of polylines or polygons with another set of polylines or polygons.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>poly1</strong> : list</p>
+<blockquote>
+<div><p>The x,y coordinates of the first set of polylines/polygons.</p>
+<p>This should be a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+<p>The length of the list is the number of polylines/polygons; N is the number of vertices of the polyline/polygon.</p>
+</div></blockquote>
+<p><strong>poly2</strong> : list</p>
+<blockquote>
+<div><p>The x,y coordinates of the second set of polylines/polygons.</p>
+<p>This should be a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+<p>The length of the list is the number of polylines/polygons; N is the number of vertices of the polyline/polygon.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>xy_intersect</strong> : list</p>
+<blockquote class="last">
+<div><p>The x,y coordinates of the intersection points.</p>
+<p>This is a NxMxLx2 shaped list. N is the number of polylines/polygons in the first set; M is the number of polylines/polygons in the second set.
+L is the number of intersection points.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.latlong2rd">
+<code class="descclassname">gis_func.</code><code class="descname">latlong2rd</code><span class="sig-paren">(</span><em>latitude</em>, <em>longitude</em>, <em>h_wgs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.latlong2rd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to convert LatLong coordinates to RD coordinates.</p>
+<p>WGS84 ellipsoid is assumed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>latitude</strong> : float</p>
+<blockquote>
+<div><p>Latitude in [decimal degrees].</p>
+</div></blockquote>
+<p><strong>longitude</strong> : float</p>
+<blockquote>
+<div><p>Longitude in [decimal degrees].</p>
+</div></blockquote>
+<p><strong>h_wgs</strong> : float or None (optional)</p>
+<blockquote>
+<div><p>Elevation in [m] relative to WGS84 ellipsoid.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>x_rd</strong> : float</p>
+<blockquote>
+<div><p>RD x coordinate in [m].</p>
+</div></blockquote>
+<p><strong>y_rd</strong> : float</p>
+<blockquote>
+<div><p>RD y coordinate in [m].</p>
+</div></blockquote>
+<p><strong>z_nap</strong> : float or None</p>
+<blockquote class="last">
+<div><p>Elevation (z coordinate) in [m +NAP].</p>
+<p>If <em>h_wgs</em> is None then <em>z_nap</em> will be None too.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.latlong2utm">
+<code class="descclassname">gis_func.</code><code class="descname">latlong2utm</code><span class="sig-paren">(</span><em>latitude</em>, <em>longitude</em>, <em>utm_zone=None</em>, <em>utm_letter=None</em>, <em>return_zone=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.latlong2utm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to convert LatLong coordinates to UTM coordinates.</p>
+<p>WGS84 ellipsoid is assumed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>latitude</strong> : float</p>
+<blockquote>
+<div><p>Latitude in [decimal degrees].</p>
+</div></blockquote>
+<p><strong>longitude</strong> : float</p>
+<blockquote>
+<div><p>Longitude in [decimal degrees].</p>
+</div></blockquote>
+<p><strong>utm_zone</strong> : int (optional)</p>
+<blockquote>
+<div><p>UTM zone.</p>
+</div></blockquote>
+<p><strong>utm_letter</strong> : str (optional)</p>
+<blockquote>
+<div><p>UTM letter designator.</p>
+</div></blockquote>
+<p><strong>return_zone</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = return UTM zone (incl. UTM letter)</p>
+<p>False = do not return UTM zone</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>easting</strong> : int or float</p>
+<blockquote>
+<div><p>UTM easting (x coordinate) in [m].</p>
+</div></blockquote>
+<p><strong>northing</strong> : int or float</p>
+<blockquote>
+<div><p>UTM northing (y coordinate) in [m].</p>
+</div></blockquote>
+<p><strong>UTM zone</strong> : str (optional)</p>
+<blockquote class="last">
+<div><p>UTM zone (incl. UTM letter)</p>
+<p>Only return if <em>return_zone</em> is True.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.point_in_polygon">
+<code class="descclassname">gis_func.</code><code class="descname">point_in_polygon</code><span class="sig-paren">(</span><em>xy_point</em>, <em>xy_poly</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.point_in_polygon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to perform a point-in-polygon test for a set of points and a set of polygons.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy_point</strong> : array or array_like</p>
+<blockquote>
+<div><p>The x,y coordinates of the points.</p>
+<p>This should be a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>N is the number of points.</p>
+</div></blockquote>
+<p><strong>xy_poly</strong> : list</p>
+<blockquote>
+<div><p>The x,y coordinates of the set of polygons.</p>
+<p>This should be a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+<p>The length of the list is the number of polygons; N is the number of vertices of the polygon.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pip</strong> : numpy ndarray</p>
+<blockquote class="last">
+<div><p>This is a NxM array of type ‘bool’. N is the number of points; M is the number of polygons.</p>
+<p>True = point in polygon.</p>
+<p>False = point not in polygon.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.points_polygons2val">
+<code class="descclassname">gis_func.</code><code class="descname">points_polygons2val</code><span class="sig-paren">(</span><em>xy</em>, <em>f_shp</em>, <em>l_flds=None</em>, <em>nodata=-9999</em>, <em>dxy_split_polygons=1e+31</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.points_polygons2val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to extract polygon values of an ESRI shape file on points.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy</strong> : list, array or array_like (2-D)</p>
+<blockquote>
+<div><p>The x,y coordinates of the points: Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>This can also be a list of shapely point geometries.</p>
+</div></blockquote>
+<p><strong>f_shp</strong> : str</p>
+<blockquote>
+<div><p>Input polygon shape file.</p>
+</div></blockquote>
+<p><strong>l_flds</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of field names to read. If <em>l_flds</em> is None all fields are read.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : float, int (optional)</p>
+<blockquote>
+<div><p>Nodata value to be applied.</p>
+</div></blockquote>
+<p><strong>dxy_split_polygons</strong> : float (optional)</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : numpy recarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.poly2slopes_intersects">
+<code class="descclassname">gis_func.</code><code class="descname">poly2slopes_intersects</code><span class="sig-paren">(</span><em>xy_poly</em>, <em>nodata=1.23456789e+31</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.poly2slopes_intersects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to calculate the slopes and y-axis intersects of all line elements of a set of polylines or polygons.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy_poly</strong> : list</p>
+<blockquote>
+<div><p>The x,y coordinates of the set of polylines/polygons.</p>
+<p>This should be a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+<p>The length of the list is the number of polylines/polygons; N is the number of vertices of the polyline/polygon.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : int or float (optional)</p>
+<blockquote>
+<div><p>Nodata value to be returned for an infinite slope or intersect.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>slopes</strong> : list</p>
+<blockquote>
+<div><p>The slopes of all line elements of the set of polylines/polygons.</p>
+<p>This is a list of arrays with N values. The length of the list is the number of polylines/polygons; N is the number of line element of the polyline/polygon.</p>
+</div></blockquote>
+<p><strong>intersects</strong> : list</p>
+<blockquote class="last">
+<div><p>The y-axis intersects of all line elements of the set of polylines/polygons.</p>
+<p>This is a list of arrays with N values. The length of the list is the number of polylines/polygons; N is the number of line element of the polyline/polygon.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.polyline2interval_points">
+<code class="descclassname">gis_func.</code><code class="descname">polyline2interval_points</code><span class="sig-paren">(</span><em>xy_poly</em>, <em>interval</em>, <em>all_vert=True</em>, <em>end_vert=True</em>, <em>mid_point=False</em>, <em>startend_shift=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.polyline2interval_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get points at a regular interval along the polylines in a set of polylines.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy_poly</strong> : list</p>
+<blockquote>
+<div><p>The x,y coordinates of the set of polylines.</p>
+<p>This should be a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+<p>The length of the list is the number of polylines; N is the number of vertices of the polyline.</p>
+</div></blockquote>
+<p><strong>interval</strong> : float</p>
+<blockquote>
+<div><p>Interval distance.</p>
+</div></blockquote>
+<p><strong>all_vert</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = the vertices are included as points, even if they are not at the specified interval distance.</p>
+<p>False = the vertices are not included, unless they are at the specified interval distance.</p>
+</div></blockquote>
+<p><strong>end_vert</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = the end vertex is included as point, even if it is not at the specified interval distance.</p>
+<p>False = the end vertex is not included, unless it is at the specified interval distance or <em>all_vert</em> is True.</p>
+</div></blockquote>
+<p><strong>startend_shift</strong> : float (optional)</p>
+<blockquote>
+<div><p>If not 0.0 the first point is shifted forward over a distance of <em>startend_shift</em> and the last point is shifted backward over a distance of <em>startend_shift</em>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output</strong> : list of numpy recarrays</p>
+<blockquote class="last">
+<div><p>Each recarray belongs to a polyline in the set of polylines. It is a table with the fields ‘X’, ‘Y’ and ‘DIST’ being the x coordinates, y coordinates and distances of the points.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.polyline_idf2val">
+<code class="descclassname">gis_func.</code><code class="descname">polyline_idf2val</code><span class="sig-paren">(</span><em>xy_poly</em>, <em>fl_idf</em>, <em>interval</em>, <em>nodata=None</em>, <em>interpolate=True</em>, <em>all_vert=True</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.polyline_idf2val" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get values of a list of IDF files at a regular interval along the polylines in a set of polylines.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy_poly</strong> : list</p>
+<blockquote>
+<div><p>The x,y coordinates of the set of polylines.</p>
+<p>This should be a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+<p>The length of the list is the number of polylines; N is the number of vertices of the polyline.</p>
+</div></blockquote>
+<p><strong>fl_idf</strong> : list</p>
+<blockquote>
+<div><p>List of IDF files or rasterArr objects.</p>
+</div></blockquote>
+<p><strong>interval</strong> : float</p>
+<blockquote>
+<div><p>Interval distance.</p>
+</div></blockquote>
+<p><strong>interpolate</strong> : bool (optional)</p>
+<blockquote>
+<div><p>Flag for linear interpolation from cell centers to x,y location.</p>
+<p>True = enable linear interpolation</p>
+<p>False = disable linear interpolation</p>
+</div></blockquote>
+<p><strong>all_vert</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = the vertices are included as points, even if they are not at the specified interval distance.</p>
+<p>False = the vertices are not included, unless they are at the specified interval distance.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output</strong> : list of numpy recarrays</p>
+<blockquote class="last">
+<div><p>Each recarray belongs to a polyline in the set of polylines.
+It is a table; the first 3 fields are ‘X’, ‘Y’, ‘DIST’ being the x coordinates, y coordinates and distances of the points.
+The subsequent fields contain the values of the IDF files. The name of these fields is the basename of the IDF files.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.rd2latlong">
+<code class="descclassname">gis_func.</code><code class="descname">rd2latlong</code><span class="sig-paren">(</span><em>x_rd</em>, <em>y_rd</em>, <em>z_nap=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.rd2latlong" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to convert RD coordinates to LatLong coordinates.</p>
+<p>WGS84 ellipsoid is assumed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x_rd</strong> : int or float</p>
+<blockquote>
+<div><p>RD x coordinate in [m].</p>
+</div></blockquote>
+<p><strong>y_rd</strong> : int or float</p>
+<blockquote>
+<div><p>RD y coordinate in [m].</p>
+</div></blockquote>
+<p><strong>z_nap</strong> : int or float (optional)</p>
+<blockquote>
+<div><p>Elevation (z coordinate) in [m +NAP].</p>
+<p>If <em>z_nap</em> is None the elevation is set to 0.0 m +NAP.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>latitude</strong> : float</p>
+<blockquote>
+<div><p>Latitude in [decimal degrees].</p>
+</div></blockquote>
+<p><strong>longitude</strong> : float</p>
+<blockquote>
+<div><p>Longitude in [decimal degrees].</p>
+</div></blockquote>
+<p><strong>h_wgs</strong> : float or None</p>
+<blockquote class="last">
+<div><p>Elevation in [m] relative to WGS84 ellipsoid.</p>
+<p>If <em>z_nap</em> is None then <em>h</em> will be None too.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.shapelyGeoms2arr">
+<code class="descclassname">gis_func.</code><code class="descname">shapelyGeoms2arr</code><span class="sig-paren">(</span><em>geoms</em>, <em>gi</em>, <em>shptype=None</em>, <em>data=None</em>, <em>field=None</em>, <em>nodata=None</em>, <em>set_gi_extent=True</em>, <em>all_touched=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.shapelyGeoms2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to rasterize shapely geometries using GDAL’s RasterizeLayer function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>geoms</strong> : list</p>
+<blockquote>
+<div><p>List of shapely geometries of type ‘Point’, ‘LineString’, ‘LinearRing’ or ‘Polygon’.</p>
+</div></blockquote>
+<p><strong>gi</strong> : list or dict</p>
+<blockquote>
+<div><p>Dict or list with basic geographical information according to rasterArr object.</p>
+<p>See <a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+<p>The geographical information is used to set the cell sizes, cell boundaries and (depending on <em>set_gi_extent</em>) the extent.</p>
+</div></blockquote>
+<p><strong>shptype</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Type of the shapes: ‘POINT’, ‘POLYLINE’ or ‘POLYGON’.</p>
+<p>If <em>shptype</em> is None the type is determined from <em>geoms</em>. If the shapes are points <em>shptype</em> is ignored.</p>
+</div></blockquote>
+<p><strong>data</strong> : numpy recarray or None (optional)</p>
+<blockquote>
+<div><p>The data belonging to the shapes.</p>
+<p>The number of records should be equal to the number of shapes (i.e. the length of <em>geoms</em>).</p>
+</div></blockquote>
+<p><strong>field</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Name of the field to be rasterized.</p>
+<p>If <em>field</em> is None or does not exist in the shapefile the shapes are rasterized to the value 1.
+This is faster than rasterizing a specific field.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : float, int or None (optional)</p>
+<p><strong>set_gi_extent</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = the extent is taken from <em>gi</em>.</p>
+<p>False = the extent is taken from the shapefile itself. The cell sizes and cell boundaries are taken from <em>gi</em>.</p>
+</div></blockquote>
+<p><strong>all_touched</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True  = Option to rasterize shapefiles using all cells that touch the border of the shape.</p>
+<p>False = Option disabled.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.shapelyGeoms2shp">
+<code class="descclassname">gis_func.</code><code class="descname">shapelyGeoms2shp</code><span class="sig-paren">(</span><em>f_shp</em>, <em>geoms</em>, <em>shptype=None</em>, <em>data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.shapelyGeoms2shp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write shapely geometries to an ESRI shape file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_shp</strong> : str</p>
+<blockquote>
+<div><p>The ESRI shape file to be created.</p>
+</div></blockquote>
+<p><strong>geoms</strong> : list</p>
+<blockquote>
+<div><p>List of shapely geometries of type ‘Point’, ‘LineString’, ‘LinearRing’ or ‘Polygon’.</p>
+</div></blockquote>
+<p><strong>shptype</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Type of the shapes: ‘POINT’, ‘POLYLINE’ or ‘POLYGON’.</p>
+<p>If <em>shptype</em> is None the type is determined from <em>geoms</em>.</p>
+</div></blockquote>
+<p><strong>data</strong> : numpy recarray or None (optional)</p>
+<blockquote class="last">
+<div><p>The data belonging to the shapes.</p>
+<p>The number of records should be equal to the number of shapes (i.e. the length of <em>geoms</em>).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.shapelyGeoms2xy">
+<code class="descclassname">gis_func.</code><code class="descname">shapelyGeoms2xy</code><span class="sig-paren">(</span><em>geoms</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.shapelyGeoms2xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to convert shapely geometries to xy array/list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>geoms</strong> : list</p>
+<blockquote>
+<div><p>List of shapely geometries of type ‘Point’, ‘LineString’, ‘LinearRing’ or ‘Polygon’.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>shptype</strong> : str</p>
+<blockquote>
+<div><p>Type of the shapes: ‘POINT’, ‘POLYLINE’ or ‘POLYGON’.</p>
+</div></blockquote>
+<p><strong>xy</strong> : list or numpy ndarray</p>
+<blockquote class="last">
+<div><p>The x,y coordinates of the shapes.</p>
+<p>If <em>shptype</em> is ‘POINT’ this is a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If <em>shptype</em> is ‘POLYLINE’ or ‘POLYGON’ this is a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.shp2arr">
+<code class="descclassname">gis_func.</code><code class="descname">shp2arr</code><span class="sig-paren">(</span><em>f_shape</em>, <em>gi</em>, <em>field=None</em>, <em>nodata=None</em>, <em>set_gi_extent=True</em>, <em>all_touched=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.shp2arr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to rasterize an ESRI shapefile using GDAL’s RasterizeLayer function.</p>
+<p>Does not work to create non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_shape</strong> : str or osgeo.ogr.Layer object</p>
+<blockquote>
+<div><p>Shapefile or osgeo.ogr.Layer object.</p>
+<p>Recognized features are point, line and polygon shapefiles. Multi-part features are supported.</p>
+</div></blockquote>
+<p><strong>gi</strong> : list or dict</p>
+<blockquote>
+<div><p>Dict or list with basic geographical information according to rasterArr object.</p>
+<p>See <a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+<p>The geographical information is used to set the cell sizes, cell boundaries and (depending on <em>set_gi_extent</em>) the extent.</p>
+</div></blockquote>
+<p><strong>field</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Name of the field to be rasterized.</p>
+<p>If <em>field</em> is None or does not exist in the shapefile the shapes are rasterized to the value 1.
+This is faster than rasterizing a specific field.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : float, int or None (optional)</p>
+<p><strong>set_gi_extent</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = the extent is taken from <em>gi</em>.</p>
+<p>False = the extent is taken from the shapefile itself. The cell sizes and cell boundaries are taken from <em>gi</em>.</p>
+</div></blockquote>
+<p><strong>all_touched</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True  = Option to rasterize shapefiles using all cells that touch the border of the shape.</p>
+<p>False = Option disabled.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.shp2arr_PIL">
+<code class="descclassname">gis_func.</code><code class="descname">shp2arr_PIL</code><span class="sig-paren">(</span><em>f_shape</em>, <em>gi</em>, <em>field=None</em>, <em>precision=1</em>, <em>frac=0.5</em>, <em>st=None</em>, <em>set_gi_extent=True</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.shp2arr_PIL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to rasterize an ESRI shapefile using PIL.</p>
+<p>Does not work to create non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_shape</strong> : str</p>
+<blockquote>
+<div><p>Shapefile.</p>
+<p>Recognized features are point, line and polygon shapefiles. Multi-part features are supported.</p>
+</div></blockquote>
+<p><strong>gi</strong> : list or dict</p>
+<blockquote>
+<div><p>Dict or list with basic geographical information according to rasterArr object.</p>
+<p>See <a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+<p>The geographical information is used to set the cell sizes, cell boundaries and (depending on <em>set_gi_extent</em>) the extent.</p>
+</div></blockquote>
+<p><strong>field</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Name of the field to be rasterized.</p>
+<p>If <em>field</em> is None or does not exist in the shapefile the shapes are rasterized to the value 1.
+This is faster than rasterizing a specific field.</p>
+</div></blockquote>
+<p><strong>precision</strong> : int (optional)</p>
+<blockquote>
+<div><p>Precision number (&gt;= 0).</p>
+<p>If <em>precision</em> is &gt;0 then the shape file is rasterized to the downscaled raster and thereafter upscaled again.
+The downscale factor is <em>precision*+1, e.g. if *precision</em> is 1 the downscaling factor is 2, meaning that the cell sizes are divided by 2.
+This could give a better (more precise) result. See also the parameter <em>frac</em>.</p>
+<p>The higher the precision number, the slower the calculation. Memory error could occur if the number is too large.</p>
+</div></blockquote>
+<p><strong>frac</strong> : float (optional)</p>
+<blockquote>
+<div><p>Fraction (range 0-1). This fraction is used in the upscaling mentioned above (see parameter <em>precision</em>) to determine which resulting cell are covered by the shape and which not.</p>
+</div></blockquote>
+<p><strong>st</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Shape type. Recognized are: ‘point’, ‘line’ and polygon’. These overrule the shape type of each shape, if possible.</p>
+<p>If <em>st</em> is None the shape type of the shapes is not changed.</p>
+</div></blockquote>
+<p><strong>set_gi_extent</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = the extent is taken from <em>gi</em>.</p>
+<blockquote>
+<div><p>Note that first the shapefile is rasterized to the full extent of the shapefile and thereafter clipped to the extent of <em>gi</em>.</p>
+</div></blockquote>
+<p>False = the extent is taken from the shapefile itself. The cell sizes and cell boundaries are taken from <em>gi</em>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.shp2arr_refined">
+<code class="descclassname">gis_func.</code><code class="descname">shp2arr_refined</code><span class="sig-paren">(</span><em>f_shape</em>, <em>gi</em>, <em>field=None</em>, <em>nodata=None</em>, <em>set_gi_extent=True</em>, <em>downscale_factor=5</em>, <em>x_split=5</em>, <em>y_split=5</em>, <em>frac=0.5</em>, <em>method=’mean’</em>, <em>all_touched=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.shp2arr_refined" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to rasterize an ESRI shapefile using GDAL’s RasterizeLayer function by using a refined underlying grid.</p>
+<p>Does not work to create non-equidistant rasters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_shape</strong> : str</p>
+<blockquote>
+<div><p>Shapefile.</p>
+<p>Recognized features are point, line and polygon shapefiles. Multi-part features are supported.</p>
+</div></blockquote>
+<p><strong>gi</strong> : list or dict</p>
+<blockquote>
+<div><p>Dict or list with basic geographical information according to rasterArr object.</p>
+<p>See <a class="reference internal" href="../raster_func.html#geo-info"><span class="std std-ref">Geographical information</span></a></p>
+<p>The geographical information is used to set the cell sizes, cell boundaries and (depending on <em>set_gi_extent</em>) the extent.</p>
+</div></blockquote>
+<p><strong>field</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Name of the field to be rasterized.</p>
+<p>If <em>field</em> is None or does not exist in the shapefile the shapes are rasterized to the value 1.
+This is faster than rasterizing a specific field.</p>
+</div></blockquote>
+<p><strong>nodata</strong> : float, int or None (optional)</p>
+<p><strong>set_gi_extent</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = the extent is taken from <em>gi</em>.</p>
+<p>False = the extent is taken from the shapefile itself. The cell sizes and cell boundaries are taken from <em>gi</em>.</p>
+</div></blockquote>
+<p><strong>downscale_factor</strong> : int (optional)</p>
+<blockquote>
+<div><p>Downscaling factor (refinement factor); 1 or greater.</p>
+</div></blockquote>
+<p><strong>x_split</strong> : int (optional)</p>
+<blockquote>
+<div><p>Number of times the grid is splitted in x direction; 1 or greater. Grid splitting is needed to avoid memory errors if the refined grid become to large.</p>
+</div></blockquote>
+<p><strong>y_split</strong> : int (optional)</p>
+<blockquote>
+<div><p>Number of times the grid is splitted in y direction; 1 or greater. Grid splitting is needed to avoid memory errors if the refined grid become to large.</p>
+</div></blockquote>
+<p><strong>frac</strong> : float (optional)</p>
+<blockquote>
+<div><p>Fraction (range 0-1). This fraction is used in the upscaling to determine which resulting cells are covered by the shape and which not.</p>
+</div></blockquote>
+<p><strong>method</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>The rescaling/resampling method for upscaling the refined grid to the final grid. Possible methods are:
+‘sum’, ‘min’, ‘max’, ‘harm’, ‘log10’, ‘log’, ‘mean’, ‘sample’, None.</p>
+</div></blockquote>
+<p><strong>all_touched</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True  = Option to rasterize shapefiles using all cells that touch the border of the shape.</p>
+<p>False = Option disabled.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>result</strong> : rasterArr object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.shp2gen">
+<code class="descclassname">gis_func.</code><code class="descname">shp2gen</code><span class="sig-paren">(</span><em>f_shp</em>, <em>f_gen</em>, <em>fld_id=None</em>, <em>f_table=None</em>, <em>shptype=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.shp2gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to convert an ESRI shapefile into an ArcInfo generate file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_shp</strong> : str</p>
+<blockquote>
+<div><p>The ESRI shapefile to be converted (*.shp).</p>
+</div></blockquote>
+<p><strong>f_gen</strong> : str</p>
+<blockquote>
+<div><p>The ArcInfo generate file to be created.</p>
+</div></blockquote>
+<p><strong>fld_id</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Field name of the field to be used for the IDs of the shapes in the generate file.</p>
+<p>If <em>fld_id</em> is None then the first field of the shapefile is used.</p>
+</div></blockquote>
+<p><strong>f_table</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Table file to be created, containing the data from the shapefile.
+This file may be a comma-separated file (*.csv), dbf file (*.dbf), iMOD ipf file (*.ipf) or space-separated file.</p>
+</div></blockquote>
+<p><strong>shptype</strong> : str or None (optional)</p>
+<blockquote class="last">
+<div><p>Type of the shapes: ‘POINT’, ‘POLYLINE’ or ‘POLYGON’.</p>
+<p>If <em>shptype</em> is None the type will be the same as the shapefile.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../gis_func.html#shapefile"><span class="std std-ref">ESRI shapefile</span></a></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.shp2shapelyGeoms">
+<code class="descclassname">gis_func.</code><code class="descname">shp2shapelyGeoms</code><span class="sig-paren">(</span><em>f_shp</em>, <em>center_points=False</em>, <em>l_extent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.shp2shapelyGeoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the shapes of an ESRI shape file as shapely geometries.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_shp</strong> : str</p>
+<blockquote>
+<div><p>The ESRI shape file to be converted.</p>
+</div></blockquote>
+<p><strong>center_points</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = return additionally the x,y coordinates of the centers of the shapes.</p>
+<p>False = do not return the x,y coordinates of the centers of the shapes.</p>
+</div></blockquote>
+<p><strong>l_extent</strong> : list (optional)</p>
+<blockquote>
+<div><p>A list containing xll, yll, xur and yur of the target extent (in this order).</p>
+<p>Shapes which are entirely outside this extent are not returned.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>shptype</strong> : str</p>
+<blockquote>
+<div><p>Type of the shapes: ‘POINT’, ‘POLYLINE’ or ‘POLYGON’.</p>
+</div></blockquote>
+<p><strong>geoms</strong> : list</p>
+<blockquote>
+<div><p>List of shapely geometries of type ‘Point’, ‘LineString’ or ‘Polygon’.</p>
+</div></blockquote>
+<p><strong>i_data</strong> : numpy ndarray</p>
+<blockquote>
+<div><p>Index numbers of the shapes refering to the data belonging to the shape file.</p>
+</div></blockquote>
+<p><strong>xy_center</strong> : numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the centers of the polylines or polygons.</p>
+<p>Only returned if <em>center_points</em> is True.</p>
+</div></blockquote>
+<p><strong>i_center</strong> : numpy ndarray</p>
+<blockquote>
+<div><p>Index numbers of the center points refering to the data belonging to the shapes.</p>
+<p>Only returned if <em>center_points</em> is True.</p>
+</div></blockquote>
+<p><strong>i_center_shapes</strong> : list</p>
+<blockquote class="last">
+<div><p>List with for each center point the index numbers of the shapes on which the center point is based.</p>
+<p>Only returned if <em>center_points</em> is True.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.shp2xy">
+<code class="descclassname">gis_func.</code><code class="descname">shp2xy</code><span class="sig-paren">(</span><em>f_shp</em>, <em>l_flds=None</em>, <em>fld_str=None</em>, <em>center_points=False</em>, <em>l_extent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.shp2xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to get the data of an ESRI shape file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_shp</strong> : str</p>
+<blockquote>
+<div><p>The ESRI shape file to be converted.</p>
+</div></blockquote>
+<p><strong>l_flds</strong> : list or None (optional)</p>
+<blockquote>
+<div><p>List of field names to read. If <em>l_flds</em> is None all fields are read.</p>
+</div></blockquote>
+<p><strong>fld_str</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>An arbitrary string which is scanned for occurences of field names.
+Occuring field names will be included in the list of fields to be read.</p>
+<p>Such a string could originate from user input, e.g. a condition string which is specified in an input file for a tool.</p>
+</div></blockquote>
+<p><strong>center_points</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = return additionally the x,y coordinates of the centers of the polylines or polygons.</p>
+<p>False = do not return the x,y coordinates of the centers of the polylines or polygons.</p>
+</div></blockquote>
+<p><strong>l_extent</strong> : list (optional)</p>
+<blockquote>
+<div><p>A list containing xll, yll, xur and yur of the target extent (in this order).</p>
+<p>Shapes which are entirely outside this extent are not returned.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>shptype</strong> : str</p>
+<blockquote>
+<div><p>Type of the shapes: ‘POINT’, ‘POLYLINE’ or ‘POLYGON’.</p>
+</div></blockquote>
+<p><strong>xy</strong> : list or numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the shapes.</p>
+<p>If <em>shptype</em> is ‘POINT’ this is a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If <em>shptype</em> is ‘POLYLINE’ or ‘POLYGON’ this is a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+</div></blockquote>
+<p><strong>data</strong> : numpy recarray</p>
+<blockquote>
+<div><p>The data belonging to the shapes.</p>
+<p>The number of records is equal to the number of shapes (i.e. the length of <em>xy</em>).</p>
+</div></blockquote>
+<p>xy_center: numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the centers of the polylines or polygons.</p>
+<p>Only returned if <em>center_points</em> is True.</p>
+</div></blockquote>
+<p><strong>i_center</strong> : numpy ndarray</p>
+<blockquote>
+<div><p>Index numbers of the center points refering to the data belonging to the shapes.</p>
+<p>Only returned if <em>center_points</em> is True.</p>
+</div></blockquote>
+<p><strong>i_center_shapes</strong> : list</p>
+<blockquote class="last">
+<div><p>List with for each center point the index numbers of the shapes on which the center point is based.</p>
+<p>Only returned if <em>center_points</em> is True.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.split_polygons">
+<code class="descclassname">gis_func.</code><code class="descname">split_polygons</code><span class="sig-paren">(</span><em>polygons</em>, <em>data_polygons=None</em>, <em>dxy_split_polygons=1e+31</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.split_polygons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to split shapely polygons in regular blocks.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.utm2latlong">
+<code class="descclassname">gis_func.</code><code class="descname">utm2latlong</code><span class="sig-paren">(</span><em>utm_zone</em>, <em>easting</em>, <em>northing</em>, <em>northernHemisphere=True</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.utm2latlong" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to convert UTM coordinates to LatLong coordinates.</p>
+<p>WGS84 ellipsoid is assumed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>utm_zone</strong> : int</p>
+<blockquote>
+<div><p>UTM zone.</p>
+</div></blockquote>
+<p><strong>easting</strong> : int or float</p>
+<blockquote>
+<div><p>UTM easting (x coordinate) in [m].</p>
+</div></blockquote>
+<p><strong>northing</strong> : int or float</p>
+<blockquote>
+<div><p>UTM northing (y coordinate) in [m].</p>
+</div></blockquote>
+<p><strong>northernHemisphere</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = northern hemisphere</p>
+<p>False = southern hemisphere</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>latitude</strong> : float</p>
+<blockquote>
+<div><p>Latitude in [decimal degrees].</p>
+</div></blockquote>
+<p><strong>longitude</strong> : float</p>
+<blockquote class="last">
+<div><p>Longitude in [decimal degrees].</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-obj docutils literal"><span class="pre">LL_UTM</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.write_gen">
+<code class="descclassname">gis_func.</code><code class="descname">write_gen</code><span class="sig-paren">(</span><em>f_gen</em>, <em>xy</em>, <em>shptype=None</em>, <em>data=None</em>, <em>fld_id=None</em>, <em>f_table=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.write_gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write an ArcInfo generate file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_gen</strong> : str</p>
+<blockquote>
+<div><p>The ArcInfo generate file to be created.</p>
+</div></blockquote>
+<p><strong>xy</strong> : list or numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the shapes.</p>
+<p>If the type of the shapes is ‘POINT’ this should be a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If the type of the shapes is ‘POLYLINE’ or ‘POLYGON’ this should be a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+</div></blockquote>
+<p><strong>shptype</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Type of the shapes: ‘POINT’, ‘POLYLINE’ or ‘POLYGON’.</p>
+<p>If <em>shptype</em> is None the type is determined from <em>xy</em>. If the shapes are points <em>shptype</em> is ignored.</p>
+</div></blockquote>
+<p><strong>data</strong> : numpy recarray or None (optional)</p>
+<blockquote>
+<div><p>The data belonging to the shapes.</p>
+<p>The number of records should be equal to the number of shapes (i.e. the length of <em>xy</em>).</p>
+</div></blockquote>
+<p><strong>fld_id</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Field name of the field in the data array to be used for the IDs of the shapes in the generate file.</p>
+<p>If <em>fld_id</em> is None or can not be linked to the data array of <em>data</em> then the IDs will be index numbers.</p>
+<p>If the field contains non-unique values then the IDs will be index numbers.</p>
+</div></blockquote>
+<p><strong>f_table</strong> : str or None (optional)</p>
+<blockquote class="last">
+<div><p>Table file to be created, containing the data of <em>data</em>.
+This file may be a comma-separated file (*.csv), dbf file (*.dbf), iMOD ipf file (*.ipf) or space-separated file.</p>
+<p>If <em>f_table</em> is None or <em>data</em> is None no table file will be created.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.write_isg">
+<code class="descclassname">gis_func.</code><code class="descname">write_isg</code><span class="sig-paren">(</span><em>f_lines, f_points, f_isg, fld_points=[‘ILINE’, ‘DIST’, ‘ZP’, ‘WP’, ‘BOT’, ‘RES’, ‘INF’], startendyr=[1980, 2020], l_crs=[2.0, 10.0, 25.0]</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.write_isg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write an iMOD isg file.</p>
+<p>The isg file is based on a line shape file (water courses) and a point shape file (calculation points on the lines).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_lines</strong> : str</p>
+<blockquote>
+<div><p>File name of the line shape file.</p>
+</div></blockquote>
+<p><strong>f_points</strong> : str</p>
+<blockquote>
+<div><p>File name of the point shape or table file. If this is a table file the fields ‘shapeX’ and ‘shapeY’ are expected to be included.</p>
+</div></blockquote>
+<p><strong>f_isg</strong> : str</p>
+<blockquote>
+<div><p>File name of the isg file.</p>
+</div></blockquote>
+<p><strong>fld_points</strong> : list or tuple (optional)</p>
+<blockquote>
+<div><p>List of fields of the point shape file for the necessary ISG parameters.</p>
+<p>The fields are (in this order): line index number corresponding to the line shape file, distance on the line, summer level, winter level, bottom level, resistance, infiltration factor.</p>
+</div></blockquote>
+<p><strong>startendyr</strong> : list or tuple (optional)</p>
+<blockquote>
+<div><p>List with start year and end year of the summer/winter level time series.</p>
+</div></blockquote>
+<p><strong>l_crs</strong> : list or tuple (optional)</p>
+<blockquote class="last">
+<div><p>List with the parameter values for the default cross section: width, depth, K-manning.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.write_shp">
+<code class="descclassname">gis_func.</code><code class="descname">write_shp</code><span class="sig-paren">(</span><em>f_shp</em>, <em>xy</em>, <em>shptype=None</em>, <em>data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.write_shp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to write an ESRI shape file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>f_shp</strong> : str</p>
+<blockquote>
+<div><p>The ESRI shape file to be created.</p>
+</div></blockquote>
+<p><strong>xy</strong> : list or numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the shapes.</p>
+<p>If the type of the shapes is ‘POINT’ this should be a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If the type of the shapes is ‘POLYLINE’ or ‘POLYGON’ this should be a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+<p>This can also be a list of shapely point geometries.</p>
+</div></blockquote>
+<p><strong>shptype</strong> : str or None (optional)</p>
+<blockquote>
+<div><p>Type of the shapes: ‘POINT’, ‘POLYLINE’ or ‘POLYGON’.</p>
+<p>If <em>shptype</em> is None the type is determined from <em>xy</em>. If the shapes are points <em>shptype</em> is ignored.</p>
+</div></blockquote>
+<p><strong>data</strong> : numpy recarray or None (optional)</p>
+<blockquote class="last">
+<div><p>The data belonging to the shapes.</p>
+<p>The number of records should be equal to the number of shapes (i.e. the length of <em>xy</em>).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.xy2shapelyGeoms">
+<code class="descclassname">gis_func.</code><code class="descname">xy2shapelyGeoms</code><span class="sig-paren">(</span><em>xy</em>, <em>shptype=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.xy2shapelyGeoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to convert xy array/list to shapely geometries.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy</strong> : list or numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the shapes.</p>
+<p>If <em>shptype</em> is ‘POINT’ this is a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If <em>shptype</em> is ‘POLYLINE’ or ‘POLYGON’ this is a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+</div></blockquote>
+<p><strong>shptype</strong> : str (optional)</p>
+<blockquote>
+<div><p>Type of the shapes: ‘POINT’, ‘POLYLINE’ or ‘POLYGON’.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>geoms</strong> : list</p>
+<blockquote class="last">
+<div><p>List of shapely geometries of type ‘Point’, ‘LineString’ or ‘Polygon’.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.xy_reproject">
+<code class="descclassname">gis_func.</code><code class="descname">xy_reproject</code><span class="sig-paren">(</span><em>xy</em>, <em>crs_in</em>, <em>crs_out</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.xy_reproject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to reproject x,y coordinates of shapes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy</strong> : list or numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the shapes to be reprojected.</p>
+<p>If the type of the shapes is ‘POINT’ this should be a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If the type of the shapes is ‘POLYLINE’ or ‘POLYGON’ this should be a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+</div></blockquote>
+<p><strong>crs_in</strong> : int or str</p>
+<blockquote>
+<div><p>Input crs reference.</p>
+<p>One of the following forms:</p>
+<p>Integer: EPSG reference number.</p>
+<p>String: ‘EPSG:i’ where i denotes a EPSG reference number.</p>
+<p>String: ‘UTMiC’ where i denotes a UTM zone number and C denotes ‘N’ or ‘S’ for the hemisphere.</p>
+<p>String: GDAL’s so called WellKnownGeogCS string, e.g. ‘WGS84’.</p>
+<p>String: Ohter recognized strings are: ‘amersfoort’, ‘rd’, ‘gda94’, ‘gda94_vicgrid’</p>
+<p>String: WKT string</p>
+</div></blockquote>
+<p><strong>crs_out</strong> : int or str</p>
+<blockquote>
+<div><p>Output crs reference.</p>
+<p>Same possible forms as <em>crs_in</em>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>xy_out</strong> : list or numpy ndarray</p>
+<blockquote class="last">
+<div><p>The reprojected x,y coordinates of the shapes.</p>
+<p>If the type of the shapes is ‘POINT’ this is a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If the type of the shapes is ‘POLYLINE’ or ‘POLYGON’ this is a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.xy_rotate">
+<code class="descclassname">gis_func.</code><code class="descname">xy_rotate</code><span class="sig-paren">(</span><em>xy, rot_CwRad, xy_rot=[0, 0], rot_inDeg=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.xy_rotate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to rotate x,y coordinates of shapes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy</strong> : list or numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the shapes to be reprojected.</p>
+<p>If the type of the shapes is ‘POINT’ this should be a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If the type of the shapes is ‘POLYLINE’ or ‘POLYGON’ this should be a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+</div></blockquote>
+<p><strong>rot_CwRad</strong> : float</p>
+<blockquote>
+<div><p>The rotation angle in clock-wise radians.</p>
+</div></blockquote>
+<p><strong>xy_rot</strong> : list, tuple or numpy ndarray (optional)</p>
+<blockquote>
+<div><p>The x,y coordinates (1-D) of the point around which the rotation should be done.</p>
+</div></blockquote>
+<p><strong>rot_inDeg</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = rotation angle <em>rot_CwRad</em> is given in degrees.</p>
+<p>False = rotation angle is not given in degrees.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>xy_out</strong> : list or numpy ndarray</p>
+<blockquote class="last">
+<div><p>The reprojected x,y coordinates of the shapes.</p>
+<p>If the type of the shapes is ‘POINT’ this is a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If the type of the shapes is ‘POLYLINE’ or ‘POLYGON’ this is a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="gis_func.xy_shift">
+<code class="descclassname">gis_func.</code><code class="descname">xy_shift</code><span class="sig-paren">(</span><em>xy, xy_shift=[0, 0], backward=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gis_func.xy_shift" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to shift/translate x,y coordinates of shapes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>xy</strong> : list or numpy ndarray</p>
+<blockquote>
+<div><p>The x,y coordinates of the shapes to be reprojected.</p>
+<p>If the type of the shapes is ‘POINT’ this should be a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If the type of the shapes is ‘POLYLINE’ or ‘POLYGON’ this should be a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+</div></blockquote>
+<p><strong>xy_shift</strong> : list, tuple or numpy ndarray (optional)</p>
+<blockquote>
+<div><p>The shift in x and y direction (1-D).</p>
+</div></blockquote>
+<p><strong>backward</strong> : bool (optional)</p>
+<blockquote>
+<div><p>True = the shift is done ‘backward’ (in oposite direction).</p>
+<p>False = the shift is done ‘forward’ (normal direction).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>xy_out</strong> : list or numpy ndarray</p>
+<blockquote class="last">
+<div><p>The shifted x,y coordinates of the shapes.</p>
+<p>If the type of the shapes is ‘POINT’ this is a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If the type of the shapes is ‘POLYLINE’ or ‘POLYGON’ this is a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">home</a>|&nbsp;</li>
+        <li><a href="../search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Wiebe Borren.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

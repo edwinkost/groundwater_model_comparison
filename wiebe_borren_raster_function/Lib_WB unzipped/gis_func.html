@@ -1,0 +1,468 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Module gis_func &#8212; Lib_WB 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Module table_func" href="table_func.html" />
+    <link rel="prev" title="Module raster_func" href="raster_func.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="index.html"><img src="_static/logo.jpg" width=150 border="0" alt="Deltares python modules"/></a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="table_func.html" title="Module table_func"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="raster_func.html" title="Module raster_func"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Module gis_func</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting started</a></li>
+<li><a class="reference internal" href="#esri-shapefile">ESRI shapefile</a></li>
+<li><a class="reference internal" href="#arcinfo-generate-file">ArcInfo generate file</a></li>
+<li><a class="reference internal" href="#imod-vector-files">iMOD vector files</a></li>
+<li><a class="reference internal" href="#rasters">Rasters</a></li>
+<li><a class="reference internal" href="#geometries">Geometries</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="raster_func.html"
+                        title="previous chapter">Module raster_func</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="table_func.html"
+                        title="next chapter">Module table_func</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/gis_func.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-gis-func">
+<span id="gis-func"></span><h1>Module gis_func<a class="headerlink" href="#module-gis-func" title="Permalink to this headline">¶</a></h1>
+<p>This module contains GIS functions.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getting-started">
+<h3>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h3>
+<p>Module file: gis_func.py</p>
+<p>Recommended import statement:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">gis_func</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p><strong>Python installation and modules:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Python</td>
+<td>Developed and tested with Python 2.7</td>
+</tr>
+<tr class="row-even"><td>Numpy</td>
+<td>Developed and tested with numpy 1.8.2</td>
+</tr>
+<tr class="row-odd"><td>GDAL</td>
+<td>Developed and tested with GDAL 1.10.1</td>
+</tr>
+<tr class="row-even"><td>pyshp</td>
+<td>shapefile.py (<a class="reference external" href="http://code.google.com/p/pyshp">pyshp</a>)</td>
+</tr>
+<tr class="row-odd"><td>shapely</td>
+<td>Developed and tested with shapely 1.5.13</td>
+</tr>
+<tr class="row-even"><td>PIL</td>
+<td>Python Image Library (PIL / Image). See remark below.</td>
+</tr>
+<tr class="row-odd"><td>rtree</td>
+<td>Used in function <code class="xref py py-func docutils literal"><span class="pre">points_polygon2val()</span></code>. Developed and tested with rtree 0.8.2</td>
+</tr>
+<tr class="row-even"><td>table_func</td>
+<td>table_func.py from Lib_WB (<a class="reference internal" href="table_func.html#table-func"><span class="std std-ref">Module table_func</span></a>)</td>
+</tr>
+<tr class="row-odd"><td>raster_func</td>
+<td>raster_func.py from Lib_WB (<a class="reference internal" href="raster_func.html#raster-func"><span class="std std-ref">Module raster_func</span></a>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PIL</strong></p>
+<p>PIL is used in the function <a class="reference internal" href="rst/gis_func.html#gis_func.shp2arr_PIL" title="gis_func.shp2arr_PIL"><code class="xref py py-func docutils literal"><span class="pre">gis_func.shp2arr_PIL()</span></code></a>.</p>
+<p>In the standard PythonXY installation at Deltares there could be a bug in the PILImageDraw.py file.</p>
+<p>See how to fix this bug at <a class="reference external" href="https://github.com/python-imaging/Pillow/commit/1f41e25b4feec620ad32e8b3a9b28466f63b3afe">Fix AttributeError: ‘module’ object has no attribute ‘isNumberType’</a></p>
+</div>
+<div class="section" id="esri-shapefile">
+<span id="shapefile"></span><h3>ESRI shapefile<a class="headerlink" href="#esri-shapefile" title="Permalink to this headline">¶</a></h3>
+<p>Recognized are point, polyline and polygon shapefiles (one geometry per file). Multi-part features are supported.</p>
+<p>In gis_func shapefiles are read with pyshp (shapefile.py) and written with pyshp or GDAL.</p>
+<p>See also:</p>
+<p><a class="reference external" href="http://www.gdal.org/ogr/drv_shapefile.html">ESRI shapefile</a></p>
+<p><a class="reference external" href="http://code.google.com/p/pyshp">pyshp</a></p>
+</div>
+<div class="section" id="arcinfo-generate-file">
+<span id="gen-file"></span><h3>ArcInfo generate file<a class="headerlink" href="#arcinfo-generate-file" title="Permalink to this headline">¶</a></h3>
+<p>ASCII files in special format for points, polylines and polygons (one geometry per file).</p>
+<p>In gis_func a polygon file is distinguished from a polyline file by the existence of an x,y coordinate for the label of each polygon.
+These coordinates are absent in polyline files.</p>
+<p>See also <a class="reference external" href="http://www.gdal.org/ogr/drv_arcgen.html">ArcInfo generate file</a></p>
+</div>
+<div class="section" id="imod-vector-files">
+<h3>iMOD vector files<a class="headerlink" href="#imod-vector-files" title="Permalink to this headline">¶</a></h3>
+<p>Reading of IFF files (flow path lines) and reading and writing of ISG files (surface water lines) is supported.</p>
+<p>Reading and writing of IPF files (points) are supported by functions in table_func.</p>
+<p>See also the description of the iMOD files in <a class="reference external" href="http://content.oss.deltares.nl/delft3d/manuals/iMOD_User_Manual.pdf">iMOD User Manual</a></p>
+</div>
+<div class="section" id="rasters">
+<h3>Rasters<a class="headerlink" href="#rasters" title="Permalink to this headline">¶</a></h3>
+<p>The rasterArr object of <a class="reference internal" href="raster_func.html#raster-func"><span class="std std-ref">Module raster_func</span></a> is used.</p>
+</div>
+<div class="section" id="geometries">
+<h3>Geometries<a class="headerlink" href="#geometries" title="Permalink to this headline">¶</a></h3>
+<p>3 types of geometries (also called shapes or features) are supported: points, (poly)lines and polygons.
+The corresponding shape type references (shptype) used in gis_func are: ‘POINT’, ‘POLYLINE’, ‘POLYGON’.</p>
+<p>The geometries can have 2 different forms in gis_func:</p>
+<ul class="simple">
+<li>xy array/list</li>
+<li>shapely geometries</li>
+</ul>
+<p><strong>xy array/list</strong></p>
+<p>The coordinates of the points/vertices are stored as numpy ndarrays or a list of numpy ndarray.</p>
+<p>If the type of the shapes is ‘POINT’ this should be a Nx2 array: [(x1,y1), (x2,y2) … (xN,yN)].</p>
+<p>If the type of the shapes is ‘POLYLINE’ or ‘POLYGON’ this should be a list of Nx2 arrays: [[(x1,y1),(x2,y2) .. (xN,yN)], [(x1,y1),(x2,y2) .. (xM,yM)] …].</p>
+<p>The distinction between polygons and polylines is that the first and last vertex of a polygon are equal.</p>
+<p>Interior polygons (‘holes’) are not supported in this format.</p>
+<p><strong>shapely geometries</strong></p>
+<p>The coordinates of the points/vertices are stored as shapely geometries: Point, LineString, Polygon.</p>
+<p>The advantages of shapely geometries compared to xy array/list are:</p>
+<ul class="simple">
+<li>interior polygons (‘holes’) are supported</li>
+<li>shapely offers GIS functions and methods which can be used on these geometries</li>
+</ul>
+<p>The disadvantage is that the creation of the shapely geometries is slower.</p>
+<p><strong>summary of shape types</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="34%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">gis_func shape type</th>
+<th class="head">xy array/list</th>
+<th class="head">shapely geometry</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>POINT</td>
+<td>Nx2 array</td>
+<td>Point</td>
+</tr>
+<tr class="row-odd"><td>POLYLINE</td>
+<td>list of Nx2 arrays</td>
+<td>LineString</td>
+</tr>
+<tr class="row-even"><td>POLYGON</td>
+<td>list of Nx2 arrays</td>
+<td>Polygon</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p><strong>Reading:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.get_shp_data" title="gis_func.get_shp_data"><code class="xref py py-func docutils literal"><span class="pre">get_shp_data</span></code></a></td>
+<td>Function to get the data of an ESRI shape file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.get_gen_data" title="gis_func.get_gen_data"><code class="xref py py-func docutils literal"><span class="pre">get_gen_data</span></code></a></td>
+<td>Function to get the data of an ArcInfo generate file.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.get_iff_data" title="gis_func.get_iff_data"><code class="xref py py-func docutils literal"><span class="pre">get_iff_data</span></code></a></td>
+<td>Function to get the data of an iMOD iff file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.get_isg_data" title="gis_func.get_isg_data"><code class="xref py py-func docutils literal"><span class="pre">get_isg_data</span></code></a></td>
+<td>Function to get the data of an iMOD isg file.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.shp2xy" title="gis_func.shp2xy"><code class="xref py py-func docutils literal"><span class="pre">shp2xy</span></code></a></td>
+<td>Function to get the data of an ESRI shape file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.shp2shapelyGeoms" title="gis_func.shp2shapelyGeoms"><code class="xref py py-func docutils literal"><span class="pre">shp2shapelyGeoms</span></code></a></td>
+<td>Function to get the shapes of an ESRI shape file as shapely geometries.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Writing:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.write_shp" title="gis_func.write_shp"><code class="xref py py-func docutils literal"><span class="pre">write_shp</span></code></a></td>
+<td>Function to write an ESRI shape file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.write_gen" title="gis_func.write_gen"><code class="xref py py-func docutils literal"><span class="pre">write_gen</span></code></a></td>
+<td>Function to write an ArcInfo generate file.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.write_isg" title="gis_func.write_isg"><code class="xref py py-func docutils literal"><span class="pre">write_isg</span></code></a></td>
+<td>Function to write an iMOD isg file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.shapelyGeoms2shp" title="gis_func.shapelyGeoms2shp"><code class="xref py py-func docutils literal"><span class="pre">shapelyGeoms2shp</span></code></a></td>
+<td>Function to write shapely geometries to an ESRI shape file.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conversion of ArcInfo generate files and ESRI shape files:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.gen2shp" title="gis_func.gen2shp"><code class="xref py py-func docutils literal"><span class="pre">gen2shp</span></code></a></td>
+<td>Function to convert an ArcInfo generate file into an ESRI shapefile.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.shp2gen" title="gis_func.shp2gen"><code class="xref py py-func docutils literal"><span class="pre">shp2gen</span></code></a></td>
+<td>Function to convert an ESRI shapefile into an ArcInfo generate file.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Shape type and format conversion</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="62%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.get_shptype" title="gis_func.get_shptype"><code class="xref py py-func docutils literal"><span class="pre">get_shptype</span></code></a></td>
+<td>Function to get the shape type of a xy array/list or shapely geometry/geometries.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.xy2shapelyGeoms" title="gis_func.xy2shapelyGeoms"><code class="xref py py-func docutils literal"><span class="pre">xy2shapelyGeoms</span></code></a></td>
+<td>Function to convert xy array/list to shapely geometries.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.shapelyGeoms2xy" title="gis_func.shapelyGeoms2xy"><code class="xref py py-func docutils literal"><span class="pre">shapelyGeoms2xy</span></code></a></td>
+<td>Function to convert shapely geometries to xy array/list.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rasterizing:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="68%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.shp2arr" title="gis_func.shp2arr"><code class="xref py py-func docutils literal"><span class="pre">shp2arr</span></code></a></td>
+<td>Function to rasterize an ESRI shapefile.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.shp2arr_refined" title="gis_func.shp2arr_refined"><code class="xref py py-func docutils literal"><span class="pre">shp2arr_refined</span></code></a></td>
+<td>Function to rasterize an ESRI shapefile using GDAL’s RasterizeLayer function by using a refined underlying grid.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.shp2arr_PIL" title="gis_func.shp2arr_PIL"><code class="xref py py-func docutils literal"><span class="pre">shp2arr_PIL</span></code></a></td>
+<td>Function to rasterize an ESRI shapefile using PIL.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.shapelyGeoms2arr" title="gis_func.shapelyGeoms2arr"><code class="xref py py-func docutils literal"><span class="pre">shapelyGeoms2arr</span></code></a></td>
+<td>Function to rasterize shapely geometries using GDAL’s RasterizeLayer function.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Raster to shape conversion:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.arr2shp_contour" title="gis_func.arr2shp_contour"><code class="xref py py-func docutils literal"><span class="pre">arr2shp_contour</span></code></a></td>
+<td>Function to create an ESRI shapefile with contour lines from a raster, using gdal_contour.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conversion of coordinates:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.xy_reproject" title="gis_func.xy_reproject"><code class="xref py py-func docutils literal"><span class="pre">xy_reproject</span></code></a></td>
+<td>Function to reproject x,y coordinates of shapes.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.xy_rotate" title="gis_func.xy_rotate"><code class="xref py py-func docutils literal"><span class="pre">xy_rotate</span></code></a></td>
+<td>Function to rotate x,y coordinates of shapes.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.xy_shift" title="gis_func.xy_shift"><code class="xref py py-func docutils literal"><span class="pre">xy_shift</span></code></a></td>
+<td>Function to shift/translate x,y coordinates of shapes.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.utm2latlong" title="gis_func.utm2latlong"><code class="xref py py-func docutils literal"><span class="pre">utm2latlong</span></code></a></td>
+<td>Function to convert UTM coordinates to LatLong coordinates.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.latlong2utm" title="gis_func.latlong2utm"><code class="xref py py-func docutils literal"><span class="pre">latlong2utm</span></code></a></td>
+<td>Function to convert LatLong coordinates to UTM coordinates.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.rd2latlong" title="gis_func.rd2latlong"><code class="xref py py-func docutils literal"><span class="pre">rd2latlong</span></code></a></td>
+<td>Function to convert RD coordinates to LatLong coordinates.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.latlong2rd" title="gis_func.latlong2rd"><code class="xref py py-func docutils literal"><span class="pre">latlong2rd</span></code></a></td>
+<td>Function to convert LatLong coordinates to RD coordinates.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>GIS operations:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="63%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.points_polygons2val" title="gis_func.points_polygons2val"><code class="xref py py-func docutils literal"><span class="pre">points_polygons2val</span></code></a></td>
+<td>Function to extract polygon values of an ESRI shape file on points.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.split_polygons" title="gis_func.split_polygons"><code class="xref py py-func docutils literal"><span class="pre">split_polygons</span></code></a></td>
+<td>Function to split shapely polygons in regular blocks.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.polyline2interval_points" title="gis_func.polyline2interval_points"><code class="xref py py-func docutils literal"><span class="pre">polyline2interval_points</span></code></a></td>
+<td>Function to get points at a regular interval along the polylines in a set of polylines.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.polyline_idf2val" title="gis_func.polyline_idf2val"><code class="xref py py-func docutils literal"><span class="pre">polyline_idf2val</span></code></a></td>
+<td>Function to get values of a list of IDF files at a regular interval along the polylines in a set of polylines.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.xy_rotate" title="gis_func.xy_rotate"><code class="xref py py-func docutils literal"><span class="pre">xy_rotate</span></code></a></td>
+<td>Function to rotate x,y coordinates of shapes.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.xy_shift" title="gis_func.xy_shift"><code class="xref py py-func docutils literal"><span class="pre">xy_shift</span></code></a></td>
+<td>Function to shift/translate x,y coordinates of shapes.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.poly2slopes_intersects" title="gis_func.poly2slopes_intersects"><code class="xref py py-func docutils literal"><span class="pre">poly2slopes_intersects</span></code></a></td>
+<td>Function to calculate the slopes and y-axis intersects of all line elements of a set of polylines or polygons.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/gis_func.html#gis_func.intersect_poly" title="gis_func.intersect_poly"><code class="xref py py-func docutils literal"><span class="pre">intersect_poly</span></code></a></td>
+<td>Function to get the intersection points of a set of polylines or polygons with another set of polylines or polygons.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.point_in_polygon" title="gis_func.point_in_polygon"><code class="xref py py-func docutils literal"><span class="pre">point_in_polygon</span></code></a></td>
+<td>Function to perform a point-in-polygon test for a set of points and a set of polygons.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Other functions/methods</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="63%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/gis_func.html#gis_func.delete_shp" title="gis_func.delete_shp"><code class="xref py py-func docutils literal"><span class="pre">delete_shp</span></code></a></td>
+<td>Function to delete an ESRI shapefile including all associated files.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="table_func.html" title="Module table_func"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="raster_func.html" title="Module raster_func"
+             >previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Wiebe Borren.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

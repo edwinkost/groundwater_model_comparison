@@ -1,0 +1,526 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Module table_func &#8212; Lib_WB 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Module gis_func" href="gis_func.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="index.html"><img src="_static/logo.jpg" width=150 border="0" alt="Deltares python modules"/></a>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gis_func.html" title="Module gis_func"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Module table_func</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting started</a></li>
+<li><a class="reference internal" href="#tables">Tables</a></li>
+<li><a class="reference internal" href="#numpy-recarray-structured-array">Numpy recarray (structured array)</a></li>
+<li><a class="reference internal" href="#table-file-formats">Table file formats</a><ul>
+<li><a class="reference internal" href="#comma-separated-files">Comma-separated files</a></li>
+<li><a class="reference internal" href="#dbf-files">DBF files</a></li>
+<li><a class="reference internal" href="#imod-ipf-file">iMOD IPF file</a></li>
+<li><a class="reference internal" href="#imod-timeseries-file">iMOD timeseries file</a></li>
+<li><a class="reference internal" href="#space-separated-files">Space-separated files</a></li>
+<li><a class="reference internal" href="#other-text-formatted-files">Other text-formatted files</a></li>
+<li><a class="reference internal" href="#excel-files">Excel files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#reading-table-files">Reading table files</a></li>
+<li><a class="reference internal" href="#writing-table-files">Writing table files</a></li>
+<li><a class="reference internal" href="#modifying-numpy-recarrays">Modifying numpy recarrays</a></li>
+<li><a class="reference internal" href="#other-functions">Other functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gis_func.html"
+                        title="previous chapter">Module gis_func</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/table_func.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-table-func">
+<span id="table-func"></span><h1>Module table_func<a class="headerlink" href="#module-table-func" title="Permalink to this headline">¶</a></h1>
+<p>This module contains table (file) functions.</p>
+<p>It comprises reading, writing and a limited number of manipulations.</p>
+<p>The data is stored in numpy recarrays.</p>
+<p>The main purpose of the module is to make it easier to read and write
+different formats of table files.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getting-started">
+<h3>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h3>
+<p>Module file: table_func.py</p>
+<p>Recommended import statement:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">table_func</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p><strong>Python installation and modules:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Python</td>
+<td>Developed and tested with Python 2.7</td>
+</tr>
+<tr class="row-even"><td>Numpy</td>
+<td>Developed and tested with numpy 1.8.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tables">
+<h3>Tables<a class="headerlink" href="#tables" title="Permalink to this headline">¶</a></h3>
+<p>Tables are data structured in fields (columns) and records (rows).
+The fields have a name and could have different data types, e.g. float, int and string.
+A record contains a value for each field.</p>
+<p>In table_func tables are stored in numpy recarrays (structured arrays). See below.</p>
+</div>
+<div class="section" id="numpy-recarray-structured-array">
+<h3>Numpy recarray (structured array)<a class="headerlink" href="#numpy-recarray-structured-array" title="Permalink to this headline">¶</a></h3>
+<p>See also <a class="reference external" href="http://docs.scipy.org/doc/numpy/user/basics.rec.html">Numpy documentation on structured arrays</a></p>
+<p>Numpy recarrays make it possible to store data of different type (dtype) in one array.
+Data is structured in fields and records and is therefore suitable to store data in tabular form (tables).</p>
+<p>Although one may think of a table as a 2-dimensional dataset, it is called 1-dimensional, with the records on dimension 1.</p>
+<p>Fields could be accessed by their field names, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">myTable</span><span class="p">[</span><span class="s">&#39;myField&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>It returns an array with the value of each record in the field ‘myField’.</p>
+<p>Records could be accessed by index number, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="n">myTable</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>It returns the first record.</p>
+<p>In table_func all values in the table are 0-dimensional values, i.e. single values.
+It is not possible to store a sequence of values in a field within one record. This is possible with numpy recarrays, but not used here.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="c"># single values in each field</span>
+<span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">),</span>
+ <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">)]</span>
+
+<span class="c"># sequence of values in the first field; this is not possible in table_func</span>
+<span class="p">[([</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">],</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">),</span>
+ <span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>Ways to get field names and data types of a recarray:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="c"># getting the field names:</span>
+<span class="n">myTable</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span>
+
+<span class="c"># getting the field names and data types:</span>
+<span class="n">myTable</span><span class="o">.</span><span class="n">dtype</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="table-file-formats">
+<span id="table-formats"></span><h3>Table file formats<a class="headerlink" href="#table-file-formats" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="comma-separated-files">
+<span id="csv-file"></span><h4>Comma-separated files<a class="headerlink" href="#comma-separated-files" title="Permalink to this headline">¶</a></h4>
+<p>A text-formatted table file. The fields are separated by commas. This file format is also refered to as ‘csv’ file.</p>
+<p>In some functions it is assumed that there is 1 header line (also comma-separated) which contains the field names. See function description if this assumption is made.</p>
+</div>
+<div class="section" id="dbf-files">
+<span id="dbf-file"></span><h4>DBF files<a class="headerlink" href="#dbf-files" title="Permalink to this headline">¶</a></h4>
+<p>A binary table file. File format used by the dBASE database management system to store tables of data.</p>
+<p>The data file of an ESRI shapefile is a DBF file.</p>
+<p>See also: <a class="reference external" href="http://www.digitalpreservation.gov/formats/fdd/fdd000325.shtml">DBF file</a></p>
+<p>The field specs comprise type, size and deci where</p>
+<blockquote>
+<div><p>type is one of:</p>
+<blockquote>
+<div><p>C for ascii character data</p>
+<p>M for ascii character memo data (real memo fields not supported)</p>
+<p>D for datetime objects</p>
+<p>N for ints or decimal objects</p>
+<p>F for floats</p>
+<p>L for logical values ‘T’, ‘F’, or ‘?’</p>
+</div></blockquote>
+<p>size is the field width</p>
+<p>deci is the number of decimal places in the provided decimal object</p>
+</div></blockquote>
+</div>
+<div class="section" id="imod-ipf-file">
+<span id="imod-file"></span><h4>iMOD IPF file<a class="headerlink" href="#imod-ipf-file" title="Permalink to this headline">¶</a></h4>
+<p>A text-formatted table file. This is a table file used by iMOD. It may be space or comma-separated.</p>
+<p>The header of the file consists of several lines.
+The number of records, number of fields, each field name are all stored in a separate header line.
+The last header line contains an index number (refering to one of the fields) and a file extension. The index number starts at 1 (the first field).
+If the index number is &gt; 0 it is used to construct file names from that specific field and the extension.
+These file names point to iMOD timeseries files (see below).</p>
+<p>The records consist of one line each.</p>
+<p>Example of an IPF file with 4 fields and 3 records:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="mi">3</span>
+<span class="mi">4</span>
+<span class="n">X</span>
+<span class="n">Y</span>
+<span class="n">Z</span>
+<span class="n">Q</span>
+<span class="mi">0</span><span class="p">,</span><span class="n">TXT</span>
+<span class="mf">110000.0</span>  <span class="mf">750000.0</span>  <span class="mf">15.0</span>  <span class="o">-</span><span class="mf">300.0</span>
+<span class="mf">109000.0</span>  <span class="mf">760000.0</span>  <span class="mf">25.0</span>  <span class="o">-</span><span class="mf">300.0</span>
+<span class="mf">108000.0</span>  <span class="mf">770000.0</span>  <span class="mf">26.0</span>  <span class="o">-</span><span class="mf">300.0</span>
+</pre></div>
+</div>
+<p>And now the 4th field refer to timeseries files with extention *.TXT:</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="mi">3</span>
+<span class="mi">4</span>
+<span class="n">X</span>
+<span class="n">Y</span>
+<span class="n">Z</span>
+<span class="n">Q</span>
+<span class="mi">4</span><span class="p">,</span><span class="n">TXT</span>
+<span class="mf">110000.0</span>  <span class="mf">750000.0</span>  <span class="mf">15.0</span>  <span class="s">&quot;data</span><span class="se">\a</span><span class="s">bstraction 1&quot;</span>
+<span class="mf">110000.0</span>  <span class="mf">750000.0</span>  <span class="mf">15.0</span>  <span class="s">&quot;data</span><span class="se">\a</span><span class="s">bstraction 2&quot;</span>
+<span class="mf">110000.0</span>  <span class="mf">750000.0</span>  <span class="mf">15.0</span>  <span class="s">&quot;data</span><span class="se">\a</span><span class="s">bstraction 3&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="imod-timeseries-file">
+<h4>iMOD timeseries file<a class="headerlink" href="#imod-timeseries-file" title="Permalink to this headline">¶</a></h4>
+<p>A text-formatted table file. This is a table file used by iMOD for timeseries. It may be space or comma-separated.</p>
+<p>The first field is used to store dates (or date-times). The missing value is specified for each field.</p>
+<p>Example of timeseries file with 2 fields and with 14 year of data on a daily basis (5114 dates):</p>
+<div class="highlight-default"><div class="highlight"><pre><span class="mi">5114</span>
+<span class="mi">2</span>
+<span class="n">DATE</span><span class="p">,</span><span class="o">-</span><span class="mi">999</span>
+<span class="n">HEAD</span><span class="p">,</span><span class="o">-</span><span class="mi">999999</span>
+<span class="mi">20000101</span> <span class="o">-</span><span class="mf">10.5</span>
+<span class="mi">20000102</span> <span class="o">-</span><span class="mf">10.4</span>
+<span class="o">..</span>
+<span class="mi">20131231</span> <span class="o">-</span><span class="mf">10.9</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="space-separated-files">
+<span id="dat-file"></span><h4>Space-separated files<a class="headerlink" href="#space-separated-files" title="Permalink to this headline">¶</a></h4>
+<p>A text-formatted table file. The fields are separated by spaces: any (combination of) whitespaces, i.e. space and tab. This file format is sometimes refered to as ‘dat’ file.</p>
+<p>In some functions it is assumed that there is 1 header line (also space-separated) which contains the field names. See function description if this assumption is made.</p>
+</div>
+<div class="section" id="other-text-formatted-files">
+<span id="txt-file"></span><h4>Other text-formatted files<a class="headerlink" href="#other-text-formatted-files" title="Permalink to this headline">¶</a></h4>
+<p>It is possible to use other text-formatted files, which resemble the comma or space-separated files but use other separators/delimiters.</p>
+</div>
+<div class="section" id="excel-files">
+<span id="xls-file"></span><h4>Excel files<a class="headerlink" href="#excel-files" title="Permalink to this headline">¶</a></h4>
+<p>Microsoft Excel files: *.xls and *.xlsx.</p>
+<p>Only reading of Excel files (workbooks) is currently supported. Tables from any worksheet in the workbook can be read.</p>
+<p>By default it is assumed that all data in the worksheet belong to the table. However, empty rows at the top and empty columns on the left are skipped automatically.</p>
+<p>Additionally it is possible to specify the block of cells containing the table.</p>
+</div>
+</div>
+</div>
+<div class="section" id="reading-table-files">
+<span id="reading-tables"></span><h2>Reading table files<a class="headerlink" href="#reading-table-files" title="Permalink to this headline">¶</a></h2>
+<p><strong>Main function for reading table files:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.table2arr" title="table_func.table2arr"><code class="xref py py-func docutils literal"><span class="pre">table2arr</span></code></a></td>
+<td>Function to read a table file and create a numpy recarray (structured array).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions for reading table files in specific formats:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.ipf2arr" title="table_func.ipf2arr"><code class="xref py py-func docutils literal"><span class="pre">ipf2arr</span></code></a></td>
+<td>Function to read an iMOD IPF file and create a numpy recarray.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.imodtss2arr" title="table_func.imodtss2arr"><code class="xref py py-func docutils literal"><span class="pre">imodtss2arr</span></code></a></td>
+<td>Function to read an iMOD timeseries file and create a numpy recarray.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.csv2arr" title="table_func.csv2arr"><code class="xref py py-func docutils literal"><span class="pre">csv2arr</span></code></a></td>
+<td>Function to read a comma-separated file and create a numpy recarray.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.dbf2arr" title="table_func.dbf2arr"><code class="xref py py-func docutils literal"><span class="pre">dbf2arr</span></code></a></td>
+<td>Function to read a DBF file and create a numpy recarray.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.dat2arr" title="table_func.dat2arr"><code class="xref py py-func docutils literal"><span class="pre">dat2arr</span></code></a></td>
+<td>Function to read a space-separated file and create a numpy recarray.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.txt2arr" title="table_func.txt2arr"><code class="xref py py-func docutils literal"><span class="pre">txt2arr</span></code></a></td>
+<td>Function to read a text-formatted table file and create a numpy recarray or ndarray.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.xls2arr" title="table_func.xls2arr"><code class="xref py py-func docutils literal"><span class="pre">xls2arr</span></code></a></td>
+<td>Function to read a table from a worksheet in an Excel workbook.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.xls2arr_allsheets" title="table_func.xls2arr_allsheets"><code class="xref py py-func docutils literal"><span class="pre">xls2arr_allsheets</span></code></a></td>
+<td>Function to read the tables from all worksheets in an Excel workbook.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions for getting field information:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.table2fields" title="table_func.table2fields"><code class="xref py py-func docutils literal"><span class="pre">table2fields</span></code></a></td>
+<td>Function to get the field names of a table file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.ipf2fields" title="table_func.ipf2fields"><code class="xref py py-func docutils literal"><span class="pre">ipf2fields</span></code></a></td>
+<td>Function to get the field names of an iMOD IPF file.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.ipf2iext" title="table_func.ipf2iext"><code class="xref py py-func docutils literal"><span class="pre">ipf2iext</span></code></a></td>
+<td>Function to get the field number of the iMOD timeseries file references (IEXT) and the extension (EXT) from an iMOD IPF file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.csv2fields" title="table_func.csv2fields"><code class="xref py py-func docutils literal"><span class="pre">csv2fields</span></code></a></td>
+<td>Function to get the field names of a comma-separated file.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.dbf2fields" title="table_func.dbf2fields"><code class="xref py py-func docutils literal"><span class="pre">dbf2fields</span></code></a></td>
+<td>Function to get the field names of a DBF file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.dbf2fields_specs" title="table_func.dbf2fields_specs"><code class="xref py py-func docutils literal"><span class="pre">dbf2fields_specs</span></code></a></td>
+<td>Function to get the field names and field specs of a DBF file.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.dat2fields" title="table_func.dat2fields"><code class="xref py py-func docutils literal"><span class="pre">dat2fields</span></code></a></td>
+<td>Function to get the field names of a space-separated file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.xls2fields" title="table_func.xls2fields"><code class="xref py py-func docutils literal"><span class="pre">xls2fields</span></code></a></td>
+<td>Function to get the field names of a table in a worksheet in an Excel workbook.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.get_fields" title="table_func.get_fields"><code class="xref py py-func docutils literal"><span class="pre">get_fields</span></code></a></td>
+<td>Function to get the field names of a text-formatted table file.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Other functions related to reading table files:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.dbfreader" title="table_func.dbfreader"><code class="xref py py-func docutils literal"><span class="pre">dbfreader</span></code></a></td>
+<td>Function to create a generator over records in a DBF file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.xls2sheets" title="table_func.xls2sheets"><code class="xref py py-func docutils literal"><span class="pre">xls2sheets</span></code></a></td>
+<td>Function to get the worksheet names of an Excel workbook.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="writing-table-files">
+<span id="writing-tables"></span><h2>Writing table files<a class="headerlink" href="#writing-table-files" title="Permalink to this headline">¶</a></h2>
+<p><strong>Main function for writing table files:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.arr2table" title="table_func.arr2table"><code class="xref py py-func docutils literal"><span class="pre">arr2table</span></code></a></td>
+<td>Function to write a numpy recarray to a table file.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions for writing table files in specific formats:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.arr2ipf" title="table_func.arr2ipf"><code class="xref py py-func docutils literal"><span class="pre">arr2ipf</span></code></a></td>
+<td>Function to write a numpy recarray to an iMOD IPF file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.arr2imodtss" title="table_func.arr2imodtss"><code class="xref py py-func docutils literal"><span class="pre">arr2imodtss</span></code></a></td>
+<td>Function to write a numpy recarray to an iMOD timeseries file.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.arr2csv" title="table_func.arr2csv"><code class="xref py py-func docutils literal"><span class="pre">arr2csv</span></code></a></td>
+<td>Function to write numpy recarray to a comma-separated file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.arr2dbf" title="table_func.arr2dbf"><code class="xref py py-func docutils literal"><span class="pre">arr2dbf</span></code></a></td>
+<td>Function to write numpy recarray to a DBF file.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.arr2dat" title="table_func.arr2dat"><code class="xref py py-func docutils literal"><span class="pre">arr2dat</span></code></a></td>
+<td>Function to write numpy recarray to a space-separated file.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.arr2txt" title="table_func.arr2txt"><code class="xref py py-func docutils literal"><span class="pre">arr2txt</span></code></a></td>
+<td>Function to write a numpy recarray to a text-formatted table file.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Other functions related to writing table files:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.dbfwriter" title="table_func.dbfwriter"><code class="xref py py-func docutils literal"><span class="pre">dbfwriter</span></code></a></td>
+<td>Function to create and write a binary string directly to an opened DBF file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="modifying-numpy-recarrays">
+<h2>Modifying numpy recarrays<a class="headerlink" href="#modifying-numpy-recarrays" title="Permalink to this headline">¶</a></h2>
+<p><strong>Functions:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="58%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.recarray2ndarray" title="table_func.recarray2ndarray"><code class="xref py py-func docutils literal"><span class="pre">recarray2ndarray</span></code></a></td>
+<td>Function to convert a numpy recarray to a regular numpy ndarray.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.make_recarr" title="table_func.make_recarr"><code class="xref py py-func docutils literal"><span class="pre">make_recarr</span></code></a></td>
+<td>Function to create a numpy recarray filled with nodata.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.take_from_recarr" title="table_func.take_from_recarr"><code class="xref py py-func docutils literal"><span class="pre">take_from_recarr</span></code></a></td>
+<td>Function to take specific fields from a numpy recarray.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.add_to_recarr" title="table_func.add_to_recarr"><code class="xref py py-func docutils literal"><span class="pre">add_to_recarr</span></code></a></td>
+<td>Function to add fields to a numpy recarray.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.remove_from_recarr" title="table_func.remove_from_recarr"><code class="xref py py-func docutils literal"><span class="pre">remove_from_recarr</span></code></a></td>
+<td>Function to remove fields from a numpy recarray.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.change_dtype" title="table_func.change_dtype"><code class="xref py py-func docutils literal"><span class="pre">change_dtype</span></code></a></td>
+<td>Function to change the datatype (dtype) of specific fields in a numpy recarray.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="other-functions">
+<h2>Other functions<a class="headerlink" href="#other-functions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="48%" />
+<col width="52%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.arr2dbfspecs" title="table_func.arr2dbfspecs"><code class="xref py py-func docutils literal"><span class="pre">arr2dbfspecs</span></code></a></td>
+<td>Function to get DBF field specs for a numpy recarray.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.split_csv" title="table_func.split_csv"><code class="xref py py-func docutils literal"><span class="pre">split_csv</span></code></a></td>
+<td>Function to split a string according to ‘csv’ rules.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.split_ipf" title="table_func.split_ipf"><code class="xref py py-func docutils literal"><span class="pre">split_ipf</span></code></a></td>
+<td>Function to split a string according to ‘ipf’ rules.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.split_freeformat" title="table_func.split_freeformat"><code class="xref py py-func docutils literal"><span class="pre">split_freeformat</span></code></a></td>
+<td>Function to split a string according to ‘freeformat’ rules.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="rst/table_func.html#table_func.split_string" title="table_func.split_string"><code class="xref py py-func docutils literal"><span class="pre">split_string</span></code></a></td>
+<td>Function to split a string using one or more delimiters.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="rst/table_func.html#table_func.replace_string" title="table_func.replace_string"><code class="xref py py-func docutils literal"><span class="pre">replace_string</span></code></a></td>
+<td>Function to replace substrings by other substrings.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gis_func.html" title="Module gis_func"
+             >previous</a> |</li>
+        <li><a href="index.html">home</a>|&nbsp;</li>
+        <li><a href="search.html">search</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Wiebe Borren.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>
