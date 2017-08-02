@@ -18,6 +18,6 @@ clone_map_file_name = "clone_map_colombia_model.map"
 map_array = raster_func.raster2arr(idf_file_name)
 
 # convert the array to a pcraster file and make a pcraster clone map file based on this array
-map_array.write(clone_map_file_name + ".tmp")
-clone_map = pcr.defined(pcr.defined(clone_map_file_name + ".tmp"))
+map_array.write(clone_map_file_name + ".tmp.map")
+clone_map = pcr.defined(pcr.defined(clone_map_file_name + ".tmp.map""))
 pcr.report(clone_map, clone_map_file_name)
