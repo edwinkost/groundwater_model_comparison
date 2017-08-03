@@ -31,33 +31,51 @@ logger = logging.getLogger(__name__)
 
 ###########################################################################################################
 
-# file name of the clone map defining the scope of output
-cloneMapFileName = "/home/edwinhs/github/edwinkost/groundwater_model_comparison/making_clone_map_from_idf/clone_map_colombia_model.map"
+# file name of the global clone map defining the scope of input (global extent, 5 arcmin resolution) 
+globeCloneMapFileName = "/home/edwinhs/github/edwinkost/groundwater_model_comparison/global_maps/lddsound_05min.map"
+
+# file name of the clone map defining the scope of output (from the local/regional model) 
+localCloneMapFileName = "/home/edwinhs/github/edwinkost/groundwater_model_comparison/making_clone_map_from_idf/clone_map_colombia_model.map"
 
 # netcdf input file name
 netcdf_input = {}
-netcdf_input['file_name']     =  
-netcdf_input['variable_name'] = varDict.netcdf_short_name[efas_variable_name] 
+# - for the bottom layer
+netcdf_input['file_name']        = "/projects/0/aqueduct/users/edwinhs/pcrglobwb_modflow_version_2015_06_XX/merged_1958_to_2015/global/netcdf/groundwaterHeadLayer1_monthEnd_output_1958-01-31_to_2015-12-31_compressed.nc" 
+netcdf_input['variable_name']    = "groundwater_head_for_layer_1" 
+#~ # - for the top layer
+#~ netcdf_input['file_name']     = "/projects/0/aqueduct/users/edwinhs/pcrglobwb_modflow_version_2015_06_XX/merged_1958_to_2015/global/netcdf/groundwaterHeadLayer2_monthEnd_output_1958-01-31_to_2015-12-31.nc" 
+#~ netcdf_input['variable_name'] = "groundwater_head_for_layer_2" 
 
-# location where outpuut pcraster files will be stored
-pcraster_files = {}
-pcraster_files['directory'] = "/scratch/edwin/input/forcing/hyperhydro_wg1/EFAS/source/pcraster/"
-pcraster_files['file_name'] = efas_variable_name # "pr"
+# location where output pcraster files will be stored
+pcraster_output = {}
+pcraster_output['output_folder']  = "/scrach-shared/edwinhs/modflow_results_in_pcraster/"
+# - for the bottom layer         
+pcraster_output['file_name']      = "hbot"
+#~ # - for the top layer         
+#~ pcraster_output['file_name']   = "htop"
 
 # prepare the output directory
 try:
-    os.makedirs(output['folder'])
+    os.makedirs(pcraster_output['output_folder'])
 except:
-    os.system('rm -r ')
+    os.system('rm -r ' + str(pcraster_output['output_folder']))
     pass
 
-startDate     = "1990-01-01" # YYYY-MM-DD
-endDate       = None
+startDate     = "2000-01-01" # YYYY-MM-DD
+endDate       = "2012-12-01"
 
-# projection/coordinate sy
-inputEPSG  = "EPSG:3035" 
-outputEPSG = "EPSG:4326"
+# resampling method
 resample_method = "near"
+
+# projection/coordinate system 
+# - the input is in the lat/lon coordinate system (WGS 84)
+inputEPSG  = "EPSG:4326"
+# - the output will be in EPSG:3115, MAGNA-SIRGAS / Colombia West Zone
+outputEPSG = "EPSG:3115"
+# Info from Sandra: The coordinates for Valle del Cauca (ESCACES): I checked 2 things. 
+# * A website I found http://www.cali.gov.co/planeacion/publicaciones/105289/proyecciones_transformaciones_cartograficas_idesc/ where it says for Cali the coordinate system is Sistema de Coordenadas Cartesiano de Cali. (en ArcGIS: MAGNA_Cali_Valle_del_Cauca_2009).
+# * I then open one of the files I have in for ESCACES 2 and check the coordinate system (attached image). The CRS is EPSG:3115, MAGNA-SIRGAS / Colombia West Zone.
+
 
 ###########################################################################################################
 
@@ -73,12 +91,13 @@ def main():
     
     # time object
     modelTime = ModelTime() # timeStep info: year, month, day, doy, hour, etc
-    modelTime.getStartEndTimeSteps(startDate,endDate,nrOfTimeSteps)
+    modelTime.getStartEndTimeSteps(startDate, endDate)
     
-    calculationModel = CalcFramework(cloneMapFileName,\
-                                     pcraster_files, \
+    calculationModel = CalcFramework(globeCloneMapFileName, localCloneMapFileName, \
+                                     netcdf_input, \
+                                     pcraster_output, \
                                      modelTime, \
-                                     output, inputEPSG, outputEPSG, resample_method)
+                                     inputEPSG, outputEPSG, resample_method)
 
     dynamic_framework = DynamicFramework(calculationModel,modelTime.nrOfTimeSteps)
     dynamic_framework.setQuiet(True)

@@ -16,26 +16,29 @@ logger = logging.getLogger(__name__)
 
 class CalcFramework(DynamicModel):
 
-    def __init__(self, cloneMapFileName,\
-                       pcraster_files, \
+    def __init__(self, globeCloneMapFileName, localCloneMapFileName, \
+                       netcdf_input, \
+                       pcraster_output, \
                        modelTime, \
-                       output, inputEPSG = None, outputEPSG = None, resample_method = None):
+                       inputEPSG, outputEPSG, resample_method):
         DynamicModel.__init__(self)
         
-        # set the clone map
-        self.cloneMapFileName = cloneMapFileName
-        pcr.setclone(self.cloneMapFileName)
+        # clone map file names:
+        self.globeCloneMapFileName = globeCloneMapFileName
+        self.localCloneMapFileName = localCloneMapFileName
         
         # time variable/object
         self.modelTime = modelTime
         
-        # output file name, folder name, etc. 
-        self.output = output
-        self.output['file_name'] = vos.getFullPath(self.output['file_name'], self.output['folder'])
+        # netcdf input and pcraster output files
+        self.netcdf_input    = netcdf_input
+        self.pcraster_output = pcraster_output
         
         # input and output projection/coordinate systems 
         self.inputEPSG  =  inputEPSG
         self.outputEPSG = outputEPSG
+        
+        # resampling method
         self.resample_method = resample_method
 
         # prepare temporary directory
@@ -46,21 +49,6 @@ class CalcFramework(DynamicModel):
         except:
             pass
         
-        # pcraster input files
-        self.pcraster_files = pcraster_files
-        # - the begining part of pcraster file names (e.g. "pr" for "pr000000.001")
-        self.pcraster_file_name = self.pcraster_files['directory']+"/"+\
-                                  self.pcraster_files['file_name']
-
-        # object for reporting
-        self.netcdf_report = OutputNetcdf(cloneMapFileName, self.output['description'])       
-
-        # make a netcdf file
-        self.netcdf_report.createNetCDF(self.output['file_name'],\
-                                        self.output['variable_name'],\
-                                        self.output['unit'],\
-                                        self.output['long_name'])
-        
     def initial(self): 
         pass
 
@@ -69,63 +57,27 @@ class CalcFramework(DynamicModel):
         # re-calculate current model time using current pcraster timestep value
         self.modelTime.update(self.currentTimeStep())
 
-        # reading a netcdf file: 
+        # perform the operation only at the last day of the month (as the input netcdf file has a monthly resolution with the last date of the month as its time stamp)
+        if self.modelTime.isLastDayOfMonth():
         
-        # save it to a pcraster map (still at global extent and 5 arcmin resolution 
-        
-        # reproject and resample it to a local coordinate system
-        
-        # save it to a pcraster map with time stamp as its extension
-        
-        # save it to a pcraster map with default/common extension for pcraster file time series (e.g. using generateNameT)
-        pcraster_map_file_name = pcr.framework.frameworkBase.generateNameT(self.pcraster_file_name,\
-                                                                           self.modelTime.timeStepPCR)
-        
-        if self.output['variable_name'] != "temperature":
+            # reading a netcdf file (global extent, 5 arcmin resolution): 
+            pcr.setclone(self.globeCloneMapFileName)
+            UNTIL THIS PART
+            global_pcraster_map = vos.netcdf2PCRobjClone(ncFile  = ,
+                                                         varName = ,dateInput,\
+                                                         useDoy = None,
+                                                         cloneMapFileName  = None,\
+                                                         LatitudeLongitude = True,\
+                                                         specificFillValue = None)
+            
+            
+            # - save it to a pcraster map (still at global extent and 5 arcmin resolution 
+            
+            # reproject and resample it to a local coordinate system
+            
+            # save it to a pcraster map with time stamp as its extension
+            
+            # save it to a pcraster map with default/common extension for pcraster file time series (e.g. using generateNameT)
             pcraster_map_file_name = pcr.framework.frameworkBase.generateNameT(self.pcraster_file_name,\
-                                                                               self.modelTime.timeStepPCR) 
-            pcr_map_values = vos.readPCRmapClone(v = pcraster_map_file_name,\
-                                                 cloneMapFileName = self.cloneMapFileName,\
-                                                 tmpDir = self.tmpDir,\
-                                                 absolutePath = None, isLddMap = False,\
-                                                 cover = None,\
-                                                 isNomMap = False,\
-                                                 inputEPSG = self.inputEPSG,\
-                                                 outputEPSG = self.outputEPSG,\
-                                                 method = self.resample_method)
-        else:
-            min_map_file_name = pcr.framework.frameworkBase.generateNameT(self.pcraster_files['directory']+"/tn", self.modelTime.timeStepPCR)
-            max_map_file_name = pcr.framework.frameworkBase.generateNameT(self.pcraster_files['directory']+"/tx", self.modelTime.timeStepPCR)
-            min_map_values = vos.readPCRmapClone(v = min_map_file_name,\
-                                                 cloneMapFileName = self.cloneMapFileName,\
-                                                 tmpDir = self.tmpDir,\
-                                                 absolutePath = None, isLddMap = False,\
-                                                 cover = None,\
-                                                 isNomMap = False,\
-                                                 inputEPSG = self.inputEPSG,\
-                                                 outputEPSG = self.outputEPSG,\
-                                                 method = self.resample_method)
-            max_map_values = vos.readPCRmapClone(v = max_map_file_name,\
-                                                 cloneMapFileName = self.cloneMapFileName,\
-                                                 tmpDir = self.tmpDir,\
-                                                 absolutePath = None, isLddMap = False,\
-                                                 cover = None,\
-                                                 isNomMap = False,\
-                                                 inputEPSG = self.inputEPSG,\
-                                                 outputEPSG = self.outputEPSG,\
-                                                 method = self.resample_method)
-            pcr_map_values = 0.50*(min_map_values + \
-                                   max_map_values)
-
+                                                                               self.modelTime.timeStepPCR)
         
-        # for precipitation, converting the unit from mm.day-1 to m.day-1
-        if self.output['variable_name'] == "precipitation": pcr_map_values *= 0.001
-        
-        # reporting
-        timeStamp = datetime.datetime(self.modelTime.year,\
-                                      self.modelTime.month,\
-                                      self.modelTime.day,0)
-        self.netcdf_report.data2NetCDF(self.output['file_name'],\
-                                       self.output['variable_name'],\
-                                       pcr.pcr2numpy(pcr_map_values,vos.MV),\
-                                       timeStamp)
