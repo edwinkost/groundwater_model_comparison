@@ -49,19 +49,15 @@ netcdf_input['variable_name']    = "groundwater_head_for_layer_1"
 # location where output pcraster files will be stored
 pcraster_output = {}
 pcraster_output['output_folder']  = "/scrach-shared/edwinhs/modflow_results_in_pcraster/"
+
+# file names:          
 # - for the bottom layer         
 pcraster_output['file_name']      = "hbot"
 #~ # - for the top layer         
 #~ pcraster_output['file_name']   = "htop"
 
-# prepare the output directory
-try:
-    os.makedirs(pcraster_output['output_folder'])
-except:
-    os.system('rm -r ' + str(pcraster_output['output_folder']))
-    pass
-
-startDate     = "2000-01-01" # YYYY-MM-DD
+# starting and end dates     # YYYY-MM-DD
+startDate     = "2000-01-01"
 endDate       = "2012-12-01"
 
 # resampling method
@@ -81,13 +77,35 @@ outputEPSG = "EPSG:3115"
 
 def main():
     
+    # prepare the output directory
+    try:
+        os.makedirs(pcraster_output['output_folder'])
+    except:
+        os.system('rm -r ' + str(pcraster_output['output_folder']))
+        pass
+    # - making the directory for storing global extent output files
+    os.makedirs(pcraster_output['output_folder'] + "/global/")
+    # - making the directory for storing regional extent output files
+    os.makedirs(pcraster_output['output_folder'] + "/regional/")
+    
     # prepare logger and its directory
-    log_file_location = output['folder']+"/log/"
+    log_file_location = output['folder'] + "/log/"
     try:
         os.makedirs(log_file_location)
     except:
         pass
     vos.initialize_logging(log_file_location)
+
+    # prepare a temporary folder
+    tmp_file_location = output['folder'] + "/tmp/"
+    try:
+        os.makedirs(tmp_file_location)
+    except:
+        pass
+    
+    
+    
+    # prepare a 
     
     # time object
     modelTime = ModelTime() # timeStep info: year, month, day, doy, hour, etc
