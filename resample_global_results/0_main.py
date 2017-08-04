@@ -58,7 +58,7 @@ pcraster_output['file_name']      = "htop"
 
 # starting and end dates     # YYYY-MM-DD
 startDate     = "2000-01-01"
-endDate       = "2012-12-01"
+endDate       = "2012-12-31"
 
 # resampling method
 resample_method = "near"

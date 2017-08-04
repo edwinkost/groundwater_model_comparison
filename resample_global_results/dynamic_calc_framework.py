@@ -53,8 +53,11 @@ class CalcFramework(DynamicModel):
         self.modelTime.update(self.currentTimeStep())
 
         # perform the operation only at the last day of the month (as the input netcdf file has a monthly resolution with the last date of the month as its time stamp)
+        self.i_month = 0
         if self.modelTime.isLastDayOfMonth():
         
+            self.i_month = self.i_month + 1
+            
             # reading a netcdf file (global extent, 5 arcmin resolution): 
             pcr.setclone(self.globeCloneMapFileName)
             global_pcraster_map = vos.netcdf2PCRobjClone(ncFile    = self.netcdf_input['file_name'], \
@@ -64,8 +67,7 @@ class CalcFramework(DynamicModel):
             # there will be two files as follows:
             # - Format 1: example file names: htop0000.001 (for the 1st time step), htop0000.002, htop0000.003, etc. ...
             pcraster_file_name = self.pcraster_output['output_folder'] + "/global/" + self.pcraster_output['file_name']
-            pcraster_file_name = pcr.framework.frameworkBase.generateNameT(pcraster_file_name,\
-                                                                           self.modelTime.timeStepPCR)
+            pcraster_file_name = pcr.framework.frameworkBase.generateNameT(pcraster_file_name, self.i_month)
             pcr.report(global_pcraster_map, pcraster_file_name)
             # - Format 2: example file names: htop_2000_01.map, htop_2000_02.map, etc.
             pcraster_file_name = self.pcraster_output['output_folder'] + "/global/" + self.pcraster_output['file_name'] + "_" + self.modelTime.fulldate[0:7].replace("-", "_") + ".map"
@@ -87,8 +89,7 @@ class CalcFramework(DynamicModel):
             # there will be two files as follows:
             # - Format 1: example file names: htop0000.001 (for the 1st time step), htop0000.002, htop0000.003, etc. ...
             pcraster_file_name = self.pcraster_output['output_folder'] + "/regional/" + self.pcraster_output['file_name']
-            pcraster_file_name = pcr.framework.frameworkBase.generateNameT(pcraster_file_name,\
-                                                                           self.modelTime.timeStepPCR)
+            pcraster_file_name = pcr.framework.frameworkBase.generateNameT(pcraster_file_name, self.i_month)
             pcr.report(local_pcraster_map, pcraster_file_name)
             # - Format 2: example file names: htop_2000_01.map, htop_2000_02.map, etc.
             pcraster_file_name = self.pcraster_output['output_folder'] + "/regional/" + self.pcraster_output['file_name'] + "_" + self.modelTime.fulldate[0:7].replace("-", "_") + ".map"
