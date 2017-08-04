@@ -41,6 +41,9 @@ class CalcFramework(DynamicModel):
         # resampling method
         self.resample_method = resample_method
 
+        # initial clone
+        pcr.setclone(self.globeCloneMapFileName)
+
     def initial(self): 
         pass
 
