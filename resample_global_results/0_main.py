@@ -48,7 +48,7 @@ netcdf_input['variable_name']    = "groundwater_head_for_layer_1"
 
 # location where output pcraster files will be stored
 pcraster_output = {}
-pcraster_output['output_folder']  = "/scrach-shared/edwinhs/modflow_results_in_pcraster/"
+pcraster_output['output_folder']  = "/scratch-shared/edwinhs/modflow_results_in_pcraster/"
 
 # file names:          
 # - for the bottom layer         
