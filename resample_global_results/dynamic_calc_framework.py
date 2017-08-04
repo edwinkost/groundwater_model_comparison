@@ -87,7 +87,7 @@ class CalcFramework(DynamicModel):
                                                      isNomMap = False, \
                                                      inputEPSG  = self.inputEPSG, 
                                                      outputEPSG = self.outputEPSG,
-                                                     method = "near"):
+                                                     method = "near")
             # save it to pcraster maps (now already at the extent, the resolution and the coordinate system of the local model) 
             # there will be two file sas follows:
             # - Format 1: example file names: htop0000.001 (for the 1st time step), htop0000.002, htop0000.003, etc. ...
