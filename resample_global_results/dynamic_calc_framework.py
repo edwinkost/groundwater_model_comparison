@@ -75,7 +75,7 @@ class CalcFramework(DynamicModel):
             pcr.setclone(self.localCloneMapFileName)
             local_pcraster_map = vos.readPCRmapClone(v = pcraster_file_name, \
                                                      cloneMapFileName = self.localCloneMapFileName, \
-                                                     tmpDir = self.output['folder'] + "/tmp/", \
+                                                     tmpDir = self.pcraster_output['output_folder'] + "/tmp/", \
                                                      absolutePath = None,\
                                                      isLddMap = False, \
                                                      cover = None, \
