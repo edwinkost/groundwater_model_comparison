@@ -42,9 +42,9 @@ netcdf_input = {}
 # - for the bottom layer
 netcdf_input['file_name']        = "/projects/0/aqueduct/users/edwinhs/pcrglobwb_modflow_version_2015_06_XX/merged_1958_to_2015/global/netcdf/groundwaterHeadLayer1_monthEnd_output_1958-01-31_to_2015-12-31_compressed.nc" 
 netcdf_input['variable_name']    = "groundwater_head_for_layer_1" 
-#~ # - for the top layer
-#~ netcdf_input['file_name']     = "/projects/0/aqueduct/users/edwinhs/pcrglobwb_modflow_version_2015_06_XX/merged_1958_to_2015/global/netcdf/groundwaterHeadLayer2_monthEnd_output_1958-01-31_to_2015-12-31.nc" 
-#~ netcdf_input['variable_name'] = "groundwater_head_for_layer_2" 
+# - for the top layer
+netcdf_input['file_name']        = "/projects/0/aqueduct/users/edwinhs/pcrglobwb_modflow_version_2015_06_XX/merged_1958_to_2015/global/netcdf/groundwaterHeadLayer2_monthEnd_output_1958-01-31_to_2015-12-31.nc" 
+netcdf_input['variable_name']    = "groundwater_head_for_layer_2" 
 
 # location where output pcraster files will be stored
 pcraster_output = {}
@@ -53,8 +53,8 @@ pcraster_output['output_folder']  = "/scratch-shared/edwinhs/modflow_results_in_
 # file names:          
 # - for the bottom layer         
 pcraster_output['file_name']      = "hbot"
-#~ # - for the top layer         
-#~ pcraster_output['file_name']   = "htop"
+# - for the top layer         
+pcraster_output['file_name']      = "htop"
 
 # starting and end dates     # YYYY-MM-DD
 startDate     = "2000-01-01"
