@@ -64,11 +64,11 @@ class CalcFramework(DynamicModel):
             # there will be two files as follows:
             # - Format 1: example file names: htop0000.001 (for the 1st time step), htop0000.002, htop0000.003, etc. ...
             pcraster_file_name = self.pcraster_output['output_folder'] + "/global/" + self.pcraster_output['file_name']
-            pcraster_map_file_name = pcr.framework.frameworkBase.generateNameT(pcraster_file_name,\
-                                                                               self.modelTime.timeStepPCR)
+            pcraster_file_name = pcr.framework.frameworkBase.generateNameT(pcraster_file_name,\
+                                                                           self.modelTime.timeStepPCR)
             pcr.report(global_pcraster_map, pcraster_file_name)
             # - Format 2: example file names: htop_2000_01.map, htop_2000_02.map, etc.
-            pcraster_file_name = self.pcraster_output['output_folder'] + "/global/" + self.pcraster_output['file_name'] + "_" + self.modelTime.fulldate[0:7].replace("-", "_") + "*.map"
+            pcraster_file_name = self.pcraster_output['output_folder'] + "/global/" + self.pcraster_output['file_name'] + "_" + self.modelTime.fulldate[0:7].replace("-", "_") + ".map"
             pcr.report(global_pcraster_map, pcraster_file_name)
             
             # reproject and resample it to a local coordinate system
@@ -84,12 +84,12 @@ class CalcFramework(DynamicModel):
                                                      outputEPSG = self.outputEPSG,
                                                      method = "near")
             # save it to pcraster maps (now already at the extent, the resolution and the coordinate system of the local model) 
-            # there will be two file sas follows:
+            # there will be two files as follows:
             # - Format 1: example file names: htop0000.001 (for the 1st time step), htop0000.002, htop0000.003, etc. ...
             pcraster_file_name = self.pcraster_output['output_folder'] + "/regional/" + self.pcraster_output['file_name']
-            pcraster_map_file_name = pcr.framework.frameworkBase.generateNameT(pcraster_file_name,\
-                                                                               self.modelTime.timeStepPCR)
+            pcraster_file_name = pcr.framework.frameworkBase.generateNameT(pcraster_file_name,\
+                                                                           self.modelTime.timeStepPCR)
             pcr.report(local_pcraster_map, pcraster_file_name)
             # - Format 2: example file names: htop_2000_01.map, htop_2000_02.map, etc.
-            pcraster_file_name = self.pcraster_output['output_folder'] + "/regional/" + self.pcraster_output['file_name'] + "_" + self.modelTime.fulldate[0:7].replace("-", "_") + "*.map"
+            pcraster_file_name = self.pcraster_output['output_folder'] + "/regional/" + self.pcraster_output['file_name'] + "_" + self.modelTime.fulldate[0:7].replace("-", "_") + ".map"
             pcr.report(local_pcraster_map, pcraster_file_name)
