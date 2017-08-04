@@ -44,6 +44,9 @@ class CalcFramework(DynamicModel):
         # initial clone
         pcr.setclone(self.globeCloneMapFileName)
 
+        # monthly step
+        self.i_month = 0
+
     def initial(self): 
         pass
 
@@ -53,7 +56,6 @@ class CalcFramework(DynamicModel):
         self.modelTime.update(self.currentTimeStep())
 
         # perform the operation only at the last day of the month (as the input netcdf file has a monthly resolution with the last date of the month as its time stamp)
-        self.i_month = 0
         if self.modelTime.isLastDayOfMonth():
         
             self.i_month = self.i_month + 1
