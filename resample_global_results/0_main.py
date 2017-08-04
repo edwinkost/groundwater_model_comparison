@@ -89,7 +89,7 @@ def main():
     os.makedirs(pcraster_output['output_folder'] + "/regional/")
     
     # prepare logger and its directory
-    log_file_location = output['folder'] + "/log/"
+    log_file_location = pcraster_output['folder'] + "/log/"
     try:
         os.makedirs(log_file_location)
     except:
@@ -97,16 +97,12 @@ def main():
     vos.initialize_logging(log_file_location)
 
     # prepare a temporary folder
-    tmp_file_location = output['folder'] + "/tmp/"
+    tmp_file_location = pcraster_output['folder'] + "/tmp/"
     try:
         os.makedirs(tmp_file_location)
     except:
         pass
-    
-    
-    
-    # prepare a 
-    
+
     # time object
     modelTime = ModelTime() # timeStep info: year, month, day, doy, hour, etc
     modelTime.getStartEndTimeSteps(startDate, endDate)
