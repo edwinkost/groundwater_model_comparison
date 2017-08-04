@@ -41,14 +41,6 @@ class CalcFramework(DynamicModel):
         # resampling method
         self.resample_method = resample_method
 
-        # prepare temporary directory
-        self.tmpDir = output['folder']+"/tmp/"
-        try:
-            os.makedirs(self.tmpDir)
-            os.system('rm -r '+tmpDir+"/*")
-        except:
-            pass
-        
     def initial(self): 
         pass
 
