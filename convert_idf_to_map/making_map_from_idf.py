@@ -27,8 +27,10 @@ except:
 
 # convert idf file to map file
 for idf_file in idf_files:
+    print idf_file
     # read idf file
     map_array = raster_func.raster2arr(idf_file)
     # save it to pcraster file
     pcraster_file_name = out_folder + "/" + os.path.basename(idf_file) + ".map"
+    print pcraster_file_name
     map_array .write(pcraster_file_name)
