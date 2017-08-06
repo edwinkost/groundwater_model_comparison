@@ -19,7 +19,11 @@ end_year = 2012
 
 # output folder location
 output_folder = "/scratch-shared/edwinhs/tristan_output/evaluation/"
-
+try:
+    os.makedirs(output_folder)
+except:
+    pass
+    
 # calculate the average value/map of the local model
 msg = "Calculate the average value/map of the local model!"
 print(msg)
