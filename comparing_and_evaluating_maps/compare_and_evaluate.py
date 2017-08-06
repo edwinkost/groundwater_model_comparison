@@ -63,6 +63,8 @@ for year in range(str_year, end_year + 1, 1):
         i_month   = i_month + 1
 # calculating average and saving it to a pcraster map
 average_global = cum_map / i_month
+# use only the values where local model exists:
+average_global = pcr.ifthen(pcr.defined(average_local), average_global)
 pcr.aguila(average_global)
 pcr.report(average_global, output_folder + "/average_global.map")
 
