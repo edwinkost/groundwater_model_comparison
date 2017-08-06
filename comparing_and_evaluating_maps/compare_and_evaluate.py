@@ -27,7 +27,8 @@ cum_map = pcr.scalar(0.0)
 for year in (str_year, end_year + 1, 1):
     for month in (1, 12 + 1, 1):
         i_month   = i_month + 1
-        file_name = local_model_folder + "/head_%04i%02i" + "01_l1.idf.map" %(year, month)  
+        file_name = "head_%04i%02i" %(year, month)
+        file_name = local_model_folder + "/" + file_name + "01_l1.idf.map"   
         print(file_name)
         cum_map   = cum_map + pcr.readmap(local_model_folder + "")
 average_local = cum_map / i_month
