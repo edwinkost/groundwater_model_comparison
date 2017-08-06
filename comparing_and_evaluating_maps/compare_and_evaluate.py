@@ -24,8 +24,8 @@ print(msg)
 local_model_folder  = "/scratch-shared/edwinhs/colombia_model_results/head/l1_top/" 
 i_month = 0
 cum_map = pcr.scalar(0.0)
-for year in (str_year, end_year + 1, 1):
-    for month in (1, 13, 1):
+for year in range(str_year, end_year + 1, 1):
+    for month in range(1, 12+1, 1):
         i_month   = i_month + 1
         file_name = "head_%04d%02d" %(year, month)
         file_name = local_model_folder + "/" + file_name + "01_l1.idf.map"   
