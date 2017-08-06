@@ -30,7 +30,7 @@ for year in (str_year, end_year + 1, 1):
         file_name = "head_%04i%02i" %(year, month)
         file_name = local_model_folder + "/" + file_name + "01_l1.idf.map"   
         print(file_name)
-        cum_map   = cum_map + pcr.readmap(local_model_folder + "")
+        cum_map   = cum_map + pcr.readmap(local_model_folder + file_name)
 average_local = cum_map / i_month
 pcr.aguila(average_local)
 
